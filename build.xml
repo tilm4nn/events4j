@@ -147,7 +147,7 @@
 		</copy>
 		<mkdir dir="${dist.home}/${lib.test.dir}" />
 		<copy todir="${dist.home}/${lib.test.dir}">
-			<fileset dir="${lib.home}" />
+			<fileset dir="${lib.test.home}" />
 		</copy>
 		<mkdir dir="${dist.home}/${src.dir}" />
 		<copy todir="${dist.home}/${src.dir}">
