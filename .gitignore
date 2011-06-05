@@ -1,6 +1,5 @@
 *.class
 bin
 build
-doc
 dist
 events4j*.zip
