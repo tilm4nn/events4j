@@ -29,21 +29,34 @@ import net.objectzoo.delegates.ActionAsyncResult;
 import net.objectzoo.delegates.DynamicActionAsync;
 import net.objectzoo.delegates.DynamicFuncAsync;
 
+/**
+ * This adapter converts a {@link DynamicFuncAsync} to a {@link DynamicActionAsync}.
+ * 
+ * @author tilmann
+ */
 public class DynamicFuncAsyncToDynamicActionAsync implements DynamicActionAsync
 {
+	private final DynamicFuncAsync dynamicFunc;
 	
-	private final DynamicFuncAsync func;
-	
-	public DynamicFuncAsyncToDynamicActionAsync(DynamicFuncAsync func)
+	/**
+	 * Convert the given {@link DynamicFuncAsync} to the interface {@link DynamicActionAsync}
+	 * 
+	 * @param dynamicFunc
+	 *        the func to be converted
+	 */
+	public DynamicFuncAsyncToDynamicActionAsync(DynamicFuncAsync dynamicFunc)
 	{
-		this.func = func;
+		this.dynamicFunc = dynamicFunc;
 	}
 	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public ActionAsyncResult beginDynamicInvoke(ActionAsyncCallback callback, Object asyncState,
 												Object... params)
 	{
-		return func.beginDynamicInvoke(new ActionCallbackToFuncCallback(callback), asyncState,
-			params);
+		return dynamicFunc.beginDynamicInvoke(new ActionCallbackToFuncCallback(callback),
+			asyncState, params);
 	}
 }

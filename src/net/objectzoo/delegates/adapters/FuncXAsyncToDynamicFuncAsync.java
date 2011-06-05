@@ -34,41 +34,98 @@ import net.objectzoo.delegates.FuncAsyncCallback;
 import net.objectzoo.delegates.FuncAsyncResult;
 import net.objectzoo.delegates.helpers.DynamicAsyncInvoker;
 
+/**
+ * This adapter converts a given {@code FuncXAsync} to a {@link DynamicFuncAsync}.
+ * 
+ * The calls to the
+ * {@link DynamicFuncAsync#beginDynamicInvoke(FuncAsyncCallback, Object, Object...)} method are
+ * forwarded to the original func's {@code beginInvoke} method. If a call to
+ * {@code beginDynamicInvoke} has the wrong argument count regarding the original func an
+ * {@link IllegalArgumentException} is thrown.
+ * 
+ * @author tilmann
+ */
 public class FuncXAsyncToDynamicFuncAsync implements DynamicFuncAsync
 {
-	
 	private final DynamicAsyncInvoker dynamicInvoker;
 	
+	/**
+	 * Convert the given {@link FuncAsync} to the interface {@link DynamicFuncAsync}
+	 * 
+	 * @param func
+	 *        the func to be converted
+	 */
 	public FuncXAsyncToDynamicFuncAsync(FuncAsync<?, ?> func)
 	{
 		this(FuncAsync.class, func);
 	}
 	
+	/**
+	 * Convert the given {@link Func0Async} to the interface {@link DynamicFuncAsync}
+	 * 
+	 * @param func
+	 *        the func to be converted
+	 */
 	public FuncXAsyncToDynamicFuncAsync(Func0Async<?> func)
 	{
 		this(Func0Async.class, func);
 	}
 	
+	/**
+	 * Convert the given {@link Func2Async} to the interface {@link DynamicFuncAsync}
+	 * 
+	 * @param func
+	 *        the func to be converted
+	 */
 	public FuncXAsyncToDynamicFuncAsync(Func2Async<?, ?, ?> func)
 	{
 		this(Func2Async.class, func);
 	}
 	
+	/**
+	 * Convert the given {@link Func3Async} to the interface {@link DynamicFuncAsync}
+	 * 
+	 * @param func
+	 *        the func to be converted
+	 */
 	public FuncXAsyncToDynamicFuncAsync(Func3Async<?, ?, ?, ?> func)
 	{
 		this(Func3Async.class, func);
 	}
 	
+	/**
+	 * Convert the given {@link Func4Async} to the interface {@link DynamicFuncAsync}
+	 * 
+	 * @param func
+	 *        the func to be converted
+	 */
 	public FuncXAsyncToDynamicFuncAsync(Func4Async<?, ?, ?, ?, ?> func)
 	{
 		this(Func4Async.class, func);
 	}
 	
-	private <T> FuncXAsyncToDynamicFuncAsync(Class<T> funcType, T func)
+	/**
+	 * Convert the given {@code FuncXAsync} to the interface {@link DynamicFuncAsync}
+	 * 
+	 * @param <FuncType>
+	 *        the type of func to be converted
+	 * @param funcType
+	 *        the type of func to be converted
+	 * @param func
+	 *        the func to be converted
+	 */
+	private <FuncType> FuncXAsyncToDynamicFuncAsync(Class<FuncType> funcType, FuncType func)
 	{
 		dynamicInvoker = new DynamicAsyncInvoker(funcType, func);
 	}
 	
+	/**
+	 * {@inheritDoc}
+	 * 
+	 * @throws IllegalArgumentException
+	 *         if the parameter count given to this method does not match the parameter count of the
+	 *         underlying original func.
+	 */
 	@Override
 	public FuncAsyncResult<?> beginDynamicInvoke(FuncAsyncCallback<Object> callback,
 												 Object asyncState, Object... params)

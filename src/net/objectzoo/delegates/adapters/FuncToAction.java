@@ -27,16 +27,32 @@ package net.objectzoo.delegates.adapters;
 import net.objectzoo.delegates.Action;
 import net.objectzoo.delegates.Func;
 
+/**
+ * This adapter converts a {@link Func} to an {@link Action}.
+ * 
+ * @author tilmann
+ * 
+ * @param <T>
+ *        The type of the {@code Func}'s/{@code Action}'s parameter
+ */
 public class FuncToAction<T> implements Action<T>
 {
-	
 	private final Func<T, ?> func;
 	
+	/**
+	 * Convert the given {@link Func} to the interface {@link Action}
+	 * 
+	 * @param func
+	 *        the func to be converted
+	 */
 	public FuncToAction(Func<T, ?> func)
 	{
 		this.func = func;
 	}
 	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void invoke(T parameter)
 	{

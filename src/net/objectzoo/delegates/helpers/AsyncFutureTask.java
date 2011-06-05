@@ -34,26 +34,53 @@ import net.objectzoo.delegates.ActionAsyncResult;
 import net.objectzoo.delegates.FuncAsyncCallback;
 import net.objectzoo.delegates.FuncAsyncResult;
 
+/**
+ * This {@link FutureTask} subclass is used internally for the asynchronous invocation of actions
+ * and funcs and implements the interfaces {@link FuncAsyncResult} and {@link ActionAsyncResult} so
+ * that it directly serves as return value for the asynchronous invocations and as parameter given
+ * to the callback methods.
+ * 
+ * @author tilmann
+ * 
+ * @param <R>
+ *        the type of the return value of the invocation
+ */
 class AsyncFutureTask<R> extends FutureTask<R> implements FuncAsyncResult<R>, ActionAsyncResult
 {
-	
 	private final Object asyncState;
-	
 	private final FuncAsyncCallback<R> callback;
 	
-	public Object getAsyncState()
-	{
-		return asyncState;
-	}
-	
+	/**
+	 * Creates a new {@code AsyncFutureTask} that invokes the given callable and holds the given
+	 * asyncState and callback.
+	 * 
+	 * @param callable
+	 *        the callable to be invoked asynchronously
+	 * @param callback
+	 *        the callback to be called when the invocation has finished
+	 * @param asyncState
+	 *        the asynchronous state object to be returned by this asynchronous result
+	 */
 	public AsyncFutureTask(Callable<R> callable, FuncAsyncCallback<R> callback, Object asyncState)
 	{
-		
 		super(callable);
 		this.asyncState = asyncState;
 		this.callback = callback;
 	}
 	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Object getAsyncState()
+	{
+		return asyncState;
+	}
+	
+	/**
+	 * This methods overrides the super class method to call the callback when the invocation has
+	 * finished.
+	 */
 	@Override
 	protected void done()
 	{
@@ -63,25 +90,37 @@ class AsyncFutureTask<R> extends FutureTask<R> implements FuncAsyncResult<R>, Ac
 		}
 	}
 	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void endInvoke() throws InterruptedException, ExecutionException
 	{
 		get();
 	}
 	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void endInvoke(long timeout, TimeUnit unit) throws InterruptedException,
 		ExecutionException, TimeoutException
 	{
 		get(timeout, unit);
 	}
-
+	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public R endInvokeReturn() throws InterruptedException, ExecutionException
 	{
 		return get();
 	}
-
+	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public R endInvokeReturn(long timeout, TimeUnit unit) throws InterruptedException,
 		ExecutionException, TimeoutException

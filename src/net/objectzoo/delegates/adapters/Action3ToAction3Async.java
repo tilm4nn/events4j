@@ -33,30 +33,66 @@ import net.objectzoo.delegates.ActionAsyncCallback;
 import net.objectzoo.delegates.ActionAsyncResult;
 import net.objectzoo.delegates.helpers.AsyncExecutor;
 
+/**
+ * An adapter that converts a conventional {@link Action3} to an {@link Action3Async}.
+ * 
+ * All asynchronous calls are executed in another thread and forwarded to the
+ * {@link Action3#invoke(Object, Object, Object)} method.
+ * 
+ * The {@link Executor} to use for the asynchronous invocations can be chosen during creation of
+ * this adapter. If no explicit executor is given the a default executor is used. The default
+ * executor can be set using the {@link AsyncExecutor#setDefaultExecutor(Executor)} property or is
+ * created automatically by the {@link AsyncExecutor}.
+ * 
+ * @author tilmann
+ * 
+ * @param <T1>
+ *        The type of the {@code Action}'s first parameter
+ * @param <T2>
+ *        The type of the {@code Action}'s second parameter
+ * @param <T3>
+ *        The type of the {@code Action}'s third parameter
+ */
 public class Action3ToAction3Async<T1, T2, T3> implements Action3Async<T1, T2, T3>
 {
-	
 	private final Action3<T1, T2, T3> action;
-	
 	private final AsyncExecutor asyncExecutor;
 	
+	/**
+	 * Converts the given {@link Action3} to the interface {@link Action3Async} using the default
+	 * executor
+	 * 
+	 * @param action
+	 *        the action to be converted
+	 */
 	public Action3ToAction3Async(Action3<T1, T2, T3> action)
 	{
 		this(action, null);
 	}
 	
+	/**
+	 * Converts the given {@link Action3} to the interface {@link Action3Async} and executes
+	 * asynchronous call using the given {@link Executor}
+	 * 
+	 * @param action
+	 *        the action to be converted
+	 * @param executor
+	 *        the executor used for the asynchronous calls
+	 */
 	public Action3ToAction3Async(Action3<T1, T2, T3> action, Executor executor)
 	{
 		this.action = action;
 		this.asyncExecutor = new AsyncExecutor(executor);
 	}
 	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public ActionAsyncResult beginInvoke(ActionAsyncCallback callback, Object asyncState,
 										 final T1 parameter1, final T2 parameter2,
 										 final T3 parameter3)
 	{
-		
 		Callable<Object> callable = new Callable<Object>()
 		{
 			@Override

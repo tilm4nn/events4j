@@ -30,18 +30,42 @@ import net.objectzoo.delegates.DynamicFuncAsync;
 import net.objectzoo.delegates.FuncAsyncCallback;
 import net.objectzoo.delegates.FuncAsyncResult;
 
+/**
+ * This helper class is used to dynamically invoke the "beginInvoke" method of asynchronous actions
+ * or funcs using reflection.
+ * 
+ * @author tilmann
+ */
 public class DynamicAsyncInvoker implements DynamicFuncAsync
 {
-	
 	private final Object target;
 	private final Method invokeMethod;
 	
-	public <T> DynamicAsyncInvoker(Class<T> targetType, T target)
+	/**
+	 * Creates a new {@code DynamicAsyncInvoker} that invokes the the "beginInvoke" method of the
+	 * target type on the given target instance.
+	 * 
+	 * @param <TargetType>
+	 *        the type defining the invoke method
+	 * @param targetType
+	 *        the type defining the invoke method
+	 * @param target
+	 *        the target instance for the invocation
+	 */
+	public <TargetType> DynamicAsyncInvoker(Class<TargetType> targetType, TargetType target)
 	{
 		this.target = target;
 		this.invokeMethod = DynamicInvoker.getInvokeMethod(targetType, "beginInvoke");
 	}
 	
+	/**
+	 * {@inheritDoc}
+	 * 
+	 * @throws IllegalArgumentException
+	 *         if the parameter count given to this method does not match the parameter count of the
+	 *         beginInvoke method defined at construction time.
+	 */
+	@Override
 	public FuncAsyncResult<?> beginDynamicInvoke(FuncAsyncCallback<Object> callback,
 												 Object asyncState, Object... params)
 	{
@@ -51,6 +75,17 @@ public class DynamicAsyncInvoker implements DynamicFuncAsync
 			invokeParameters);
 	}
 	
+	/**
+	 * Computes the parameter array to be given to the invocation of the "beginInvoke" method
+	 * 
+	 * @param callback
+	 *        the callback parameter of the method
+	 * @param asyncState
+	 *        the asyncState parameter of the method
+	 * @param params
+	 *        the func parameters of the method
+	 * @return an array containing all parameters as accepted by the "beginInvoke" method
+	 */
 	static Object[] computeAsycBeginInvokeParameters(Object callback, Object asyncState,
 													 Object... params)
 	{

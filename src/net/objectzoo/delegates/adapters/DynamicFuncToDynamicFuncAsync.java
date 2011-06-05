@@ -33,28 +33,58 @@ import net.objectzoo.delegates.FuncAsyncCallback;
 import net.objectzoo.delegates.FuncAsyncResult;
 import net.objectzoo.delegates.helpers.AsyncExecutor;
 
+/**
+ * An adapter that converts a conventional {@link DynamicFunc} to an {@link DynamicFuncAsync}.
+ * 
+ * All asynchronous calls are executed in another thread and forwarded to the
+ * {@link DynamicFunc#dynamicInvoke(Object...)} method.
+ * 
+ * The {@link Executor} to use for the asynchronous invocations can be chosen during creation of
+ * this adapter. If no explicit executor is given the a default executor is used. The default
+ * executor can be set using the {@link AsyncExecutor#setDefaultExecutor(Executor)} property or is
+ * created automatically by the {@link AsyncExecutor}.
+ * 
+ * @author tilmann
+ */
 public class DynamicFuncToDynamicFuncAsync implements DynamicFuncAsync
 {
 	private final DynamicFunc dynamicFunc;
-	
 	private final AsyncExecutor asyncExecutor;
 	
+	/**
+	 * Converts the given {@link DynamicFunc} to the interface {@link DynamicFuncAsync} using the
+	 * default executor
+	 * 
+	 * @param dynamicFunc
+	 *        the dynamicFunc to be converted
+	 */
 	public DynamicFuncToDynamicFuncAsync(DynamicFunc dynamicFunc)
 	{
 		this(dynamicFunc, null);
 	}
 	
+	/**
+	 * Converts the given {@link DynamicFunc} to the interface {@link DynamicFuncAsync} and executes
+	 * asynchronous call using the given {@link Executor}
+	 * 
+	 * @param dynamicFunc
+	 *        the dynamicFunc to be converted
+	 * @param executor
+	 *        the executor used for the asynchronous calls
+	 */
 	public DynamicFuncToDynamicFuncAsync(DynamicFunc dynamicFunc, Executor executor)
 	{
 		this.dynamicFunc = dynamicFunc;
 		this.asyncExecutor = new AsyncExecutor(executor);
 	}
 	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public FuncAsyncResult<?> beginDynamicInvoke(FuncAsyncCallback<Object> callback,
 												 Object asyncState, final Object... params)
 	{
-		
 		Callable<Object> callable = new Callable<Object>()
 		{
 			@Override

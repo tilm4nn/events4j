@@ -31,26 +31,56 @@ import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
+import net.objectzoo.delegates.FuncAsync;
 import net.objectzoo.delegates.FuncAsyncCallback;
 import net.objectzoo.delegates.FuncAsyncResult;
 
+/**
+ * This is a helper class that is used for the asynchronous invocation of actions and funcs.
+ * 
+ * An {@link Executor} is used for the asynchronous invocations. The {@code Executor} to be used is
+ * determined with the following steps.
+ * 
+ * 1. The {@code Executor} given at construction time is used.
+ * 
+ * 2. The default {@code Executor} that has been set is used.
+ * 
+ * 3. A new default {@code Executor} is created and used.
+ * 
+ * The default {@code Executor} automatically created by this {@code AsyncExecutor} is a
+ * {@link ThreadPoolExecutor} with at most one single @ Thread} working at the asynchronous
+ * operations and an unbounded {@link LinkedBlockingQueue} as backend storage. This guarantees that
+ * all asynchronous invocation are performed one after each other in the order that they have been
+ * queued and bears the risk of a {@link OutOfMemoryError} if permanently new asynchronous
+ * invocations are queued faster than they can be completed by a single {@code Thread}.
+ * 
+ * @author tilmann
+ */
 public class AsyncExecutor
 {
+	private final Executor executor;
+	private static Executor defaultExecutor;
+	
+	/**
+	 * Creates a new {@code AsyncExecutor} that uses the default {@link Executor} for asynchronous
+	 * exection. The default {@link Executor} can be set using the
+	 * {@link #setDefaultExecutor(Executor)} property.
+	 */
 	public AsyncExecutor()
 	{
 		this(null);
 	}
 	
+	/**
+	 * Creates a new {@code AsyncExecutor} that uses the given {@link Executor} for asynchronous
+	 * exection. If {@code null} is given the default {@link Executor} is used.
+	 */
 	public AsyncExecutor(Executor executor)
 	{
 		this.executor = executor;
 	}
 	
-	private final Executor executor;
-	
-	private static Executor defaultExecutor;
-	
-	static Executor createDefaultExecutor()
+	private static Executor createDefaultExecutor()
 	{
 		final ThreadGroup threadGroup = new ThreadGroup(AsyncExecutor.class.getName());
 		
@@ -69,8 +99,16 @@ public class AsyncExecutor
 			new LinkedBlockingQueue<Runnable>(), threadFactory);
 	}
 	
+	/**
+	 * Retrieves the default {@link Executor} creating a new one of none has been set or created
+	 * before.
+	 * 
+	 * @return the default {@link Executor}
+	 */
 	public static Executor getDefaultExecutor()
 	{
+		// Implementation uses double checked singleton. This does not guarantee 100% unique
+		// creation of the default executor but should be sufficient for now.
 		if (defaultExecutor == null)
 		{
 			synchronized (AsyncExecutor.class)
@@ -84,6 +122,12 @@ public class AsyncExecutor
 		return defaultExecutor;
 	}
 	
+	/**
+	 * Sets the default {@link Executor}
+	 * 
+	 * @param defaultExecutor
+	 *        the new default {@link Executor}
+	 */
 	public static void setDefaultExecutor(Executor defaultExecutor)
 	{
 		synchronized (AsyncExecutor.class)
@@ -92,7 +136,7 @@ public class AsyncExecutor
 		}
 	}
 	
-	Executor getExecutor()
+	private Executor getExecutor()
 	{
 		if (executor != null)
 		{
@@ -101,6 +145,21 @@ public class AsyncExecutor
 		return getDefaultExecutor();
 	}
 	
+	/**
+	 * Executes the given {@link Callable} asynchronously, creates a {@link FuncAsyncResult} and
+	 * takes care of calling the given {@link FuncAsyncCallback} as required by the specification of
+	 * {@link FuncAsync#beginInvoke(FuncAsyncCallback, Object, Object)}.
+	 * 
+	 * @param <R>
+	 *        the return value type of the {@code Callable}
+	 * @param callable
+	 *        the callable to be called to carry out the invocation and to obtain the return value
+	 * @param callback
+	 *        the callback to be called when the asynchronous invocation has finished
+	 * @param asyncState
+	 *        the asynchronous state object to be used in the asynchronous result
+	 * @return the asynchronous result object for the invocation
+	 */
 	public <R> FuncAsyncResult<R> execute(Callable<R> callable,
 										  FuncAsyncCallback<? super R> callback, Object asyncState)
 	{

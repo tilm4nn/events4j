@@ -31,24 +31,57 @@ import net.objectzoo.delegates.ActionAsync;
 import net.objectzoo.delegates.ActionAsyncCallback;
 import net.objectzoo.delegates.ActionAsyncResult;
 import net.objectzoo.delegates.adapters.ActionToActionAsync;
+import net.objectzoo.delegates.helpers.AsyncExecutor;
 
+/**
+ * This is an abstract support class that can be used to quickly implement asynchronous actions.
+ * 
+ * All asynchronous calls are executed in another thread and forwarded to the
+ * {@link Action#invoke(Object)} method.
+ * 
+ * The {@link Executor} to use for the asynchronous invocations can be chosen during creation of
+ * {@code ActionAsyncSupport} instances. If no explicit executor is given the a default executor is
+ * used. The default executor can be set using the
+ * {@link AsyncExecutor#setDefaultExecutor(Executor)} property or is created automatically by the
+ * {@link AsyncExecutor}.
+ * 
+ * @author tilmann
+ * 
+ * @param <T>
+ *        The type of the {@code ActionAsync}'s parameter
+ */
 public abstract class ActionAsyncSupport<T> implements Action<T>, ActionAsync<T>
 {
+	private final ActionAsync<T> asyncDelegate;
+	
+	/**
+	 * Creates a new {@code ActionAsyncSupport} that uses the default executor
+	 */
 	public ActionAsyncSupport()
 	{
 		this(null);
 	}
 	
+	/**
+	 * Create a new {@code ActionAsyncSupport} that uses the given executor
+	 * 
+	 * @param executor
+	 *        the {@link Executor} to use for asynchronous invocations
+	 */
 	public ActionAsyncSupport(Executor executor)
 	{
 		asyncDelegate = new ActionToActionAsync<T>(this, executor);
 	}
 	
-	private final ActionAsync<T> asyncDelegate;
-	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public abstract void invoke(T parameter);
 	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public ActionAsyncResult beginInvoke(ActionAsyncCallback callback, Object asyncState,
 										 T parameter)

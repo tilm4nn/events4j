@@ -28,11 +28,37 @@ import net.objectzoo.delegates.Action3;
 import net.objectzoo.events.Event3;
 import net.objectzoo.events.helpers.EventSubscriberRegisty;
 
+/**
+ * The {@code Event3Distributor} is a helper class that encapsulates all the logic required to
+ * provide events in other classes. The {@code Event3Distributor} implements the {@link Event3}
+ * interface to allow subscription and the {@link Action3} interface to allow invocations to be
+ * distributed to all subscribers. Subscriber invocations are performed in the order of
+ * subscription.
+ * 
+ * @author tilmann
+ * 
+ * @param <T1>
+ *        The type of the first information parameter the event provides
+ * @param <T2>
+ *        The type of the second information parameter the event provides
+ * @param <T3>
+ *        The type of the third information parameter the event provides
+ */
 public class Event3Distributor<T1, T2, T3> implements Action3<T1, T2, T3>, Event3<T1, T2, T3>
 {
-	
 	private EventSubscriberRegisty<Action3<? super T1, ? super T2, ? super T3>> registry = new EventSubscriberRegisty<Action3<? super T1, ? super T2, ? super T3>>();
 	
+	/**
+	 * This {@code invoke} implementation invokes all event subscribers in the order they have been
+	 * subscribed.
+	 * 
+	 * @param parameter1
+	 *        the first parameter to invoke the subscribers with
+	 * @param parameter2
+	 *        the second parameter to invoke the subscribers with
+	 * @param parameter3
+	 *        the second parameter to invoke the subscribers with
+	 */
 	@Override
 	public void invoke(T1 parameter1, T2 parameter2, T3 parameter3)
 	{
@@ -42,12 +68,18 @@ public class Event3Distributor<T1, T2, T3> implements Action3<T1, T2, T3>, Event
 		}
 	}
 	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void subscribe(Action3<? super T1, ? super T2, ? super T3> action)
 	{
 		registry.subscribe(action);
 	}
 	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void unsubscribe(Action3<? super T1, ? super T2, ? super T3> action)
 	{

@@ -29,23 +29,64 @@ import java.lang.reflect.Method;
 
 import net.objectzoo.delegates.DynamicFunc;
 
+/**
+ * This helper class is used to dynamically invoke the "invoke" method of actions or funcs using
+ * reflection.
+ * 
+ * @author tilmann
+ */
 public class DynamicInvoker implements DynamicFunc
 {
 	private final Object target;
-	
 	private final Method invokeMethod;
 	
-	public <T> DynamicInvoker(Class<T> targetType, T target)
+	/**
+	 * Creates a new {@code DynamicInvoker} that invokes the the "invoke" method of the target type
+	 * on the given target instance.
+	 * 
+	 * @param <TargetType>
+	 *        the type defining the invoke method
+	 * @param targetType
+	 *        the type defining the invoke method
+	 * @param target
+	 *        the target instance for the invocation
+	 */
+	public <TargetType> DynamicInvoker(Class<TargetType> targetType, TargetType target)
 	{
 		this.target = target;
 		this.invokeMethod = getInvokeMethod(targetType, "invoke");
 	}
 	
+	/**
+	 * {@inheritDoc}
+	 * 
+	 * @throws IllegalArgumentException
+	 *         if the parameter count given to this method does not match the parameter count of the
+	 *         invoke method defined at construction time.
+	 */
+	@Override
 	public Object dynamicInvoke(Object... params)
 	{
 		return invokeMethod(invokeMethod, target, params);
 	}
 	
+	/**
+	 * Invokes the method method on the target instance with the given parameters
+	 * 
+	 * @param method
+	 *        the method to be invoked
+	 * @param target
+	 *        the target instance for the invocation
+	 * @param params
+	 *        the parameters for the invocation
+	 * @return the return value of the invocation
+	 * @throws IllegalArgumentException
+	 *         if the parameter count given to this method does not match the parameter count of the
+	 *         method.
+	 * @throws IllegalStateException
+	 *         if the method throws an {@link Exception} that is not a subclass of
+	 *         {@link RuntimeException} or if the current thread has no access to the method.
+	 */
 	static Object invokeMethod(Method method, Object target, Object[] params)
 	{
 		try
@@ -73,9 +114,20 @@ public class DynamicInvoker implements DynamicFunc
 		}
 	}
 	
+	/**
+	 * Retrieves the first method with the given name from the given target type and sets it
+	 * accessible.
+	 * 
+	 * @param targetType
+	 *        the type to retrieve the method from
+	 * @param methodName
+	 *        the name of the method to retrieve
+	 * @return the method retrieved
+	 * @throws IllegalArgumentException
+	 *         if no method with the given name can be found in the target type
+	 */
 	static Method getInvokeMethod(Class<?> targetType, String methodName)
 	{
-		
 		for (Method method : targetType.getMethods())
 		{
 			if (methodName.equals(method.getName()))

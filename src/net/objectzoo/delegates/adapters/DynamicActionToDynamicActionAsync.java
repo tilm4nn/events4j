@@ -33,29 +33,58 @@ import net.objectzoo.delegates.DynamicAction;
 import net.objectzoo.delegates.DynamicActionAsync;
 import net.objectzoo.delegates.helpers.AsyncExecutor;
 
+/**
+ * An adapter that converts a conventional {@link DynamicAction} to an {@link DynamicActionAsync}.
+ * 
+ * All asynchronous calls are executed in another thread and forwarded to the
+ * {@link DynamicAction#dynamicInvoke(Object...)} method.
+ * 
+ * The {@link Executor} to use for the asynchronous invocations can be chosen during creation of
+ * this adapter. If no explicit executor is given the a default executor is used. The default
+ * executor can be set using the {@link AsyncExecutor#setDefaultExecutor(Executor)} property or is
+ * created automatically by the {@link AsyncExecutor}.
+ * 
+ * @author tilmann
+ */
 public class DynamicActionToDynamicActionAsync implements DynamicActionAsync
 {
-	
 	private final DynamicAction dynamicAction;
-	
 	private final AsyncExecutor asyncExecutor;
 	
+	/**
+	 * Converts the given {@link DynamicAction} to the interface {@link DynamicActionAsync} using
+	 * the default executor
+	 * 
+	 * @param dynamicAction
+	 *        the dynamicAction to be converted
+	 */
 	public DynamicActionToDynamicActionAsync(DynamicAction dynamicAction)
 	{
 		this(dynamicAction, null);
 	}
 	
+	/**
+	 * Converts the given {@link DynamicAction} to the interface {@link DynamicActionAsync} and
+	 * executes asynchronous call using the given {@link Executor}
+	 * 
+	 * @param dynamicAction
+	 *        the dynamicAction to be converted
+	 * @param executor
+	 *        the executor used for the asynchronous calls
+	 */
 	public DynamicActionToDynamicActionAsync(DynamicAction dynamicAction, Executor executor)
 	{
 		this.dynamicAction = dynamicAction;
 		this.asyncExecutor = new AsyncExecutor(executor);
 	}
 	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public ActionAsyncResult beginDynamicInvoke(ActionAsyncCallback callback, Object asyncState,
 												final Object... params)
 	{
-		
 		Callable<Object> callable = new Callable<Object>()
 		{
 			@Override

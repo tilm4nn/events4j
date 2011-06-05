@@ -28,11 +28,29 @@ import net.objectzoo.delegates.Action;
 import net.objectzoo.events.Event;
 import net.objectzoo.events.helpers.EventSubscriberRegisty;
 
+/**
+ * The {@code EventDistributor} is a helper class that encapsulates all the logic required to
+ * provide events in other classes. The {@code EventDistributor} implements the {@link Event}
+ * interface to allow subscription and the {@link Action} interface to allow invocations to be
+ * distributed to all subscribers. Subscriber invocations are performed in the order of
+ * subscription.
+ * 
+ * @author tilmann
+ * 
+ * @param <T>
+ *        The type of the information parameter the event provides
+ */
 public class EventDistributor<T> implements Action<T>, Event<T>
 {
-	
 	private EventSubscriberRegisty<Action<? super T>> registry = new EventSubscriberRegisty<Action<? super T>>();
 	
+	/**
+	 * This {@code invoke} implementation invokes all event subscribers in the order they have been
+	 * subscribed.
+	 * 
+	 * @param parameter
+	 *        the parameter to invoke the subscribers with
+	 */
 	@Override
 	public void invoke(T parameter)
 	{
@@ -42,12 +60,18 @@ public class EventDistributor<T> implements Action<T>, Event<T>
 		}
 	}
 	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void subscribe(Action<? super T> action)
 	{
 		registry.subscribe(action);
 	}
 	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void unsubscribe(Action<? super T> action)
 	{

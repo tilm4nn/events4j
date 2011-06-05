@@ -29,16 +29,34 @@ import net.objectzoo.delegates.ActionAsyncCallback;
 import net.objectzoo.delegates.ActionAsyncResult;
 import net.objectzoo.delegates.Func2Async;
 
+/**
+ * This adapter converts a {@link Func2Async} to an {@link Action2Async}.
+ * 
+ * @author tilmann
+ * 
+ * @param <T1>
+ *        The type of the {@code Func2Async}'s/{@code Action2Async}'s first parameter
+ * @param <T2>
+ *        The type of the {@code Func2Async}'s/{@code Action2Async}'s second parameter
+ */
 public class Func2AsyncToAction2Async<T1, T2> implements Action2Async<T1, T2>
 {
-	
 	private final Func2Async<T1, T2, ?> func;
 	
+	/**
+	 * Convert the given {@link Func2Async} to the interface {@link Action2Async}
+	 * 
+	 * @param func
+	 *        the func to be converted
+	 */
 	public Func2AsyncToAction2Async(Func2Async<T1, T2, ?> func)
 	{
 		this.func = func;
 	}
 	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public ActionAsyncResult beginInvoke(ActionAsyncCallback callback, Object asyncState,
 										 T1 parameter1, T2 parameter2)

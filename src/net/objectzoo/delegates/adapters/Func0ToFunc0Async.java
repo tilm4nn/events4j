@@ -33,28 +33,60 @@ import net.objectzoo.delegates.FuncAsyncCallback;
 import net.objectzoo.delegates.FuncAsyncResult;
 import net.objectzoo.delegates.helpers.AsyncExecutor;
 
+/**
+ * An adapter that converts a conventional {@link Func0} to an {@link Func0Async}.
+ * 
+ * All asynchronous calls are executed in another thread and forwarded to the {@link Func0#invoke()}
+ * method.
+ * 
+ * The {@link Executor} to use for the asynchronous invocations can be chosen during creation of
+ * this adapter. If no explicit executor is given the a default executor is used. The default
+ * executor can be set using the {@link AsyncExecutor#setDefaultExecutor(Executor)} property or is
+ * created automatically by the {@link AsyncExecutor}.
+ * 
+ * @author tilmann
+ * 
+ * @param <R>
+ *        The type of the {@code Func0}'s return value
+ */
 public class Func0ToFunc0Async<R> implements Func0Async<R>
 {
-	
 	private final Func0<R> func;
-	
 	private final AsyncExecutor asyncExecutor;
 	
+	/**
+	 * Converts the given {@link Func0} to the interface {@link Func0Async} using the default
+	 * executor
+	 * 
+	 * @param func
+	 *        the func to be converted
+	 */
 	public Func0ToFunc0Async(Func0<R> func)
 	{
 		this(func, null);
 	}
 	
+	/**
+	 * Converts the given {@link Func0} to the interface {@link Func0Async} and executes
+	 * asynchronous call using the given {@link Executor}
+	 * 
+	 * @param func
+	 *        the func to be converted
+	 * @param executor
+	 *        the executor used for the asynchronous calls
+	 */
 	public Func0ToFunc0Async(Func0<R> func, Executor executor)
 	{
 		this.func = func;
 		this.asyncExecutor = new AsyncExecutor(executor);
 	}
 	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public FuncAsyncResult<R> beginInvoke(FuncAsyncCallback<? super R> callback, Object asyncState)
 	{
-		
 		Callable<R> callable = new Callable<R>()
 		{
 			@Override

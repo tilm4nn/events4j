@@ -31,25 +31,55 @@ import net.objectzoo.delegates.ActionAsyncResult;
 import net.objectzoo.delegates.DynamicAction;
 import net.objectzoo.delegates.DynamicActionAsync;
 import net.objectzoo.delegates.adapters.DynamicActionToDynamicActionAsync;
+import net.objectzoo.delegates.helpers.AsyncExecutor;
 
+/**
+ * This is an abstract support class that can be used to quickly implement asynchronous dynamic
+ * actions.
+ * 
+ * All asynchronous calls are executed in another thread and forwarded to the
+ * {@link DynamicAction#dynamicInvoke(Object...)} method.
+ * 
+ * The {@link Executor} to use for the asynchronous invocations can be chosen during creation of
+ * {@code ActionAsyncSupport} instances. If no explicit executor is given the a default executor is
+ * used. The default executor can be set using the
+ * {@link AsyncExecutor#setDefaultExecutor(Executor)} property or is created automatically by the
+ * {@link AsyncExecutor}.
+ * 
+ * @author tilmann
+ */
 public abstract class DynamicActionAsyncSupport implements DynamicAction, DynamicActionAsync
 {
+	private final DynamicActionAsync dynamicAsyncDelegate;
 	
+	/**
+	 * Creates a new {@code DynamicActionAsyncSupport} that uses the default executor
+	 */
 	public DynamicActionAsyncSupport()
 	{
 		this(null);
 	}
 	
+	/**
+	 * Create a new {@code DynamicActionAsyncSupport} that uses the given executor
+	 * 
+	 * @param executor
+	 *        the {@link Executor} to use for asynchronous invocations
+	 */
 	public DynamicActionAsyncSupport(Executor executor)
 	{
 		dynamicAsyncDelegate = new DynamicActionToDynamicActionAsync(this, executor);
 	}
 	
-	private final DynamicActionAsync dynamicAsyncDelegate;
-	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public abstract void dynamicInvoke(Object... params);
 	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public ActionAsyncResult beginDynamicInvoke(ActionAsyncCallback callback, Object asyncState,
 												Object... params)

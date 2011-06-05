@@ -28,11 +28,26 @@ import net.objectzoo.delegates.DynamicAction;
 import net.objectzoo.events.DynamicEvent;
 import net.objectzoo.events.helpers.EventSubscriberRegisty;
 
+/**
+ * The {@code DynamicEventDistributor} is a helper class that encapsulates all the logic required to
+ * provide events in other classes. The {@code DynamicEventDistributor} implements the
+ * {@link DynamicEvent} interface to allow subscription and the {@link DynamicAction} interface to
+ * allow invocations to be distributed to all subscribers. Subscriber invocations are performed in
+ * the order of subscription.
+ * 
+ * @author tilmann
+ */
 public class DynamicEventDistributor implements DynamicAction, DynamicEvent
 {
-	
 	private EventSubscriberRegisty<DynamicAction> registry = new EventSubscriberRegisty<DynamicAction>();
 	
+	/**
+	 * This {@code dynamicInvoke} implementation invokes all event subscribers in the order they
+	 * have been subscribed.
+	 * 
+	 * @param params
+	 *        the parameters to invoke the subscribers with
+	 */
 	@Override
 	public void dynamicInvoke(Object... params)
 	{
@@ -42,12 +57,18 @@ public class DynamicEventDistributor implements DynamicAction, DynamicEvent
 		}
 	}
 	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void subscribe(DynamicAction action)
 	{
 		registry.subscribe(action);
 	}
 	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void unsubscribe(DynamicAction action)
 	{

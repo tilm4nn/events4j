@@ -25,19 +25,39 @@
 package net.objectzoo.delegates.adapters;
 
 import net.objectzoo.delegates.ActionAsyncCallback;
+import net.objectzoo.delegates.ActionAsyncResult;
 import net.objectzoo.delegates.FuncAsyncCallback;
 import net.objectzoo.delegates.FuncAsyncResult;
+import net.objectzoo.delegates.helpers.AsyncExecutor;
 
+/**
+ * This adapter converts an {@link ActionAsyncCallback} to a {@link FuncAsyncCallback}. This is a
+ * utility that allows to the {@link AsyncExecutor} to be shared for action and func execution.
+ * 
+ * @author tilmann
+ */
 public class ActionCallbackToFuncCallback implements FuncAsyncCallback<Object>
 {
-	
 	private final ActionAsyncCallback actionCallback;
 	
+	/**
+	 * Converts the given {@link ActionAsyncCallback} to {@link FuncAsyncCallback}
+	 * 
+	 * @param actionCallback
+	 *        the callback to be converted
+	 */
 	public ActionCallbackToFuncCallback(ActionAsyncCallback actionCallback)
 	{
 		this.actionCallback = actionCallback;
 	}
 	
+	/**
+	 * This implementation just forwards the given {@link FuncAsyncResult} that is a subclass of
+	 * {@link ActionAsyncResult} to the {@link ActionAsyncCallback} given at creation time.
+	 * 
+	 * @param result
+	 *        the asynchronous result to be forwarded
+	 */
 	@Override
 	public void invocationFinished(FuncAsyncResult<Object> result)
 	{

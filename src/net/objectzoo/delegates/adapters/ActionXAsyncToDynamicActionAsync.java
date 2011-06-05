@@ -34,46 +34,103 @@ import net.objectzoo.delegates.ActionAsyncResult;
 import net.objectzoo.delegates.DynamicActionAsync;
 import net.objectzoo.delegates.helpers.DynamicAsyncInvoker;
 
+/**
+ * This adapter converts a given {@code ActionXAsync} to a {@link DynamicActionAsync}.
+ * 
+ * The calls to the
+ * {@link DynamicActionAsync#beginDynamicInvoke(ActionAsyncCallback, Object, Object...)} method are
+ * forwarded to the original action's {@code beginInvoke} method. If a call to
+ * {@code beginDynamicInvoke} has the wrong argument count regarding the original action an
+ * {@link IllegalArgumentException} is thrown.
+ * 
+ * @author tilmann
+ */
 public class ActionXAsyncToDynamicActionAsync implements DynamicActionAsync
 {
-	
 	private final DynamicAsyncInvoker dynamicInvoker;
 	
+	/**
+	 * Convert the given {@link ActionAsync} to the interface {@link DynamicActionAsync}
+	 * 
+	 * @param action
+	 *        the action to be converted
+	 */
 	public ActionXAsyncToDynamicActionAsync(ActionAsync<?> action)
 	{
 		this(ActionAsync.class, action);
 	}
 	
+	/**
+	 * Convert the given {@link Action0Async} to the interface {@link DynamicActionAsync}
+	 * 
+	 * @param action
+	 *        the action to be converted
+	 */
 	public ActionXAsyncToDynamicActionAsync(Action0Async action)
 	{
 		this(Action0Async.class, action);
 	}
 	
+	/**
+	 * Convert the given {@link Action2Async} to the interface {@link DynamicActionAsync}
+	 * 
+	 * @param action
+	 *        the action to be converted
+	 */
 	public ActionXAsyncToDynamicActionAsync(Action2Async<?, ?> action)
 	{
 		this(Action2Async.class, action);
 	}
 	
+	/**
+	 * Convert the given {@link Action3Async} to the interface {@link DynamicActionAsync}
+	 * 
+	 * @param action
+	 *        the action to be converted
+	 */
 	public ActionXAsyncToDynamicActionAsync(Action3Async<?, ?, ?> action)
 	{
 		this(Action3Async.class, action);
 	}
 	
+	/**
+	 * Convert the given {@link Action4Async} to the interface {@link DynamicActionAsync}
+	 * 
+	 * @param action
+	 *        the action to be converted
+	 */
 	public ActionXAsyncToDynamicActionAsync(Action4Async<?, ?, ?, ?> action)
 	{
 		this(Action4Async.class, action);
 	}
 	
-	private <T> ActionXAsyncToDynamicActionAsync(Class<T> funcType, T func)
+	/**
+	 * Convert the given {@code ActionXAsync} to the interface {@link DynamicActionAsync}
+	 * 
+	 * @param <ActionType>
+	 *        the type of action to be converted
+	 * @param actionType
+	 *        the type of action to be converted
+	 * @param action
+	 *        the action to be converted
+	 */
+	private <ActionType> ActionXAsyncToDynamicActionAsync(Class<ActionType> actionType,
+														  ActionType action)
 	{
-		dynamicInvoker = new DynamicAsyncInvoker(funcType, func);
+		dynamicInvoker = new DynamicAsyncInvoker(actionType, action);
 	}
 	
+	/**
+	 * {@inheritDoc}
+	 * 
+	 * @throws IllegalArgumentException
+	 *         if the parameter count given to this method does not match the parameter count of the
+	 *         underlying original action.
+	 */
 	@Override
 	public ActionAsyncResult beginDynamicInvoke(ActionAsyncCallback callback, Object asyncState,
 												Object... params)
 	{
-		
 		return dynamicInvoker.beginDynamicInvoke(new ActionCallbackToFuncCallback(callback),
 			asyncState, params);
 	}

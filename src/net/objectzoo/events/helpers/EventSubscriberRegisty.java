@@ -28,10 +28,26 @@ import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+/**
+ * This helper class is a registry that is used by the event distributors to store the actions that
+ * registered for the event.
+ * 
+ * @author tilmann
+ * 
+ * @param <ActionType>
+ *        the type of action this registry holds
+ */
 public class EventSubscriberRegisty<ActionType>
 {
 	private List<ActionType> subscribers = new CopyOnWriteArrayList<ActionType>();
 	
+	/**
+	 * Adds the given action to this registry if it is not allready subscribed. This is checked
+	 * using the {@link Object#equals(Object)} of the action.
+	 * 
+	 * @param action
+	 *        the action to be added
+	 */
 	public void subscribe(ActionType action)
 	{
 		if (!subscribers.contains(action))
@@ -40,11 +56,22 @@ public class EventSubscriberRegisty<ActionType>
 		}
 	}
 	
+	/**
+	 * Removes the given action from this registry.
+	 * 
+	 * @param action
+	 *        the action to be removed
+	 */
 	public void unsubscribe(ActionType action)
 	{
 		subscribers.remove(action);
 	}
 	
+	/**
+	 * Returns all subscribed actions in this registry
+	 * 
+	 * @return all subscribed actions
+	 */
 	public Collection<ActionType> getSubscribers()
 	{
 		return subscribers;

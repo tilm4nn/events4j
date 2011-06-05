@@ -25,18 +25,18 @@
 package net.objectzoo.delegates;
 
 /**
- * A {@code Func} is a reference to a function with return value that can be invoked synchronously
+ * A {@code Func0} is a reference to a function with return value that can be invoked synchronously
  * similar to a regular Java method call.
  * 
  * @author tilmann
  * 
  * @param <R>
- *        The type of the {@code Func}'s return value
+ *        The type of the {@code Func0}'s return value
  */
 public interface Func0<R>
 {
 	/**
-	 * Invoke this {@code Func}
+	 * Invoke this {@code Func0}
 	 * 
 	 * @return the return value of the invocation
 	 */

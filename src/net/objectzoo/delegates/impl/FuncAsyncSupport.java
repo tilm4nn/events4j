@@ -31,24 +31,57 @@ import net.objectzoo.delegates.FuncAsync;
 import net.objectzoo.delegates.FuncAsyncCallback;
 import net.objectzoo.delegates.FuncAsyncResult;
 import net.objectzoo.delegates.adapters.FuncToFuncAsync;
+import net.objectzoo.delegates.helpers.AsyncExecutor;
 
+/**
+ * This is an abstract support class that can be used to quickly implement asynchronous funcs.
+ * 
+ * All asynchronous calls are executed in another thread and forwarded to the
+ * {@link Func#invoke(Object)} method.
+ * 
+ * The {@link Executor} to use for the asynchronous invocations can be chosen during creation of
+ * {@code ActionAsyncSupport} instances. If no explicit executor is given the a default executor is
+ * used. The default executor can be set using the
+ * {@link AsyncExecutor#setDefaultExecutor(Executor)} property or is created automatically by the
+ * {@link AsyncExecutor}.
+ * 
+ * @author tilmann
+ * 
+ * @param <T>
+ *        The type of the {@code FuncAsync}'s parameter
+ */
 public abstract class FuncAsyncSupport<T, R> implements Func<T, R>, FuncAsync<T, R>
 {
+	private final FuncAsync<T, R> asyncDelegate;
+	
+	/**
+	 * Creates a new {@code FuncAsyncSupport} that uses the default executor
+	 */
 	public FuncAsyncSupport()
 	{
 		this(null);
 	}
 	
+	/**
+	 * Create a new {@code FuncAsyncSupport} that uses the given executor
+	 * 
+	 * @param executor
+	 *        the {@link Executor} to use for asynchronous invocations
+	 */
 	public FuncAsyncSupport(Executor executor)
 	{
 		asyncDelegate = new FuncToFuncAsync<T, R>(this, executor);
 	}
 	
-	private final FuncAsync<T, R> asyncDelegate;
-	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public abstract R invoke(T parameter);
 	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public FuncAsyncResult<R> beginInvoke(FuncAsyncCallback<? super R> callback, Object asyncState,
 										  T parameter)

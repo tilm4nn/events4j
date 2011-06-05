@@ -25,24 +25,24 @@
 package net.objectzoo.delegates;
 
 /**
- * An {@code Action} is a reference to a procedure without return value that can be invoked
+ * An {@code Action4} is a reference to a procedure without return value that can be invoked
  * synchronously similar to a regular Java method call.
  * 
  * @author tilmann
  * 
  * @param <T1>
- *        The type of the {@code Action}'s first parameter
+ *        The type of the {@code Action4}'s first parameter
  * @param <T2>
- *        The type of the {@code Action}'s second parameter
+ *        The type of the {@code Action4}'s second parameter
  * @param <T3>
- *        The type of the {@code Action}'s third parameter
+ *        The type of the {@code Action4}'s third parameter
  * @param <T4>
- *        The type of the {@code Action}'s fourth parameter
+ *        The type of the {@code Action4}'s fourth parameter
  */
 public interface Action4<T1, T2, T3, T4>
 {
 	/**
-	 * Invoke this {@code Action} with the given parameter values
+	 * Invoke this {@code Action4} with the given parameter values
 	 * 
 	 * @param parameter1
 	 *        the first parameter's value for the invocation

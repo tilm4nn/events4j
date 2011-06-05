@@ -25,26 +25,26 @@
 package net.objectzoo.delegates;
 
 /**
- * An {@code ActionAsync} is a reference to a procedure without return value that can be invoked
- * asynchronously in another thread. With {@code ActionAsync} it is possible to track the status and
- * outcome using the {@link ActionAsyncResult} returned upon invocation or by defining an
+ * An {@code Action4Async} is a reference to a procedure without return value that can be invoked
+ * asynchronously in another thread. With {@code Action4Async} it is possible to track the status
+ * and outcome using the {@link ActionAsyncResult} returned upon invocation or by defining an
  * {@link ActionAsyncCallback} for the invocation.
  * 
  * @author tilmann
  * 
  * @param <T1>
- *        The type of the {@code ActionAsync}'s first parameter
+ *        The type of the {@code Action4Async}'s first parameter
  * @param <T2>
- *        The type of the {@code ActionAsync}'s second parameter
+ *        The type of the {@code Action4Async}'s second parameter
  * @param <T3>
- *        The type of the {@code ActionAsync}'s third parameter
+ *        The type of the {@code Action4Async}'s third parameter
  * @param <T4>
- *        The type of the {@code ActionAsync}'s fourth parameter
+ *        The type of the {@code Action4Async}'s fourth parameter
  */
 public interface Action4Async<T1, T2, T3, T4>
 {
 	/**
-	 * Asynchronously invoke this {@code ActionAsync} with the given parameter value, callback and
+	 * Asynchronously invoke this {@code Action4Async} with the given parameter value, callback and
 	 * asyncState.
 	 * 
 	 * Associated with each call to {@code beginInvoke} is an {@link ActionAsyncCallback} instance
@@ -53,7 +53,7 @@ public interface Action4Async<T1, T2, T3, T4>
 	 * 
 	 * @param callback
 	 *        the {@link ActionAsyncCallback}, if given to {@code beginInvoke}, is invoked upon
-	 *        completion of the {@code ActionAsync}'s invocation and receives the same
+	 *        completion of the {@code Action4Async}'s invocation and receives the same
 	 *        {@link ActionAsyncResult} that is returned by the call to {@code beginInvoke}.
 	 * @param asyncState
 	 *        the asyncState is an arbitrary reference that, if given to {@code beginInvoke}, can be

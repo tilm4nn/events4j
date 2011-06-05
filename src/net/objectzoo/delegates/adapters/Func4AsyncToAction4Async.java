@@ -29,16 +29,38 @@ import net.objectzoo.delegates.ActionAsyncCallback;
 import net.objectzoo.delegates.ActionAsyncResult;
 import net.objectzoo.delegates.Func4Async;
 
+/**
+ * This adapter converts a {@link Func4Async} to an {@link Action4Async}.
+ * 
+ * @author tilmann
+ * 
+ * @param <T1>
+ *        The type of the {@code Func4Async}'s/{@code Action4Async}'s first parameter
+ * @param <T2>
+ *        The type of the {@code Func4Async}'s/{@code Action4Async}'s second parameter
+ * @param <T3>
+ *        The type of the {@code Func4Async}'s/{@code Action4Async}'s third parameter
+ * @param <T4>
+ *        The type of the {@code Func4Async}'s/{@code Action4Async}'s fourth parameter
+ */
 public class Func4AsyncToAction4Async<T1, T2, T3, T4> implements Action4Async<T1, T2, T3, T4>
 {
-	
 	private final Func4Async<T1, T2, T3, T4, ?> func;
 	
+	/**
+	 * Convert the given {@link Func4Async} to the interface {@link Action4Async}
+	 * 
+	 * @param func
+	 *        the func to be converted
+	 */
 	public Func4AsyncToAction4Async(Func4Async<T1, T2, T3, T4, ?> func)
 	{
 		this.func = func;
 	}
 	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public ActionAsyncResult beginInvoke(ActionAsyncCallback callback, Object asyncState,
 										 T1 parameter1, T2 parameter2, T3 parameter3, T4 parameter4)

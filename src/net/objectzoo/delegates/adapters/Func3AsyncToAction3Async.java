@@ -29,16 +29,36 @@ import net.objectzoo.delegates.ActionAsyncCallback;
 import net.objectzoo.delegates.ActionAsyncResult;
 import net.objectzoo.delegates.Func3Async;
 
+/**
+ * This adapter converts a {@link Func3Async} to an {@link Action3Async}.
+ * 
+ * @author tilmann
+ * 
+ * @param <T1>
+ *        The type of the {@code Func3Async}'s/{@code Action3Async}'s first parameter
+ * @param <T2>
+ *        The type of the {@code Func3Async}'s/{@code Action3Async}'s second parameter
+ * @param <T3>
+ *        The type of the {@code Func3Async}'s/{@code Action3Async}'s third parameter
+ */
 public class Func3AsyncToAction3Async<T1, T2, T3> implements Action3Async<T1, T2, T3>
 {
-	
 	private final Func3Async<T1, T2, T3, ?> func;
 	
+	/**
+	 * Convert the given {@link Func3Async} to the interface {@link Action3Async}
+	 * 
+	 * @param func
+	 *        the func to be converted
+	 */
 	public Func3AsyncToAction3Async(Func3Async<T1, T2, T3, ?> func)
 	{
 		this.func = func;
 	}
 	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public ActionAsyncResult beginInvoke(ActionAsyncCallback callback, Object asyncState,
 										 T1 parameter1, T2 parameter2, T3 parameter3)

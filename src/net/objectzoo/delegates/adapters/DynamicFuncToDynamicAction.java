@@ -27,20 +27,32 @@ package net.objectzoo.delegates.adapters;
 import net.objectzoo.delegates.DynamicAction;
 import net.objectzoo.delegates.DynamicFunc;
 
+/**
+ * This adapter converts a {@link DynamicFunc} to a {@link DynamicAction}.
+ * 
+ * @author tilmann
+ */
 public class DynamicFuncToDynamicAction implements DynamicAction
 {
+	private final DynamicFunc dynamicFunc;
 	
-	private final DynamicFunc func;
-	
-	public DynamicFuncToDynamicAction(DynamicFunc func)
+	/**
+	 * Convert the given {@link DynamicFunc} to the interface {@link DynamicAction}
+	 * 
+	 * @param dynamicFunc
+	 *        the func to be converted
+	 */
+	public DynamicFuncToDynamicAction(DynamicFunc dynamicFunc)
 	{
-		this.func = func;
+		this.dynamicFunc = dynamicFunc;
 	}
 	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void dynamicInvoke(Object... params)
 	{
-		func.dynamicInvoke(params);
+		dynamicFunc.dynamicInvoke(params);
 	}
-	
 }

@@ -27,20 +27,39 @@ package net.objectzoo.delegates.adapters;
 import net.objectzoo.delegates.Action3;
 import net.objectzoo.delegates.Func3;
 
+/**
+ * This adapter converts a {@link Func3} to an {@link Action3}.
+ * 
+ * @author tilmann
+ * 
+ * @param <T1>
+ *        The type of the {@code Func3}'s/{@code Action3}'s first parameter
+ * @param <T2>
+ *        The type of the {@code Func3}'s/{@code Action3}'s second parameter
+ * @param <T3>
+ *        The type of the {@code Func3}'s/{@code Action3}'s third parameter
+ */
 public class Func3ToAction3<T1, T2, T3> implements Action3<T1, T2, T3>
 {
-	
 	private final Func3<T1, T2, T3, ?> func;
 	
+	/**
+	 * Convert the given {@link Func3} to the interface {@link Action3}
+	 * 
+	 * @param func
+	 *        the func to be converted
+	 */
 	public Func3ToAction3(Func3<T1, T2, T3, ?> func)
 	{
 		this.func = func;
 	}
 	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void invoke(T1 parameter1, T2 parameter2, T3 parameter3)
 	{
 		func.invoke(parameter1, parameter2, parameter3);
 	}
-	
 }

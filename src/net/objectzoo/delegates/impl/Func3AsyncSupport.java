@@ -31,31 +31,66 @@ import net.objectzoo.delegates.Func3Async;
 import net.objectzoo.delegates.FuncAsyncCallback;
 import net.objectzoo.delegates.FuncAsyncResult;
 import net.objectzoo.delegates.adapters.Func3ToFunc3Async;
+import net.objectzoo.delegates.helpers.AsyncExecutor;
 
+/**
+ * This is an abstract support class that can be used to quickly implement asynchronous funcs.
+ * 
+ * All asynchronous calls are executed in another thread and forwarded to the
+ * {@link Func3#invoke(Object, Object, Object)} method.
+ * 
+ * The {@link Executor} to use for the asynchronous invocations can be chosen during creation of
+ * {@code ActionAsyncSupport} instances. If no explicit executor is given the a default executor is
+ * used. The default executor can be set using the
+ * {@link AsyncExecutor#setDefaultExecutor(Executor)} property or is created automatically by the
+ * {@link AsyncExecutor}.
+ * 
+ * @author tilmann
+ * 
+ * @param <T1>
+ *        The type of the {@code FuncAsync}'s first parameter
+ * @param <T2>
+ *        The type of the {@code FuncAsync}'s second parameter
+ * @param <T3>
+ *        The type of the {@code FuncAsync}'s third parameter
+ */
 public abstract class Func3AsyncSupport<T1, T2, T3, R> implements Func3<T1, T2, T3, R>,
 	Func3Async<T1, T2, T3, R>
 {
+	private final Func3Async<T1, T2, T3, R> asyncDelegate;
 	
+	/**
+	 * Creates a new {@code Func3AsyncSupport} that uses the default executor
+	 */
 	public Func3AsyncSupport()
 	{
 		this(null);
 	}
 	
+	/**
+	 * Create a new {@code Func3AsyncSupport} that uses the given executor
+	 * 
+	 * @param executor
+	 *        the {@link Executor} to use for asynchronous invocations
+	 */
 	public Func3AsyncSupport(Executor executor)
 	{
 		asyncDelegate = new Func3ToFunc3Async<T1, T2, T3, R>(this, executor);
 	}
 	
-	private final Func3Async<T1, T2, T3, R> asyncDelegate;
-	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public abstract R invoke(T1 parameter1, T2 parameter2, T3 parameter3);
 	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public FuncAsyncResult<R> beginInvoke(FuncAsyncCallback<? super R> callback, Object asyncState,
 										  T1 parameter1, T2 parameter2, T3 parameter3)
 	{
-		
 		return asyncDelegate.beginInvoke(callback, asyncState, parameter1, parameter2, parameter3);
 	}
 }

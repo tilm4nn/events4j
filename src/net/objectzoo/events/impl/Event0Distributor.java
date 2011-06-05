@@ -28,11 +28,23 @@ import net.objectzoo.delegates.Action0;
 import net.objectzoo.events.Event0;
 import net.objectzoo.events.helpers.EventSubscriberRegisty;
 
+/**
+ * The {@code Event0Distributor} is a helper class that encapsulates all the logic required to
+ * provide events in other classes. The {@code Event0Distributor} implements the {@link Event0}
+ * interface to allow subscription and the {@link Action0} interface to allow invocations to be
+ * distributed to all subscribers. Subscriber invocations are performed in the order of
+ * subscription.
+ * 
+ * @author tilmann
+ */
 public class Event0Distributor implements Action0, Event0
 {
-	
 	private EventSubscriberRegisty<Action0> registry = new EventSubscriberRegisty<Action0>();
 	
+	/**
+	 * This {@code invoke} implementation invokes all event subscribers in the order they have been
+	 * subscribed.
+	 */
 	@Override
 	public void invoke()
 	{
@@ -42,12 +54,18 @@ public class Event0Distributor implements Action0, Event0
 		}
 	}
 	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void subscribe(Action0 action)
 	{
 		registry.subscribe(action);
 	}
 	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void unsubscribe(Action0 action)
 	{

@@ -25,7 +25,7 @@
 package net.objectzoo.delegates;
 
 /**
- * An {@code Action} is a reference to a procedure without return value that can be invoked
+ * An {@code Action0} is a reference to a procedure without return value that can be invoked
  * synchronously similar to a regular Java method call.
  * 
  * @author tilmann
@@ -34,7 +34,7 @@ package net.objectzoo.delegates;
 public interface Action0
 {
 	/**
-	 * Invoke this {@code Action}
+	 * Invoke this {@code Action0}
 	 */
 	public void invoke();
 }

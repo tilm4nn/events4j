@@ -25,24 +25,24 @@
 package net.objectzoo.delegates;
 
 /**
- * A {@code FuncAsync} is a reference to a function with return value that can be invoked
- * asynchronously in another thread. With {@code FuncAsync} it is possible to track the status and
+ * A {@code Func2Async} is a reference to a function with return value that can be invoked
+ * asynchronously in another thread. With {@code Func2Async} it is possible to track the status and
  * outcome using the {@link FuncAsyncResult} returned upon invocation or by defining an
  * {@link FuncAsyncCallback} for the invocation.
  * 
  * @author tilmann
  * 
  * @param <T1>
- *        The type of the {@code FuncAsync}'s first parameter
+ *        The type of the {@code Func2Async}'s first parameter
  * @param <T2>
- *        The type of the {@code FuncAsync}'s second parameter
+ *        The type of the {@code Func2Async}'s second parameter
  * @param <R>
- *        The type of the {@code FuncAsync}'s return value
+ *        The type of the {@code Func2Async}'s return value
  */
 public interface Func2Async<T1, T2, R>
 {
 	/**
-	 * Asynchronously invoke this {@code FuncAsync} with the given parameter value, callback and
+	 * Asynchronously invoke this {@code Func2Async} with the given parameter value, callback and
 	 * asyncState.
 	 * 
 	 * Associated with each call to {@code beginInvoke} is a {@link FuncAsyncCallback} instance
@@ -51,7 +51,7 @@ public interface Func2Async<T1, T2, R>
 	 * 
 	 * @param callback
 	 *        the {@link FuncAsyncCallback}, if given to {@code beginInvoke}, is invoked upon
-	 *        completion of the {@code FuncAsync}'s invocation and receives the same
+	 *        completion of the {@code Func2Async}'s invocation and receives the same
 	 *        {@link FuncAsyncResult} that is returned by the call to {@code beginInvoke}.
 	 * @param asyncState
 	 *        the asyncState is an arbitrary reference that, if given to {@code beginInvoke}, can be

@@ -28,12 +28,42 @@ import net.objectzoo.delegates.Action4;
 import net.objectzoo.events.Event4;
 import net.objectzoo.events.helpers.EventSubscriberRegisty;
 
+/**
+ * The {@code Event4Distributor} is a helper class that encapsulates all the logic required to
+ * provide events in other classes. The {@code Event4Distributor} implements the {@link Event4}
+ * interface to allow subscription and the {@link Action4} interface to allow invocations to be
+ * distributed to all subscribers. Subscriber invocations are performed in the order of
+ * subscription.
+ * 
+ * @author tilmann
+ * 
+ * @param <T1>
+ *        The type of the first information parameter the event provides
+ * @param <T2>
+ *        The type of the second information parameter the event provides
+ * @param <T3>
+ *        The type of the third information parameter the event provides
+ * @param <T4>
+ *        The type of the fourth information parameter the event provides
+ */
 public class Event4Distributor<T1, T2, T3, T4> implements Action4<T1, T2, T3, T4>,
 	Event4<T1, T2, T3, T4>
 {
-	
 	private EventSubscriberRegisty<Action4<? super T1, ? super T2, ? super T3, ? super T4>> registry = new EventSubscriberRegisty<Action4<? super T1, ? super T2, ? super T3, ? super T4>>();
 	
+	/**
+	 * This {@code invoke} implementation invokes all event subscribers in the order they have been
+	 * subscribed.
+	 * 
+	 * @param parameter1
+	 *        the first parameter to invoke the subscribers with
+	 * @param parameter2
+	 *        the second parameter to invoke the subscribers with
+	 * @param parameter3
+	 *        the second parameter to invoke the subscribers with
+	 * @param parameter4
+	 *        the second parameter to invoke the subscribers with
+	 */
 	@Override
 	public void invoke(T1 parameter1, T2 parameter2, T3 parameter3, T4 parameter4)
 	{
@@ -43,12 +73,18 @@ public class Event4Distributor<T1, T2, T3, T4> implements Action4<T1, T2, T3, T4
 		}
 	}
 	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void subscribe(Action4<? super T1, ? super T2, ? super T3, ? super T4> action)
 	{
 		registry.subscribe(action);
 	}
 	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void unsubscribe(Action4<? super T1, ? super T2, ? super T3, ? super T4> action)
 	{

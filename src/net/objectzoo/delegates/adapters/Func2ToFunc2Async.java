@@ -33,23 +33,61 @@ import net.objectzoo.delegates.FuncAsyncCallback;
 import net.objectzoo.delegates.FuncAsyncResult;
 import net.objectzoo.delegates.helpers.AsyncExecutor;
 
+/**
+ * An adapter that converts a conventional {@link Func2} to an {@link Func2Async}.
+ * 
+ * All asynchronous calls are executed in another thread and forwarded to the
+ * {@link Func2#invoke(Object, Object)} method.
+ * 
+ * The {@link Executor} to use for the asynchronous invocations can be chosen during creation of
+ * this adapter. If no explicit executor is given the a default executor is used. The default
+ * executor can be set using the {@link AsyncExecutor#setDefaultExecutor(Executor)} property or is
+ * created automatically by the {@link AsyncExecutor}.
+ * 
+ * @author tilmann
+ * 
+ * @param <T1>
+ *        The type of the {@code Func2}'s first parameter
+ * @param <T2>
+ *        The type of the {@code Func2}'s second parameter
+ * @param <R>
+ *        The type of the {@code Func2}'s return value
+ */
 public class Func2ToFunc2Async<T1, T2, R> implements Func2Async<T1, T2, R>
 {
 	private final Func2<T1, T2, R> func;
-	
 	private final AsyncExecutor asyncExecutor;
 	
+	/**
+	 * Converts the given {@link Func2} to the interface {@link Func2Async} using the default
+	 * executor
+	 * 
+	 * @param func
+	 *        the func to be converted
+	 */
 	public Func2ToFunc2Async(Func2<T1, T2, R> func)
 	{
 		this(func, null);
 	}
 	
+	/**
+	 * Converts the given {@link Func2} to the interface {@link Func2Async} and executes
+	 * asynchronous call using the given {@link Executor}
+	 * 
+	 * @param func
+	 *        the func to be converted
+	 * @param executor
+	 *        the executor used for the asynchronous calls
+	 */
 	public Func2ToFunc2Async(Func2<T1, T2, R> func, Executor executor)
 	{
 		this.func = func;
 		this.asyncExecutor = new AsyncExecutor(executor);
 	}
 	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public FuncAsyncResult<R> beginInvoke(FuncAsyncCallback<? super R> callback, Object asyncState,
 										  final T1 parameter1, final T2 parameter2)
