@@ -48,14 +48,18 @@ public interface Event2<T1, T2>
 	 * 
 	 * @param action
 	 *        the {@link Action2} to be invoked when this {@code Event2} signals
+	 * @throws IllegalArgumentException
+	 *         if he given action to be subscribed is {@code null}
 	 */
-	public void subscribe(Action2<? super T1, ? super T2> action);
+	public void subscribe(Action2<? super T1, ? super T2> action) throws IllegalArgumentException;
 	
 	/**
 	 * Unsubscribe the given {@link Action2} from this {@code Event2}
 	 * 
 	 * @param action
 	 *        the {@link Action2} to be unsubscribed
+	 * @throws IllegalArgumentException
+	 *         if he given action to be unsubscribed is {@code null}
 	 */
-	public void unsubscribe(Action2<? super T1, ? super T2> action);
+	public void unsubscribe(Action2<? super T1, ? super T2> action) throws IllegalArgumentException;
 }

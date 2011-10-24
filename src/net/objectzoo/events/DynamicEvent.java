@@ -44,14 +44,18 @@ public interface DynamicEvent
 	 * 
 	 * @param action
 	 *        the {@link DynamicAction} to be invoked when this {@code DynamicEvent} signals
+	 * @throws IllegalArgumentException
+	 *         if he given action to be subscribed is {@code null}
 	 */
-	public void subscribe(DynamicAction action);
+	public void subscribe(DynamicAction action) throws IllegalArgumentException;
 	
 	/**
 	 * Unsubscribe the given {@link DynamicAction} from this {@code DynamicEvent}
 	 * 
 	 * @param action
 	 *        the {@link DynamicAction} to be unsubscribed
+	 * @throws IllegalArgumentException
+	 *         if he given action to be unsubscribed is {@code null}
 	 */
-	public void unsubscribe(DynamicAction action);
+	public void unsubscribe(DynamicAction action) throws IllegalArgumentException;
 }

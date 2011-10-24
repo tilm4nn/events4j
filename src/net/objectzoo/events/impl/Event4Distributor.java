@@ -25,14 +25,12 @@
 package net.objectzoo.events.impl;
 
 import net.objectzoo.delegates.Action4;
-import net.objectzoo.events.Event4;
 import net.objectzoo.events.helpers.EventSubscriberRegisty;
 
 /**
- * The {@code Event4Distributor} is a helper class that encapsulates all the logic required to
- * provide events in other classes. The {@code Event4Distributor} implements the {@link Event4}
- * interface to allow subscription and the {@link Action4} interface to allow invocations to be
- * distributed to all subscribers. Subscriber invocations are performed in the order of
+ * The {@code Event4Distributor} is a {@link Event4Delegate} implementation that allows event
+ * distribution to multiple subscribers. It is a helper class that encapsulates all the logic
+ * required to provide events in other classes. Subscriber invocations are performed in the order of
  * subscription.
  * 
  * @author tilmann
@@ -46,8 +44,7 @@ import net.objectzoo.events.helpers.EventSubscriberRegisty;
  * @param <T4>
  *        The type of the fourth information parameter the event provides
  */
-public class Event4Distributor<T1, T2, T3, T4> implements Action4<T1, T2, T3, T4>,
-	Event4<T1, T2, T3, T4>
+public class Event4Distributor<T1, T2, T3, T4> implements Event4Delegate<T1, T2, T3, T4>
 {
 	private EventSubscriberRegisty<Action4<? super T1, ? super T2, ? super T3, ? super T4>> registry = new EventSubscriberRegisty<Action4<? super T1, ? super T2, ? super T3, ? super T4>>();
 	
@@ -78,6 +75,7 @@ public class Event4Distributor<T1, T2, T3, T4> implements Action4<T1, T2, T3, T4
 	 */
 	@Override
 	public void subscribe(Action4<? super T1, ? super T2, ? super T3, ? super T4> action)
+		throws IllegalArgumentException
 	{
 		registry.subscribe(action);
 	}
@@ -87,6 +85,7 @@ public class Event4Distributor<T1, T2, T3, T4> implements Action4<T1, T2, T3, T4
 	 */
 	@Override
 	public void unsubscribe(Action4<? super T1, ? super T2, ? super T3, ? super T4> action)
+		throws IllegalArgumentException
 	{
 		registry.unsubscribe(action);
 	}

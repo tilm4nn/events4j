@@ -11,11 +11,14 @@ import org.jmock.Mockery;
 import org.junit.Before;
 import org.junit.Test;
 
+import net.objectzoo.delegates.impl.AsyncExecutor;
+import net.objectzoo.delegates.impl.AsyncFutureTask;
+
 public class AsyncExecutorTest
 {
-	Mockery context;
-	Executor executor;
-	Callable<?> callable;
+	private Mockery context;
+	private Executor executor;
+	private Callable<?> callable;
 	
 	@Before
 	public void before()

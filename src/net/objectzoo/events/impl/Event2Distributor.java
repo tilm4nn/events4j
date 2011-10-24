@@ -25,14 +25,12 @@
 package net.objectzoo.events.impl;
 
 import net.objectzoo.delegates.Action2;
-import net.objectzoo.events.Event2;
 import net.objectzoo.events.helpers.EventSubscriberRegisty;
 
 /**
- * The {@code Event2Distributor} is a helper class that encapsulates all the logic required to
- * provide events in other classes. The {@code Event2Distributor} implements the {@link Event2}
- * interface to allow subscription and the {@link Action2} interface to allow invocations to be
- * distributed to all subscribers. Subscriber invocations are performed in the order of
+ * The {@code Event2Distributor} is a {@link Event2Delegate} implementation allows that event
+ * distribution to multiple subscribers. It is a helper class that encapsulates all the logic
+ * required to provide events in other classes. Subscriber invocations are performed in the order of
  * subscription.
  * 
  * @author tilmann
@@ -42,7 +40,7 @@ import net.objectzoo.events.helpers.EventSubscriberRegisty;
  * @param <T2>
  *        The type of the second information parameter the event provides
  */
-public class Event2Distributor<T1, T2> implements Action2<T1, T2>, Event2<T1, T2>
+public class Event2Distributor<T1, T2> implements Event2Delegate<T1, T2>
 {
 	private EventSubscriberRegisty<Action2<? super T1, ? super T2>> registry = new EventSubscriberRegisty<Action2<? super T1, ? super T2>>();
 	
@@ -68,7 +66,7 @@ public class Event2Distributor<T1, T2> implements Action2<T1, T2>, Event2<T1, T2
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void subscribe(Action2<? super T1, ? super T2> action)
+	public void subscribe(Action2<? super T1, ? super T2> action) throws IllegalArgumentException
 	{
 		registry.subscribe(action);
 	}
@@ -77,7 +75,7 @@ public class Event2Distributor<T1, T2> implements Action2<T1, T2>, Event2<T1, T2
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void unsubscribe(Action2<? super T1, ? super T2> action)
+	public void unsubscribe(Action2<? super T1, ? super T2> action) throws IllegalArgumentException
 	{
 		registry.unsubscribe(action);
 	}

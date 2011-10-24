@@ -50,14 +50,20 @@ public interface Event3<T1, T2, T3>
 	 * 
 	 * @param action
 	 *        the {@link Action3} to be invoked when this {@code Event3} signals
+	 * @throws IllegalArgumentException
+	 *         if he given action to be subscribed is {@code null}
 	 */
-	public void subscribe(Action3<? super T1, ? super T2, ? super T3> action);
+	public void subscribe(Action3<? super T1, ? super T2, ? super T3> action)
+		throws IllegalArgumentException;
 	
 	/**
 	 * Unsubscribe the given {@link Action3} from this {@code Event3}
 	 * 
 	 * @param action
 	 *        the {@link Action3} to be unsubscribed
+	 * @throws IllegalArgumentException
+	 *         if he given action to be unsubscribed is {@code null}
 	 */
-	public void unsubscribe(Action3<? super T1, ? super T2, ? super T3> action);
+	public void unsubscribe(Action3<? super T1, ? super T2, ? super T3> action)
+		throws IllegalArgumentException;
 }

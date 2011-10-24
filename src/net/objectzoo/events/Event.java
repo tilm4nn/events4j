@@ -46,14 +46,18 @@ public interface Event<T>
 	 * 
 	 * @param action
 	 *        the {@link Action} to be invoked when this {@code Event} signals
+	 * @throws IllegalArgumentException
+	 *         if he given action to be subscribed is {@code null}
 	 */
-	public void subscribe(Action<? super T> action);
+	public void subscribe(Action<? super T> action) throws IllegalArgumentException;
 	
 	/**
 	 * Unsubscribe the given {@link Action} from this {@code Event}
 	 * 
 	 * @param action
 	 *        the {@link Action} to be unsubscribed
+	 * @throws IllegalArgumentException
+	 *         if he given action to be unsubscribed is {@code null}
 	 */
-	public void unsubscribe(Action<? super T> action);
+	public void unsubscribe(Action<? super T> action) throws IllegalArgumentException;
 }

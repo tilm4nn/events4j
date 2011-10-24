@@ -25,14 +25,12 @@
 package net.objectzoo.events.impl;
 
 import net.objectzoo.delegates.Action;
-import net.objectzoo.events.Event;
 import net.objectzoo.events.helpers.EventSubscriberRegisty;
 
 /**
- * The {@code EventDistributor} is a helper class that encapsulates all the logic required to
- * provide events in other classes. The {@code EventDistributor} implements the {@link Event}
- * interface to allow subscription and the {@link Action} interface to allow invocations to be
- * distributed to all subscribers. Subscriber invocations are performed in the order of
+ * The {@code EventDistributor} is a {@link EventDelegate} implementation that allows event
+ * distribution to multiple subscribers. It is a helper class that encapsulates all the logic
+ * required to provide events in other classes. Subscriber invocations are performed in the order of
  * subscription.
  * 
  * @author tilmann
@@ -40,7 +38,7 @@ import net.objectzoo.events.helpers.EventSubscriberRegisty;
  * @param <T>
  *        The type of the information parameter the event provides
  */
-public class EventDistributor<T> implements Action<T>, Event<T>
+public class EventDistributor<T> implements EventDelegate<T>
 {
 	private EventSubscriberRegisty<Action<? super T>> registry = new EventSubscriberRegisty<Action<? super T>>();
 	
@@ -64,7 +62,7 @@ public class EventDistributor<T> implements Action<T>, Event<T>
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void subscribe(Action<? super T> action)
+	public void subscribe(Action<? super T> action) throws IllegalArgumentException
 	{
 		registry.subscribe(action);
 	}
@@ -73,7 +71,7 @@ public class EventDistributor<T> implements Action<T>, Event<T>
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void unsubscribe(Action<? super T> action)
+	public void unsubscribe(Action<? super T> action) throws IllegalArgumentException
 	{
 		registry.unsubscribe(action);
 	}

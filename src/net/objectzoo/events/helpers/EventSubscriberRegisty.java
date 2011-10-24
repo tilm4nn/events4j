@@ -30,7 +30,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * This helper class is a registry that is used by the event distributors to store the actions that
- * registered for the event.
+ * subscribed for the event.
  * 
  * @author tilmann
  * 
@@ -47,9 +47,16 @@ public class EventSubscriberRegisty<ActionType>
 	 * 
 	 * @param action
 	 *        the action to be added
+	 * @throws IllegalArgumentException
+	 *         if he given action to be subscribed is {@code null}
 	 */
-	public void subscribe(ActionType action)
+	public void subscribe(ActionType action) throws IllegalArgumentException
 	{
+		if (action == null)
+		{
+			throw new IllegalArgumentException("null is not a legal Action to be subscribed");
+		}
+		
 		if (!subscribers.contains(action))
 		{
 			subscribers.add(action);
@@ -61,9 +68,16 @@ public class EventSubscriberRegisty<ActionType>
 	 * 
 	 * @param action
 	 *        the action to be removed
+	 * @throws IllegalArgumentException
+	 *         if he given action to be unsubscribed is {@code null}
 	 */
-	public void unsubscribe(ActionType action)
+	public void unsubscribe(ActionType action) throws IllegalArgumentException
 	{
+		if (action == null)
+		{
+			throw new IllegalArgumentException("null is not a legal Action to be unsubscribed");
+		}
+		
 		subscribers.remove(action);
 	}
 	
