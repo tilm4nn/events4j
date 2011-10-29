@@ -3,3 +3,4 @@ bin
 build
 dist
 events4j*.zip
+/build.properties
