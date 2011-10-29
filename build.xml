@@ -228,12 +228,12 @@
 		</jar>
 	</target>
 	<target name="jar.deploy" depends="jar" description="Delploy jar files">
-	    <delete file="${jar.deploy}/${component.name}-*.jar" />
-		<delete file="${jar.deploy}/${component.name}-*-LICENSE.txt" />
+	    <delete dir="${jar.deploy}" includes="${component.name}-*.jar" />
+		<delete dir="${jar.deploy}" includes="${component.name}-*-LICENSE.txt" />
 	    <copy file="${dist.home}/${final.name}.jar" todir="${jar.deploy}" />
 		<copy file="${basedir}/LICENSE.txt" tofile="${jar.deploy}/${final.name}-LICENSE.txt" />
-		<delete file="${jar.deploy}/${component.async.name}-*.jar" />
-		<delete file="${jar.deploy}/${component.async.name}-*-LICENSE.txt" />
+		<delete dir="${jar.deploy}" includes="${component.async.name}-*.jar" />
+		<delete dir="${jar.deploy}" includes="${component.async.name}-*-LICENSE.txt" />
 	    <copy file="${dist.home}/${final.async.name}.jar" todir="${jar.deploy}" />
 		<copy file="${basedir}/LICENSE.txt" tofile="${jar.deploy}/${final.async.name}-LICENSE.txt" />
 	</target>
