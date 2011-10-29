@@ -155,6 +155,7 @@
 				<pathelement location="${src.dir}" />
 				<pathelement location="${src.async.dir}" />
 			</sourcepath>
+			<arg value="-notimestamp" />
 		</javadoc>
 	</target>
 	<target name="dist" depends="jar, javadoc" description="Create binary/source distribution">
