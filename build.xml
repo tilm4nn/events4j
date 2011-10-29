@@ -18,7 +18,7 @@
 	<property name="component.async.name" value="events4j-async" />
 	<property name="component.gwt.name" value="events4j-gwt" />
 	<property name="component.title" value="Events4J API" />
-	<property name="component.version" value="1.1" />
+	<property name="component.version" value="1.2" />
 	<property name="component.vendor" value="object-zoo" />
 	
 	<property name="compile.debug" value="true" />
@@ -140,8 +140,7 @@
 	<target name="javadoc" depends="compile" description="Create JavaDoc">
 		<mkdir dir="${doc.home}" />
 		<mkdir dir="${doc.home}/api" />
-		<javadoc excludepackagenames="org.*"
-				 encoding="${source.encoding}"
+		<javadoc encoding="${source.encoding}"
 			     destdir="${doc.home}/api"
 			     author="true" version="true"
 			     doctitle="&lt;h1&gt;${component.title}&lt;/h1&gt;"
@@ -228,11 +227,15 @@
 		    </manifest>
 		</jar>
 	</target>
-	<target name="jar.deploy" depends="jar" description="Delploy jar file">
+	<target name="jar.deploy" depends="jar" description="Delploy jar files">
 	    <delete file="${jar.deploy}/${component.name}-*.jar" />
+		<delete file="${jar.deploy}/${component.name}-*-LICENSE.txt" />
 	    <copy file="${dist.home}/${final.name}.jar" todir="${jar.deploy}" />
+		<copy file="${basedir}/LICENSE.txt" tofile="${jar.deploy}/${final.name}-LICENSE.txt" />
 		<delete file="${jar.deploy}/${component.async.name}-*.jar" />
+		<delete file="${jar.deploy}/${component.async.name}-*-LICENSE.txt" />
 	    <copy file="${dist.home}/${final.async.name}.jar" todir="${jar.deploy}" />
+		<copy file="${basedir}/LICENSE.txt" tofile="${jar.deploy}/${final.async.name}-LICENSE.txt" />
 	</target>
 	<target name="test" depends="compile.tests" description="Run all tests">
 		<junit printsummary="yes" showoutput="false" fork="true" forkmode="perBatch" haltonerror="true" haltonfailure="true">
