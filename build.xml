@@ -187,6 +187,10 @@
 		<copy todir="${dist.home}/${src.dir}">
 			<fileset dir="${src.home}" />
 		</copy>
+		<mkdir dir="${dist.home}/${src.async.dir}" />
+		<copy todir="${dist.home}/${src.async.dir}">
+			<fileset dir="${src.async.home}" />
+		</copy>
 		<mkdir dir="${dist.home}/${src.test.dir}" />
 		<copy todir="${dist.home}/${src.test.dir}">
 			<fileset dir="${src.test.home}" />

@@ -1,4 +1,4 @@
-#Sat Oct 29 17:44:44 CEST 2011
+#Wed Nov 02 23:15:35 CET 2011
 eclipse.preferences.version=1
 org.eclipse.jdt.core.compiler.doc.comment.support=enabled
 org.eclipse.jdt.core.compiler.problem.invalidJavadoc=warning
@@ -8,7 +8,7 @@ org.eclipse.jdt.core.compiler.problem.invalidJavadocTagsNotVisibleRef=disabled
 org.eclipse.jdt.core.compiler.problem.invalidJavadocTagsVisibility=public
 org.eclipse.jdt.core.compiler.problem.missingJavadocComments=ignore
 org.eclipse.jdt.core.compiler.problem.missingJavadocCommentsOverriding=disabled
-org.eclipse.jdt.core.compiler.problem.missingJavadocCommentsVisibility=public
+org.eclipse.jdt.core.compiler.problem.missingJavadocCommentsVisibility=protected
 org.eclipse.jdt.core.compiler.problem.missingJavadocTagDescription=return_tag
 org.eclipse.jdt.core.compiler.problem.missingJavadocTags=warning
 org.eclipse.jdt.core.compiler.problem.missingJavadocTagsMethodTypeParameters=disabled
