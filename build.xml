@@ -18,7 +18,7 @@
 	<property name="component.async.name" value="events4j-async" />
 	<property name="component.gwt.name" value="events4j-gwt" />
 	<property name="component.title" value="Events4J API" />
-	<property name="component.version" value="1.2" />
+	<property name="component.version" value="1.2.1" />
 	<property name="component.vendor" value="object-zoo" />
 	
 	<property name="compile.debug" value="true" />
