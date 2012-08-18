@@ -1,0 +1,2 @@
+rootProject.name = 'events4j'
+include 'events4j', 'events4j-async'
