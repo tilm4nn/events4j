@@ -5,3 +5,4 @@ dist
 events4j*.zip
 /build.properties
 .gradle
+generated
