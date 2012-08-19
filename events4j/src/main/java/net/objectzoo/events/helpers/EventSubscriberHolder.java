@@ -73,8 +73,7 @@ public class EventSubscriberHolder<ActionType>
 	 * @throws IllegalArgumentException
 	 *         if he given action to be unsubscribed is {@code null}
 	 */
-	public void unsubscribe(ActionType action) throws IllegalArgumentException,
-		IllegalStateException
+	public void unsubscribe(ActionType action) throws IllegalArgumentException, IllegalStateException
 	{
 		if (action == null)
 		{

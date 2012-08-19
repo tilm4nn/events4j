@@ -34,7 +34,7 @@ subprojects {
 		jnarioRuntime.extendsFrom jnarioCompile
 	}
 	
-	task generateJnario(type: JavaExec)	{
+	task generateJnarioJava(type: JavaExec)	{
 		dependsOn testClasses
 		
 		classpath = files(project.sourceSets.jnario.compileClasspath)
@@ -51,11 +51,13 @@ subprojects {
 	}
 	
 	compileJnarioJava {
-		dependsOn generateJnario
+		dependsOn generateJnarioJava
 	}
 	
 	test {
 		dependsOn jnarioClasses
+		
+		include 'net/objectzoo/AllSpecsAndFeaturesSuite.class'
 		
 		beforeTest { descriptor ->
 			logger.lifecycle("Running test: " + descriptor)
