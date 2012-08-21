@@ -42,7 +42,7 @@ import net.objectzoo.events.helpers.EventSubscriberHolder;
  */
 public class Event2Caller<T1, T2> implements Event2Delegate<T1, T2>
 {
-	private EventSubscriberHolder<Action2<? super T1, ? super T2>> subscriberHolder = new EventSubscriberHolder<Action2<? super T1, ? super T2>>();
+	EventSubscriberHolder<Action2<? super T1, ? super T2>> subscriberHolder = new EventSubscriberHolder<Action2<? super T1, ? super T2>>();
 	
 	/**
 	 * This {@code invoke} implementation invokes the sole subscriber if present.
@@ -83,8 +83,8 @@ public class Event2Caller<T1, T2> implements Event2Delegate<T1, T2>
 	 *         {@code EventSubscriberHolder}
 	 */
 	@Override
-	public void unsubscribe(Action2<? super T1, ? super T2> action)
-		throws IllegalArgumentException, IllegalStateException
+	public void unsubscribe(Action2<? super T1, ? super T2> action) throws IllegalArgumentException,
+		IllegalStateException
 	{
 		subscriberHolder.unsubscribe(action);
 	}

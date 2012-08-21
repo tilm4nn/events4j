@@ -25,7 +25,7 @@
 package net.objectzoo.events.impl;
 
 import net.objectzoo.delegates.Action4;
-import net.objectzoo.events.helpers.EventSubscriberRegisty;
+import net.objectzoo.events.helpers.EventSubscriberRegistry;
 
 /**
  * The {@code Event4Distributor} is a {@link Event4Delegate} implementation that allows event
@@ -46,7 +46,7 @@ import net.objectzoo.events.helpers.EventSubscriberRegisty;
  */
 public class Event4Distributor<T1, T2, T3, T4> implements Event4Delegate<T1, T2, T3, T4>
 {
-	private EventSubscriberRegisty<Action4<? super T1, ? super T2, ? super T3, ? super T4>> registry = new EventSubscriberRegisty<Action4<? super T1, ? super T2, ? super T3, ? super T4>>();
+	EventSubscriberRegistry<Action4<? super T1, ? super T2, ? super T3, ? super T4>> registry = new EventSubscriberRegistry<Action4<? super T1, ? super T2, ? super T3, ? super T4>>();
 	
 	/**
 	 * This {@code invoke} implementation invokes all event subscribers in the order they have been

@@ -40,7 +40,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
  * @param <ActionType>
  *        the type of action this registry holds
  */
-public class EventSubscriberRegisty<ActionType>
+public class EventSubscriberRegistry<ActionType>
 {
 	private List<ActionType> subscribers = emptyList();
 	

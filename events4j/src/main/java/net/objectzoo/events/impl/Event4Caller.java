@@ -46,7 +46,7 @@ import net.objectzoo.events.helpers.EventSubscriberHolder;
  */
 public class Event4Caller<T1, T2, T3, T4> implements Event4Delegate<T1, T2, T3, T4>
 {
-	private EventSubscriberHolder<Action4<? super T1, ? super T2, ? super T3, ? super T4>> subscriberHolder = new EventSubscriberHolder<Action4<? super T1, ? super T2, ? super T3, ? super T4>>();
+	EventSubscriberHolder<Action4<? super T1, ? super T2, ? super T3, ? super T4>> subscriberHolder = new EventSubscriberHolder<Action4<? super T1, ? super T2, ? super T3, ? super T4>>();
 	
 	/**
 	 * This {@code invoke} implementation invokes the sole subscriber if present.

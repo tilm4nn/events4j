@@ -25,7 +25,7 @@
 package net.objectzoo.events.impl;
 
 import net.objectzoo.delegates.DynamicAction;
-import net.objectzoo.events.helpers.EventSubscriberRegisty;
+import net.objectzoo.events.helpers.EventSubscriberRegistry;
 
 /**
  * The {@code DynamicEventDistributor} is a {@link DynamicEventDelegate} implementation that allows
@@ -37,7 +37,7 @@ import net.objectzoo.events.helpers.EventSubscriberRegisty;
  */
 public class DynamicEventDistributor implements DynamicEventDelegate
 {
-	private EventSubscriberRegisty<DynamicAction> registry = new EventSubscriberRegisty<DynamicAction>();
+	EventSubscriberRegistry<DynamicAction> registry = new EventSubscriberRegistry<DynamicAction>();
 	
 	/**
 	 * This {@code dynamicInvoke} implementation invokes all event subscribers in the order they

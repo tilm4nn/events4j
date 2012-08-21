@@ -7,9 +7,9 @@ import static org.mockito.Mockito.*
 
 import static extension org.jnario.lib.Should.*
 
-describe EventSubscriberHolder
+describe EventSubscriberRegistry
 {
-	val subject = new EventSubscriberHolder<Action0>
+	val subject = new EventSubscriberRegistry<Action0>
 	
 	context "subscribe"
 	{
@@ -18,20 +18,13 @@ describe EventSubscriberHolder
 			subject.subscribe(null) should throw IllegalArgumentException
 		}
 		
-		fact "throws exception when subscriber is already set"
-		{
-			subject.subscribe([ | ]);
-			
-			subject.subscribe([ | ]) should throw IllegalStateException
-		}
-		
 		fact "subscribes the given subscriber"
 		{
 			val subscriber = [ | ] as Action0
 			
 			subject.subscribe(subscriber)
 			
-			subject.getSubscriber should be subscriber
+			subject.getSubscribers should contain subscriber
 		}
 	}
 	
@@ -42,13 +35,6 @@ describe EventSubscriberHolder
 			subject.unsubscribe(null) should throw IllegalArgumentException
 		}
 		
-		fact "throws exception when another subscriber is set"
-		{
-			subject.subscribe([ | ]);
-			
-			subject.unsubscribe([ | ]) should throw IllegalStateException
-		}
-		
 		fact "unsubscribes the given subscriber"
 		{
 			val subscriber = [ | ] as Action0
@@ -56,7 +42,7 @@ describe EventSubscriberHolder
 			
 			subject.unsubscribe(subscriber)
 			
-			subject.getSubscriber should be null
+			subject.getSubscribers should not contain subscriber
 		}
 	}
 }

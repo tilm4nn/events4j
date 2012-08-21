@@ -25,7 +25,7 @@
 package net.objectzoo.events.impl;
 
 import net.objectzoo.delegates.Action3;
-import net.objectzoo.events.helpers.EventSubscriberRegisty;
+import net.objectzoo.events.helpers.EventSubscriberRegistry;
 
 /**
  * The {@code Event3Distributor} is a {@link Event3Delegate} implementation that allows event
@@ -44,7 +44,7 @@ import net.objectzoo.events.helpers.EventSubscriberRegisty;
  */
 public class Event3Distributor<T1, T2, T3> implements Event3Delegate<T1, T2, T3>
 {
-	private EventSubscriberRegisty<Action3<? super T1, ? super T2, ? super T3>> registry = new EventSubscriberRegisty<Action3<? super T1, ? super T2, ? super T3>>();
+	EventSubscriberRegistry<Action3<? super T1, ? super T2, ? super T3>> registry = new EventSubscriberRegistry<Action3<? super T1, ? super T2, ? super T3>>();
 	
 	/**
 	 * This {@code invoke} implementation invokes all event subscribers in the order they have been
@@ -70,8 +70,7 @@ public class Event3Distributor<T1, T2, T3> implements Event3Delegate<T1, T2, T3>
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void subscribe(Action3<? super T1, ? super T2, ? super T3> action)
-		throws IllegalArgumentException
+	public void subscribe(Action3<? super T1, ? super T2, ? super T3> action) throws IllegalArgumentException
 	{
 		registry.subscribe(action);
 	}
@@ -80,8 +79,7 @@ public class Event3Distributor<T1, T2, T3> implements Event3Delegate<T1, T2, T3>
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void unsubscribe(Action3<? super T1, ? super T2, ? super T3> action)
-		throws IllegalArgumentException
+	public void unsubscribe(Action3<? super T1, ? super T2, ? super T3> action) throws IllegalArgumentException
 	{
 		registry.unsubscribe(action);
 	}

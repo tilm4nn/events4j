@@ -44,7 +44,7 @@ import net.objectzoo.events.helpers.EventSubscriberHolder;
  */
 public class Event3Caller<T1, T2, T3> implements Event3Delegate<T1, T2, T3>
 {
-	private EventSubscriberHolder<Action3<? super T1, ? super T2, ? super T3>> subscriberHolder = new EventSubscriberHolder<Action3<? super T1, ? super T2, ? super T3>>();
+	EventSubscriberHolder<Action3<? super T1, ? super T2, ? super T3>> subscriberHolder = new EventSubscriberHolder<Action3<? super T1, ? super T2, ? super T3>>();
 	
 	/**
 	 * This {@code invoke} implementation invokes the sole subscriber if present.
@@ -73,8 +73,8 @@ public class Event3Caller<T1, T2, T3> implements Event3Delegate<T1, T2, T3>
 	 *         if this {@code EventSubscriberHolder} already has a subscriber
 	 */
 	@Override
-	public void subscribe(Action3<? super T1, ? super T2, ? super T3> action)
-		throws IllegalArgumentException, IllegalStateException
+	public void subscribe(Action3<? super T1, ? super T2, ? super T3> action) throws IllegalArgumentException,
+		IllegalStateException
 	{
 		subscriberHolder.subscribe(action);
 	}
@@ -87,8 +87,8 @@ public class Event3Caller<T1, T2, T3> implements Event3Delegate<T1, T2, T3>
 	 *         {@code EventSubscriberHolder}
 	 */
 	@Override
-	public void unsubscribe(Action3<? super T1, ? super T2, ? super T3> action)
-		throws IllegalArgumentException, IllegalStateException
+	public void unsubscribe(Action3<? super T1, ? super T2, ? super T3> action) throws IllegalArgumentException,
+		IllegalStateException
 	{
 		subscriberHolder.unsubscribe(action);
 	}

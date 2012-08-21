@@ -37,7 +37,7 @@ import net.objectzoo.events.helpers.EventSubscriberHolder;
  */
 public class Event0Caller implements Event0Delegate
 {
-	private EventSubscriberHolder<Action0> subscriberHolder = new EventSubscriberHolder<Action0>();
+	EventSubscriberHolder<Action0> subscriberHolder = new EventSubscriberHolder<Action0>();
 	
 	/**
 	 * This {@code invoke} implementation invokes the sole subscriber if present.

@@ -37,7 +37,7 @@ import net.objectzoo.events.helpers.EventSubscriberHolder;
  */
 public class DynamicEventCaller implements DynamicEventDelegate
 {
-	private EventSubscriberHolder<DynamicAction> subscriberHolder = new EventSubscriberHolder<DynamicAction>();
+	EventSubscriberHolder<DynamicAction> subscriberHolder = new EventSubscriberHolder<DynamicAction>();
 	
 	/**
 	 * This {@code dynamicInvoke} implementation invokes the sole subscriber if present.
@@ -62,8 +62,7 @@ public class DynamicEventCaller implements DynamicEventDelegate
 	 *         if this {@code EventSubscriberHolder} already has a subscriber
 	 */
 	@Override
-	public void subscribe(DynamicAction action) throws IllegalArgumentException,
-		IllegalStateException
+	public void subscribe(DynamicAction action) throws IllegalArgumentException, IllegalStateException
 	{
 		subscriberHolder.subscribe(action);
 	}
@@ -76,8 +75,7 @@ public class DynamicEventCaller implements DynamicEventDelegate
 	 *         {@code EventSubscriberHolder}
 	 */
 	@Override
-	public void unsubscribe(DynamicAction action) throws IllegalArgumentException,
-		IllegalStateException
+	public void unsubscribe(DynamicAction action) throws IllegalArgumentException, IllegalStateException
 	{
 		subscriberHolder.unsubscribe(action);
 	}

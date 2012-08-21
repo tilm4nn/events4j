@@ -25,7 +25,7 @@
 package net.objectzoo.events.impl;
 
 import net.objectzoo.delegates.Action;
-import net.objectzoo.events.helpers.EventSubscriberRegisty;
+import net.objectzoo.events.helpers.EventSubscriberRegistry;
 
 /**
  * The {@code EventDistributor} is a {@link EventDelegate} implementation that allows event
@@ -40,7 +40,7 @@ import net.objectzoo.events.helpers.EventSubscriberRegisty;
  */
 public class EventDistributor<T> implements EventDelegate<T>
 {
-	private EventSubscriberRegisty<Action<? super T>> registry = new EventSubscriberRegisty<Action<? super T>>();
+	EventSubscriberRegistry<Action<? super T>> registry = new EventSubscriberRegistry<Action<? super T>>();
 	
 	/**
 	 * This {@code invoke} implementation invokes all event subscribers in the order they have been
