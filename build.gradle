@@ -106,7 +106,7 @@ task distZip(type: Zip) {
 		}
 		from (rootDir)
 		{
-			include 'doc/**/*', 'events4j/**/*', 'events4j-async/**/*', 'lib-test/**/*'
+			include 'doc/**/*', 'events4j/**/*', 'events4j-async/**/*', 'lib/**/*'
 			exclude '*/**/build', '*/**/generated'
 		}
 		from (files (subprojects.collect { project -> project.jar.destinationDir }))
