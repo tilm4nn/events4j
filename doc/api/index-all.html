@@ -741,9 +741,9 @@ Constructor for class net.objectzoo.events.impl.<A HREF="./net/objectzoo/events/
  subscribed for the event.<DT><A HREF="./net/objectzoo/events/helpers/EventSubscriberHolder.html#EventSubscriberHolder()"><B>EventSubscriberHolder()</B></A> - 
 Constructor for class net.objectzoo.events.helpers.<A HREF="./net/objectzoo/events/helpers/EventSubscriberHolder.html" title="class in net.objectzoo.events.helpers">EventSubscriberHolder</A>
 <DD>&nbsp;
-<DT><A HREF="./net/objectzoo/events/helpers/EventSubscriberRegisty.html" title="class in net.objectzoo.events.helpers"><B>EventSubscriberRegisty</B></A>&lt;<A HREF="./net/objectzoo/events/helpers/EventSubscriberRegisty.html" title="type parameter in EventSubscriberRegisty">ActionType</A>&gt; - Class in <A HREF="./net/objectzoo/events/helpers/package-summary.html">net.objectzoo.events.helpers</A><DD>This helper class is a registry that is used by the event distributors to store the actions that
- subscribed for the event.<DT><A HREF="./net/objectzoo/events/helpers/EventSubscriberRegisty.html#EventSubscriberRegisty()"><B>EventSubscriberRegisty()</B></A> - 
-Constructor for class net.objectzoo.events.helpers.<A HREF="./net/objectzoo/events/helpers/EventSubscriberRegisty.html" title="class in net.objectzoo.events.helpers">EventSubscriberRegisty</A>
+<DT><A HREF="./net/objectzoo/events/helpers/EventSubscriberRegistry.html" title="class in net.objectzoo.events.helpers"><B>EventSubscriberRegistry</B></A>&lt;<A HREF="./net/objectzoo/events/helpers/EventSubscriberRegistry.html" title="type parameter in EventSubscriberRegistry">ActionType</A>&gt; - Class in <A HREF="./net/objectzoo/events/helpers/package-summary.html">net.objectzoo.events.helpers</A><DD>This helper class is a registry that is used by the event distributors to store the actions that
+ subscribed for the event.<DT><A HREF="./net/objectzoo/events/helpers/EventSubscriberRegistry.html#EventSubscriberRegistry()"><B>EventSubscriberRegistry()</B></A> - 
+Constructor for class net.objectzoo.events.helpers.<A HREF="./net/objectzoo/events/helpers/EventSubscriberRegistry.html" title="class in net.objectzoo.events.helpers">EventSubscriberRegistry</A>
 <DD>&nbsp;
 <DT><A HREF="./net/objectzoo/delegates/impl/AsyncExecutor.html#execute(java.util.concurrent.Callable, net.objectzoo.delegates.FuncAsyncCallback, java.lang.Object)"><B>execute(Callable&lt;R&gt;, FuncAsyncCallback&lt;? super R&gt;, Object)</B></A> - 
 Method in class net.objectzoo.delegates.impl.<A HREF="./net/objectzoo/delegates/impl/AsyncExecutor.html" title="class in net.objectzoo.delegates.impl">AsyncExecutor</A>
@@ -916,8 +916,8 @@ Static method in class net.objectzoo.delegates.impl.<A HREF="./net/objectzoo/del
 <DT><A HREF="./net/objectzoo/events/helpers/EventSubscriberHolder.html#getSubscriber()"><B>getSubscriber()</B></A> - 
 Method in class net.objectzoo.events.helpers.<A HREF="./net/objectzoo/events/helpers/EventSubscriberHolder.html" title="class in net.objectzoo.events.helpers">EventSubscriberHolder</A>
 <DD>Get the subscriber stored in this <code>EventSubscriberHolder</code>
-<DT><A HREF="./net/objectzoo/events/helpers/EventSubscriberRegisty.html#getSubscribers()"><B>getSubscribers()</B></A> - 
-Method in class net.objectzoo.events.helpers.<A HREF="./net/objectzoo/events/helpers/EventSubscriberRegisty.html" title="class in net.objectzoo.events.helpers">EventSubscriberRegisty</A>
+<DT><A HREF="./net/objectzoo/events/helpers/EventSubscriberRegistry.html#getSubscribers()"><B>getSubscribers()</B></A> - 
+Method in class net.objectzoo.events.helpers.<A HREF="./net/objectzoo/events/helpers/EventSubscriberRegistry.html" title="class in net.objectzoo.events.helpers">EventSubscriberRegistry</A>
 <DD>Returns all subscribed actions in this registry
 </DL>
 <HR>
@@ -1121,8 +1121,8 @@ Method in interface net.objectzoo.events.<A HREF="./net/objectzoo/events/Event4.
 <DT><A HREF="./net/objectzoo/events/helpers/EventSubscriberHolder.html#subscribe(ActionType)"><B>subscribe(ActionType)</B></A> - 
 Method in class net.objectzoo.events.helpers.<A HREF="./net/objectzoo/events/helpers/EventSubscriberHolder.html" title="class in net.objectzoo.events.helpers">EventSubscriberHolder</A>
 <DD>Subscribe the given Action to this Event
-<DT><A HREF="./net/objectzoo/events/helpers/EventSubscriberRegisty.html#subscribe(ActionType)"><B>subscribe(ActionType)</B></A> - 
-Method in class net.objectzoo.events.helpers.<A HREF="./net/objectzoo/events/helpers/EventSubscriberRegisty.html" title="class in net.objectzoo.events.helpers">EventSubscriberRegisty</A>
+<DT><A HREF="./net/objectzoo/events/helpers/EventSubscriberRegistry.html#subscribe(ActionType)"><B>subscribe(ActionType)</B></A> - 
+Method in class net.objectzoo.events.helpers.<A HREF="./net/objectzoo/events/helpers/EventSubscriberRegistry.html" title="class in net.objectzoo.events.helpers">EventSubscriberRegistry</A>
 <DD>Adds the given action to this registry if it is not already subscribed.
 <DT><A HREF="./net/objectzoo/events/impl/DynamicEventAsyncAdapter.html#subscribe(net.objectzoo.delegates.DynamicAction)"><B>subscribe(DynamicAction)</B></A> - 
 Method in class net.objectzoo.events.impl.<A HREF="./net/objectzoo/events/impl/DynamicEventAsyncAdapter.html" title="class in net.objectzoo.events.impl">DynamicEventAsyncAdapter</A>
@@ -1204,8 +1204,8 @@ Method in interface net.objectzoo.events.<A HREF="./net/objectzoo/events/Event4.
 <DT><A HREF="./net/objectzoo/events/helpers/EventSubscriberHolder.html#unsubscribe(ActionType)"><B>unsubscribe(ActionType)</B></A> - 
 Method in class net.objectzoo.events.helpers.<A HREF="./net/objectzoo/events/helpers/EventSubscriberHolder.html" title="class in net.objectzoo.events.helpers">EventSubscriberHolder</A>
 <DD>Unsubscribe the given Action from this Event
-<DT><A HREF="./net/objectzoo/events/helpers/EventSubscriberRegisty.html#unsubscribe(ActionType)"><B>unsubscribe(ActionType)</B></A> - 
-Method in class net.objectzoo.events.helpers.<A HREF="./net/objectzoo/events/helpers/EventSubscriberRegisty.html" title="class in net.objectzoo.events.helpers">EventSubscriberRegisty</A>
+<DT><A HREF="./net/objectzoo/events/helpers/EventSubscriberRegistry.html#unsubscribe(ActionType)"><B>unsubscribe(ActionType)</B></A> - 
+Method in class net.objectzoo.events.helpers.<A HREF="./net/objectzoo/events/helpers/EventSubscriberRegistry.html" title="class in net.objectzoo.events.helpers">EventSubscriberRegistry</A>
 <DD>Removes the given action from this registry.
 <DT><A HREF="./net/objectzoo/events/impl/DynamicEventAsyncAdapter.html#unsubscribe(net.objectzoo.delegates.DynamicAction)"><B>unsubscribe(DynamicAction)</B></A> - 
 Method in class net.objectzoo.events.impl.<A HREF="./net/objectzoo/events/impl/DynamicEventAsyncAdapter.html" title="class in net.objectzoo.events.impl">DynamicEventAsyncAdapter</A>
