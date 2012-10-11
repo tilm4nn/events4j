@@ -59,7 +59,7 @@ import net.objectzoo.delegates.FuncAsyncResult;
 public class AsyncExecutor
 {
 	private final Executor executor;
-	private static Executor defaultExecutor;
+	private static volatile Executor defaultExecutor;
 	
 	/**
 	 * Creates a new {@code AsyncExecutor} that uses the default {@link Executor} for asynchronous
@@ -98,8 +98,8 @@ public class AsyncExecutor
 			}
 		};
 		
-		return new ThreadPoolExecutor(0, 1, 1, TimeUnit.MINUTES,
-			new LinkedBlockingQueue<Runnable>(), threadFactory);
+		return new ThreadPoolExecutor(0, 1, 1, TimeUnit.MINUTES, new LinkedBlockingQueue<Runnable>(),
+			threadFactory);
 	}
 	
 	/**
@@ -110,8 +110,7 @@ public class AsyncExecutor
 	 */
 	public static Executor getDefaultExecutor()
 	{
-		// Implementation uses double checked singleton. This does not guarantee 100% unique
-		// creation of the default executor but should be sufficient for now.
+		// Implementation uses correct double checked singleton for JAVA 5.0 and above.
 		if (defaultExecutor == null)
 		{
 			synchronized (AsyncExecutor.class)
@@ -163,8 +162,8 @@ public class AsyncExecutor
 	 *        the asynchronous state object to be used in the asynchronous result
 	 * @return the asynchronous result object for the invocation
 	 */
-	public <R> FuncAsyncResult<R> execute(Callable<R> callable,
-										  FuncAsyncCallback<? super R> callback, Object asyncState)
+	public <R> FuncAsyncResult<R> execute(Callable<R> callable, FuncAsyncCallback<? super R> callback,
+										  Object asyncState)
 	{
 		if (callable == null)
 		{
@@ -172,8 +171,8 @@ public class AsyncExecutor
 		}
 		
 		@SuppressWarnings("unchecked")
-		AsyncFutureTask<R> futureTask = new AsyncFutureTask<R>(callable,
-			(FuncAsyncCallback<R>) callback, asyncState);
+		AsyncFutureTask<R> futureTask = new AsyncFutureTask<R>(callable, (FuncAsyncCallback<R>) callback,
+			asyncState);
 		
 		getExecutor().execute(futureTask);
 		
