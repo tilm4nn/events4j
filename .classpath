@@ -2,19 +2,9 @@
 <classpath>
 	<classpathentry kind="src" path="events4j/src/main/java"/>
 	<classpathentry kind="src" path="events4j/src/test/java"/>
-	<classpathentry kind="src" path="events4j/src/test/jnario"/>
-	<classpathentry kind="src" path="events4j/src/test/generated"/>
 	<classpathentry kind="src" path="events4j-async/src/main/java"/>
 	<classpathentry kind="src" path="events4j-async/src/test/java"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="lib/test/jmock/cglib-2.1_3-src.jar"/>
-	<classpathentry kind="lib" path="lib/test/jmock/cglib-nodep-2.1_3.jar"/>
-	<classpathentry kind="lib" path="lib/test/jmock/jmock-2.5.1.jar"/>
-	<classpathentry kind="lib" path="lib/test/jmock/jmock-junit4-2.5.1.jar"/>
-	<classpathentry kind="lib" path="lib/test/jmock/jmock-legacy-2.5.1.jar"/>
-	<classpathentry kind="lib" path="lib/test/jnario/guava-13.0.jar"/>
-	<classpathentry kind="lib" path="lib/test/jnario/org.eclipse.xtend.standalone-2.3.0.jar"/>
-	<classpathentry kind="lib" path="lib/test/jnario/org.jnario.standalone.maven-0.1.0.jar"/>
 	<classpathentry kind="lib" path="lib/test/junit/hamcrest-core-1.1.jar"/>
 	<classpathentry kind="lib" path="lib/test/junit/hamcrest-library-1.1.jar"/>
 	<classpathentry kind="lib" path="lib/test/junit/junit-4.10.jar"/>

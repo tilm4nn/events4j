@@ -3,10 +3,11 @@ package net.objectzoo.delegates.helpers;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
 import static junit.framework.Assert.assertNull;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 
-import org.jmock.Expectations;
-import org.jmock.Mockery;
-import org.junit.Before;
 import org.junit.Test;
 
 import net.objectzoo.delegates.Action;
@@ -16,64 +17,41 @@ import net.objectzoo.delegates.FuncAsync;
 import net.objectzoo.delegates.FuncAsyncCallback;
 import net.objectzoo.delegates.FuncAsyncResult;
 
+@SuppressWarnings({ "unchecked", "rawtypes" })
 public class DynamicAsyncInvokerTest
 {
-	Mockery context;
-	
-	@Before
-	public void before()
-	{
-		context = new Mockery();
-	}
-	
-	@SuppressWarnings("unchecked")
 	@Test
 	public void beginDynamicInvoke_invokes_action_with_correct_arguments()
 	{
-		final FuncAsync<Object, ?> func = context.mock(FuncAsync.class);
+		final FuncAsync func = mock(FuncAsync.class);
 		DynamicAsyncInvoker sut = new DynamicAsyncInvoker(FuncAsync.class, func);
-		final FuncAsyncCallback<Object> expectedCallback = context.mock(FuncAsyncCallback.class);
+		final FuncAsyncCallback expectedCallback = mock(FuncAsyncCallback.class);
 		final Object expectedParam = new Object();
 		final Object expectedAsyncState = new Object();
 		
-		context.checking(new Expectations()
-		{
-			{
-				one(func).beginInvoke(with(expectedCallback), with(expectedAsyncState), with(expectedParam));
-			}
-		});
-		
 		sut.beginDynamicInvoke(expectedCallback, expectedAsyncState, expectedParam);
 		
-		context.assertIsSatisfied();
+		verify(func).beginInvoke(expectedCallback, expectedAsyncState, expectedParam);
 	}
 	
 	@Test
 	public void beginDynamicInvoke_returns_correct_FuncAsyncResult() throws Exception
 	{
-		final Func0Async<?> func = context.mock(Func0Async.class);
+		final Func0Async<?> func = mock(Func0Async.class);
 		DynamicAsyncInvoker sut = new DynamicAsyncInvoker(Func0Async.class, func);
-		final FuncAsyncResult<?> expected = context.mock(FuncAsyncResult.class);
-		
-		context.checking(new Expectations()
-		{
-			{
-				one(func).beginInvoke(null, null);
-				will(returnValue(expected));
-			}
-		});
+		final FuncAsyncResult<?> expected = mock(FuncAsyncResult.class);
+		doReturn(expected).when(func).beginInvoke(null, null);
 		
 		Object actual = sut.beginDynamicInvoke(null, null);
 		
 		assertEquals(expected, actual);
-		context.assertIsSatisfied();
 	}
 	
 	@SuppressWarnings("unchecked")
 	@Test(expected = IllegalArgumentException.class)
 	public void beginDynamicInvoke_throws_exception_on_wrong_argument_count()
 	{
-		final Action<Object> action = context.mock(Action.class);
+		final Action<Object> action = mock(Action.class);
 		DynamicAsyncInvoker sut = new DynamicAsyncInvoker(Action.class, action);
 		
 		sut.beginDynamicInvoke(null, null, new Object(), new Object());
@@ -82,16 +60,9 @@ public class DynamicAsyncInvokerTest
 	@Test(expected = MyRuntimeException.class)
 	public void beginDynamicInvoke_rethrows_original_RuntimeException()
 	{
-		final Action0Async action = context.mock(Action0Async.class);
+		final Action0Async action = mock(Action0Async.class);
 		DynamicAsyncInvoker sut = new DynamicAsyncInvoker(Action0Async.class, action);
-		
-		context.checking(new Expectations()
-		{
-			{
-				one(action).beginInvoke(null, null);
-				will(throwException(new MyRuntimeException()));
-			}
-		});
+		doThrow(new MyRuntimeException()).when(action).beginInvoke(null, null);
 		
 		sut.beginDynamicInvoke(null, null);
 	}
