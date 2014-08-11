@@ -1,6 +1,6 @@
 package net.objectzoo.delegates.helpers;
 
-import static junit.framework.Assert.assertEquals;
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.mock;
@@ -62,7 +62,8 @@ public class DynamicInvokerTest
 	}
 	
 	@Test
-	public void getInvokeMethod_returns_correct_method() throws SecurityException, NoSuchMethodException
+	public void getInvokeMethod_returns_correct_method() throws SecurityException,
+		NoSuchMethodException
 	{
 		Method expected = Func0.class.getMethod("invoke", new Class[0]);
 		

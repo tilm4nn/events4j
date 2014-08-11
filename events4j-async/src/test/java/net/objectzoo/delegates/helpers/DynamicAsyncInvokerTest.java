@@ -1,8 +1,8 @@
 package net.objectzoo.delegates.helpers;
 
-import static junit.framework.Assert.assertEquals;
-import static junit.framework.Assert.assertNotNull;
-import static junit.framework.Assert.assertNull;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.mock;
@@ -47,7 +47,6 @@ public class DynamicAsyncInvokerTest
 		assertEquals(expected, actual);
 	}
 	
-	@SuppressWarnings("unchecked")
 	@Test(expected = IllegalArgumentException.class)
 	public void beginDynamicInvoke_throws_exception_on_wrong_argument_count()
 	{
@@ -80,7 +79,8 @@ public class DynamicAsyncInvokerTest
 		params[0] = expected[2];
 		params[1] = expected[3];
 		
-		Object[] actual = DynamicAsyncInvoker.computeAsycBeginInvokeParameters(expected[0], expected[1], params);
+		Object[] actual = DynamicAsyncInvoker.computeAsycBeginInvokeParameters(expected[0],
+			expected[1], params);
 		
 		assertArrayEquals(expected, actual);
 	}
@@ -92,7 +92,8 @@ public class DynamicAsyncInvokerTest
 		expected[0] = new Object();
 		expected[1] = new Object();
 		
-		Object[] actual = DynamicAsyncInvoker.computeAsycBeginInvokeParameters(expected[0], expected[1]);
+		Object[] actual = DynamicAsyncInvoker.computeAsycBeginInvokeParameters(expected[0],
+			expected[1]);
 		
 		assertArrayEquals(expected, actual);
 	}
