@@ -1,94 +1,149 @@
 package net.objectzoo.delegates.helpers;
 
+import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
-import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executor;
+import java.util.function.Consumer;
+import java.util.function.Supplier;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import net.objectzoo.delegates.Action0;
+import net.objectzoo.delegates.ActionAsyncResult;
+import net.objectzoo.delegates.FunctionAsyncResult;
 import net.objectzoo.delegates.impl.AsyncExecutor;
 import net.objectzoo.delegates.impl.AsyncFutureTask;
 
 public class AsyncExecutorTest
 {
 	private Executor executor;
-	private Callable<?> callable;
+	private final Supplier<?> mockSupplier = mock(Supplier.class);;
+	private final Action0 mockAction0 = mock(Action0.class);
 	
 	@Before
-	public void before()
+	@After
+	public void resetDefaultExecutor()
 	{
-		// Reset default executor 
 		AsyncExecutor.setDefaultExecutor(null);
-		
-		callable = mock(Callable.class);
 	}
 	
 	@Test
-	public void ececute_uses_configured_default_executor()
+	public void execute_suplier_uses_configured_default_executor() throws Exception
 	{
-		executor = mock(Executor.class);
+		executor = spy(new InCallingThreadExecutor());
 		AsyncExecutor.setDefaultExecutor(executor);
 		AsyncExecutor sut = new AsyncExecutor();
 		
-		sut.execute(callable, null, null);
+		sut.execute(mockSupplier, null, null).end();
 		
 		verify(executor).execute(any(AsyncFutureTask.class));
 	}
 	
 	@Test
-	public void ececute_uses_executor_given_at_construction_time() throws Exception
+	public void execute_suplier_uses_executor_given_at_construction_time() throws Exception
 	{
-		executor = mock(Executor.class);
+		executor = spy(new InCallingThreadExecutor());
 		AsyncExecutor sut = new AsyncExecutor(executor);
 		
-		sut.execute(callable, null, null);
+		sut.execute(mockSupplier, null, null).end();
 		
 		verify(executor).execute(any(AsyncFutureTask.class));
 	}
 	
 	@Test
-	public void execute_creates_future_task_wich_calls_original_callable() throws Exception
+	public void execute_suplier_uses_created_default_executor() throws Exception
 	{
-		executor = new SyncExecutor();
-		AsyncExecutor sut = new AsyncExecutor(executor);
+		executor = spy(AsyncExecutor.getDefaultExecutor());
+		AsyncExecutor.setDefaultExecutor(executor);
+		AsyncExecutor sut = new AsyncExecutor();
 		
-		sut.execute(callable, null, null);
+		sut.execute(mockSupplier, null, null).end();
 		
-		verify(callable).call();
+		verify(executor).execute(any(AsyncFutureTask.class));
 	}
 	
 	@Test
-	public void endInvokeReturn_returns_value_from_original_callable() throws Exception
+	public void execute_suplier_creates_future_task_wich_calls_original_callable() throws Exception
 	{
-		executor = new SyncExecutor();
+		executor = new InCallingThreadExecutor();
+		AsyncExecutor sut = new AsyncExecutor(executor);
+		
+		sut.execute(mockSupplier, null, null).end();
+		
+		verify(mockSupplier).get();
+	}
+	
+	@Test
+	public void execute_action0_provides_async_state_in_result() throws Exception
+	{
+		executor = new InCallingThreadExecutor();
+		AsyncExecutor sut = new AsyncExecutor(executor);
+		
+		Object asyncState = new Object();
+		ActionAsyncResult result = sut.execute(mockAction0, null, asyncState);
+		
+		assertThat(result.getAsyncState(), is(asyncState));
+	}
+	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@Test
+	public void execute_supplier_calls_callback_with_result() throws Exception
+	{
+		Consumer callback = mock(Consumer.class);
+		executor = new InCallingThreadExecutor();
+		AsyncExecutor sut = new AsyncExecutor(executor);
+		
+		FunctionAsyncResult result = sut.execute(mockSupplier, callback, null);
+		
+		verify(callback).accept(result);
+	}
+	
+	@Test
+	public void execute_action0_creates_future_task_wich_calls_original_callable() throws Exception
+	{
+		executor = new InCallingThreadExecutor();
+		AsyncExecutor sut = new AsyncExecutor(executor);
+		
+		sut.execute(mockAction0, null, null).end();
+		
+		verify(mockAction0).start();
+	}
+	
+	@Test
+	public void endReturn_returns_value_from_original_callable() throws Exception
+	{
+		executor = new InCallingThreadExecutor();
 		AsyncExecutor sut = new AsyncExecutor(executor);
 		final Object expected = new Object();
-		doReturn(expected).when(callable).call();
+		doReturn(expected).when(mockSupplier).get();
 		
-		Object actual = sut.execute(callable, null, null).endInvokeReturn();
+		Object actual = sut.execute(mockSupplier, null, null).endReturn();
 		
 		assertEquals(expected, actual);
 	}
 	
 	@Test
-	public void endInvoke_returns_exception_from_original_callable() throws Exception
+	public void end_returns_exception_from_original_callable() throws Exception
 	{
-		executor = new SyncExecutor();
+		executor = new InCallingThreadExecutor();
 		AsyncExecutor sut = new AsyncExecutor(executor);
-		final Exception expected = new Exception();
-		doThrow(expected).when(callable).call();
+		final RuntimeException expected = new RuntimeException();
+		doThrow(expected).when(mockAction0).start();
 		
 		try
 		{
-			sut.execute(callable, null, null).endInvoke();
+			sut.execute(mockAction0, null, null).end();
 		}
 		catch (ExecutionException e)
 		{
@@ -96,7 +151,7 @@ public class AsyncExecutorTest
 		}
 	}
 	
-	private static class SyncExecutor implements Executor
+	private static class InCallingThreadExecutor implements Executor
 	{
 		@Override
 		public void execute(Runnable command)

@@ -25,6 +25,7 @@
 package net.objectzoo.delegates.adapters;
 
 import java.util.concurrent.Executor;
+import java.util.function.BiConsumer;
 
 import net.objectzoo.delegates.Action;
 import net.objectzoo.delegates.Action2;
@@ -32,13 +33,14 @@ import net.objectzoo.delegates.Action2Async;
 import net.objectzoo.delegates.impl.AsyncExecutor;
 
 /**
- * An adapter that converts an {@link Action2} to a new {@link Action2}, that makes an asynchronous
- * calls to the original Action0 upon invocation. This adapter provides no possibility to check for
- * the completion of the original action nor to retrieve thrown exceptions. Thus it is recommended
- * to use {@link Action2ToAction2Async} adapter instead to achieve a similar result.
+ * An adapter that converts an {@link Action2} or {@link BiConsumer} to a new {@link Action2}, that
+ * makes an asynchronous calls to the original Action0 upon invocation. This adapter provides no
+ * possibility to check for the completion of the original action nor to retrieve thrown exceptions.
+ * Thus it is recommended to use {@link Action2ToAction2Async} adapter instead to achieve a similar
+ * result.
  * 
  * All asynchronous calls are executed in another thread and forwarded to the
- * {@link Action2#invoke(Object, Object)} method.
+ * {@link Action2#accept(Object, Object)} method.
  * 
  * The {@link Executor} to use for the asynchronous invocations can be chosen during creation of
  * this adapter. If no explicit executor is given the a default executor is used. The default
@@ -62,7 +64,7 @@ public class Action2ToAsyncAction2<T1, T2> implements Action2<T1, T2>
 	 * @param action
 	 *        the action to be called asynchronously
 	 */
-	public Action2ToAsyncAction2(Action2<T1, T2> action)
+	public Action2ToAsyncAction2(BiConsumer<T1, T2> action)
 	{
 		this(action, null);
 	}
@@ -75,7 +77,7 @@ public class Action2ToAsyncAction2<T1, T2> implements Action2<T1, T2>
 	 * @param executor
 	 *        the executor used for the asynchronous calls
 	 */
-	public Action2ToAsyncAction2(Action2<T1, T2> action, Executor executor)
+	public Action2ToAsyncAction2(BiConsumer<T1, T2> action, Executor executor)
 	{
 		actionAsync = new Action2ToAction2Async<T1, T2>(action, executor);
 	}
@@ -84,8 +86,8 @@ public class Action2ToAsyncAction2<T1, T2> implements Action2<T1, T2>
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void invoke(T1 parameter1, T2 parameter2)
+	public void accept(T1 parameter1, T2 parameter2)
 	{
-		actionAsync.beginInvoke(null, null, parameter1, parameter2);
+		actionAsync.beginAccept(null, null, parameter1, parameter2);
 	}
 }

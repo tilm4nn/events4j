@@ -1,11 +1,13 @@
 package net.objectzoo.events.impl;
 
-import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
+import java.util.function.Consumer;
+
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.ArgumentCaptor;
 
 import net.objectzoo.delegates.Action2;
 import net.objectzoo.events.helpers.EventSubscriberHolder;
@@ -43,24 +45,19 @@ public class Event2CallerTest
 	}
 	
 	@Test
-	public void invoke_retrieves_subscriber()
+	public void accept_calls_subscriber()
 	{
-		subject.invoke(new Object(), new Object());
-		
-		verify(holderMock).getSubscriber();
-	}
-	
-	@Test
-	public void invoke_calls_subscriber()
-	{
-		Action2 subscriberMock = mock(Action2.class);
-		doReturn(subscriberMock).when(holderMock).getSubscriber();
 		Object argument1 = new Object();
 		Object argument2 = new Object();
+		subject.accept(argument1, argument2);
 		
-		subject.invoke(argument1, argument2);
+		ArgumentCaptor<Consumer<Action2>> consumerArgument = (ArgumentCaptor) ArgumentCaptor.forClass(Consumer.class);
+		verify(holderMock).callWithSubscriber(consumerArgument.capture());
 		
-		verify(subscriberMock).invoke(argument1, argument2);
+		Action2 subscriberMock = mock(Action2.class);
+		
+		consumerArgument.getValue().accept(subscriberMock);
+		verify(subscriberMock).accept(argument1, argument2);
 	}
 	
 	private static Action2 someAction2()
@@ -68,7 +65,7 @@ public class Event2CallerTest
 		return new Action2()
 		{
 			@Override
-			public void invoke(Object parameter1, Object parameter2)
+			public void accept(Object parameter1, Object parameter2)
 			{
 			}
 		};

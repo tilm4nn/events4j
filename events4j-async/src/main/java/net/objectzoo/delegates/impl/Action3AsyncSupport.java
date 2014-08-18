@@ -25,10 +25,10 @@
 package net.objectzoo.delegates.impl;
 
 import java.util.concurrent.Executor;
+import java.util.function.Consumer;
 
 import net.objectzoo.delegates.Action3;
 import net.objectzoo.delegates.Action3Async;
-import net.objectzoo.delegates.ActionAsyncCallback;
 import net.objectzoo.delegates.ActionAsyncResult;
 import net.objectzoo.delegates.adapters.Action3ToAction3Async;
 
@@ -36,7 +36,7 @@ import net.objectzoo.delegates.adapters.Action3ToAction3Async;
  * This is an abstract support class that can be used to quickly implement asynchronous actions.
  * 
  * All asynchronous calls are executed in another thread and forwarded to the
- * {@link Action3#invoke(Object, Object, Object)} method.
+ * {@link Action3#accept(Object, Object, Object)} method.
  * 
  * The {@link Executor} to use for the asynchronous invocations can be chosen during creation of
  * {@code ActionAsyncSupport} instances. If no explicit executor is given the a default executor is
@@ -81,15 +81,15 @@ public abstract class Action3AsyncSupport<T1, T2, T3> implements Action3<T1, T2,
 	 * {@inheritDoc}
 	 */
 	@Override
-	public abstract void invoke(T1 parameter1, T2 parameter2, T3 parameter3);
+	public abstract void accept(T1 parameter1, T2 parameter2, T3 parameter3);
 	
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public ActionAsyncResult beginInvoke(ActionAsyncCallback callback, Object asyncState,
+	public ActionAsyncResult beginAccept(Consumer<ActionAsyncResult> callback, Object asyncState,
 										 T1 parameter1, T2 parameter2, T3 parameter3)
 	{
-		return asyncDelegate.beginInvoke(callback, asyncState, parameter1, parameter2, parameter3);
+		return asyncDelegate.beginAccept(callback, asyncState, parameter1, parameter2, parameter3);
 	}
 }

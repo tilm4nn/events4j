@@ -24,6 +24,8 @@
  */
 package net.objectzoo.events.impl;
 
+import java.util.function.Consumer;
+
 import net.objectzoo.delegates.Action;
 import net.objectzoo.events.helpers.EventSubscriberHolder;
 
@@ -40,7 +42,7 @@ import net.objectzoo.events.helpers.EventSubscriberHolder;
  */
 public class EventCaller<T> implements EventDelegate<T>
 {
-	EventSubscriberHolder<Action<? super T>> subscriberHolder = new EventSubscriberHolder<Action<? super T>>();
+	EventSubscriberHolder<Consumer<? super T>> subscriberHolder = new EventSubscriberHolder<>();
 	
 	/**
 	 * This {@code invoke} implementation invokes the sole subscriber if present.
@@ -49,13 +51,9 @@ public class EventCaller<T> implements EventDelegate<T>
 	 *        the parameter to invoke the subscriber with
 	 */
 	@Override
-	public void invoke(T parameter)
+	public void accept(T parameter)
 	{
-		Action<? super T> subscriber = subscriberHolder.getSubscriber();
-		if (subscriber != null)
-		{
-			subscriber.invoke(parameter);
-		}
+		subscriberHolder.callWithSubscriber(Action.boundAcceptingConsumer(parameter));
 	}
 	
 	/**
@@ -65,7 +63,8 @@ public class EventCaller<T> implements EventDelegate<T>
 	 *         if this {@code EventSubscriberHolder} already has a subscriber
 	 */
 	@Override
-	public void subscribe(Action<? super T> action) throws IllegalArgumentException, IllegalStateException
+	public void subscribe(Consumer<? super T> action) throws IllegalArgumentException,
+		IllegalStateException
 	{
 		subscriberHolder.subscribe(action);
 	}
@@ -78,7 +77,8 @@ public class EventCaller<T> implements EventDelegate<T>
 	 *         {@code EventSubscriberHolder}
 	 */
 	@Override
-	public void unsubscribe(Action<? super T> action) throws IllegalArgumentException, IllegalStateException
+	public void unsubscribe(Consumer<? super T> action) throws IllegalArgumentException,
+		IllegalStateException
 	{
 		subscriberHolder.unsubscribe(action);
 	}

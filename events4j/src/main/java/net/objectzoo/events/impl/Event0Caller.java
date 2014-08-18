@@ -37,19 +37,15 @@ import net.objectzoo.events.helpers.EventSubscriberHolder;
  */
 public class Event0Caller implements Event0Delegate
 {
-	EventSubscriberHolder<Action0> subscriberHolder = new EventSubscriberHolder<Action0>();
+	EventSubscriberHolder<Action0> subscriberHolder = new EventSubscriberHolder<>();
 	
 	/**
 	 * This {@code invoke} implementation invokes the sole subscriber if present.
 	 */
 	@Override
-	public void invoke()
+	public void start()
 	{
-		Action0 subscriber = subscriberHolder.getSubscriber();
-		if (subscriber != null)
-		{
-			subscriber.invoke();
-		}
+		subscriberHolder.callWithSubscriber(Action0.startingConsumer());
 	}
 	
 	/**

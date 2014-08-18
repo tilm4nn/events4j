@@ -24,16 +24,20 @@
  */
 package net.objectzoo.delegates.impl;
 
+import java.util.Objects;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Executor;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
+import java.util.function.Consumer;
+import java.util.function.Supplier;
 
-import net.objectzoo.delegates.FuncAsync;
-import net.objectzoo.delegates.FuncAsyncCallback;
-import net.objectzoo.delegates.FuncAsyncResult;
+import net.objectzoo.delegates.Action0;
+import net.objectzoo.delegates.ActionAsyncResult;
+import net.objectzoo.delegates.FunctionAsyncResult;
+import net.objectzoo.delegates.FunctionAsync;
 
 /**
  * This is a helper class that is used for the asynchronous invocation of actions and funcs.
@@ -98,8 +102,8 @@ public class AsyncExecutor
 			}
 		};
 		
-		return new ThreadPoolExecutor(0, 1, 1, TimeUnit.MINUTES, new LinkedBlockingQueue<Runnable>(),
-			threadFactory);
+		return new ThreadPoolExecutor(0, 1, 1, TimeUnit.MINUTES,
+			new LinkedBlockingQueue<Runnable>(), threadFactory);
 	}
 	
 	/**
@@ -148,34 +152,51 @@ public class AsyncExecutor
 	}
 	
 	/**
-	 * Executes the given {@link Callable} asynchronously, creates a {@link FuncAsyncResult} and
+	 * Executes the given {@link Callable} asynchronously, creates a {@link FunctionAsyncResult} and
 	 * takes care of calling the given {@link FuncAsyncCallback} as required by the specification of
-	 * {@link FuncAsync#beginInvoke(FuncAsyncCallback, Object, Object)}.
+	 * {@link FunctionAsync#beginApply(FuncAsyncCallback, Object, Object)}.
 	 * 
 	 * @param <R>
 	 *        the return value type of the {@code Callable}
-	 * @param callable
-	 *        the callable to be called to carry out the invocation and to obtain the return value
+	 * @param callableSupplier
+	 *        the Supplier to be called to carry out the invocation and to obtain the return value
 	 * @param callback
 	 *        the callback to be called when the asynchronous invocation has finished
 	 * @param asyncState
 	 *        the asynchronous state object to be used in the asynchronous result
 	 * @return the asynchronous result object for the invocation
 	 */
-	public <R> FuncAsyncResult<R> execute(Callable<R> callable, FuncAsyncCallback<? super R> callback,
+	public <R> FunctionAsyncResult<R> execute(Supplier<R> callableSupplier,
+										  Consumer<? super FunctionAsyncResult<R>> callback,
 										  Object asyncState)
 	{
-		if (callable == null)
-		{
-			throw new IllegalArgumentException("callable=null");
-		}
+		Objects.requireNonNull(callableSupplier);
 		
-		@SuppressWarnings("unchecked")
-		AsyncFutureTask<R> futureTask = new AsyncFutureTask<R>(callable, (FuncAsyncCallback<R>) callback,
-			asyncState);
+		Callable<R> callable = () -> {
+			return callableSupplier.get();
+		};
 		
+		return execute(callback, asyncState, callable);
+	}
+	
+	public ActionAsyncResult execute(Action0 callableAction0, Consumer<ActionAsyncResult> callback,
+									 Object asyncState)
+	{
+		Objects.requireNonNull(callableAction0);
+		
+		Callable<Object> callable = () -> {
+			callableAction0.start();
+			return null;
+		};
+		
+		return execute(callback, asyncState, callable);
+	}
+	
+	private <R> FunctionAsyncResult<R> execute(Consumer<? super FunctionAsyncResult<R>> callback,
+										   Object asyncState, Callable<R> callable)
+	{
+		AsyncFutureTask<R> futureTask = new AsyncFutureTask<R>(callable, callback, asyncState);
 		getExecutor().execute(futureTask);
-		
 		return futureTask;
 	}
 }

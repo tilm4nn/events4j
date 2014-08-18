@@ -46,7 +46,7 @@ import net.objectzoo.events.helpers.EventSubscriberRegistry;
  */
 public class Event4Distributor<T1, T2, T3, T4> implements Event4Delegate<T1, T2, T3, T4>
 {
-	EventSubscriberRegistry<Action4<? super T1, ? super T2, ? super T3, ? super T4>> registry = new EventSubscriberRegistry<Action4<? super T1, ? super T2, ? super T3, ? super T4>>();
+	EventSubscriberRegistry<Action4<? super T1, ? super T2, ? super T3, ? super T4>> registry = new EventSubscriberRegistry<>();
 	
 	/**
 	 * This {@code invoke} implementation invokes all event subscribers in the order they have been
@@ -62,12 +62,9 @@ public class Event4Distributor<T1, T2, T3, T4> implements Event4Delegate<T1, T2,
 	 *        the second parameter to invoke the subscribers with
 	 */
 	@Override
-	public void invoke(T1 parameter1, T2 parameter2, T3 parameter3, T4 parameter4)
+	public void accept(T1 parameter1, T2 parameter2, T3 parameter3, T4 parameter4)
 	{
-		for (Action4<? super T1, ? super T2, ? super T3, ? super T4> action : registry.getSubscribers())
-		{
-			action.invoke(parameter1, parameter2, parameter3, parameter4);
-		}
+		registry.callWithEachSubscriber(Action4.boundAcceptingConsumer(parameter1, parameter2, parameter3, parameter4));
 	}
 	
 	/**

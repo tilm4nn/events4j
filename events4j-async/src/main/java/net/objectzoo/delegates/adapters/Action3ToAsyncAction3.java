@@ -38,7 +38,7 @@ import net.objectzoo.delegates.impl.AsyncExecutor;
  * to use {@link Action3ToAction3Async} adapter instead to achieve a similar result.
  * 
  * All asynchronous calls are executed in another thread and forwarded to the
- * {@link Action3#invoke(Object, Object, Object)} method.
+ * {@link Action3#accept(Object, Object, Object)} method.
  * 
  * The {@link Executor} to use for the asynchronous invocations can be chosen during creation of
  * this adapter. If no explicit executor is given the a default executor is used. The default
@@ -86,8 +86,8 @@ public class Action3ToAsyncAction3<T1, T2, T3> implements Action3<T1, T2, T3>
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void invoke(T1 parameter1, T2 parameter2, T3 parameter3)
+	public void accept(T1 parameter1, T2 parameter2, T3 parameter3)
 	{
-		actionAsync.beginInvoke(null, null, parameter1, parameter2, parameter3);
+		actionAsync.beginAccept(null, null, parameter1, parameter2, parameter3);
 	}
 }

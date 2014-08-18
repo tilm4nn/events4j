@@ -46,7 +46,7 @@ import net.objectzoo.events.helpers.EventSubscriberHolder;
  */
 public class Event4Caller<T1, T2, T3, T4> implements Event4Delegate<T1, T2, T3, T4>
 {
-	EventSubscriberHolder<Action4<? super T1, ? super T2, ? super T3, ? super T4>> subscriberHolder = new EventSubscriberHolder<Action4<? super T1, ? super T2, ? super T3, ? super T4>>();
+	EventSubscriberHolder<Action4<? super T1, ? super T2, ? super T3, ? super T4>> subscriberHolder = new EventSubscriberHolder<>();
 	
 	/**
 	 * This {@code invoke} implementation invokes the sole subscriber if present.
@@ -61,13 +61,10 @@ public class Event4Caller<T1, T2, T3, T4> implements Event4Delegate<T1, T2, T3, 
 	 *        the second parameter to invoke the subscriber with
 	 */
 	@Override
-	public void invoke(T1 parameter1, T2 parameter2, T3 parameter3, T4 parameter4)
+	public void accept(T1 parameter1, T2 parameter2, T3 parameter3, T4 parameter4)
 	{
-		Action4<? super T1, ? super T2, ? super T3, ? super T4> subscriber = subscriberHolder.getSubscriber();
-		if (subscriber != null)
-		{
-			subscriber.invoke(parameter1, parameter2, parameter3, parameter4);
-		}
+		subscriberHolder.callWithSubscriber(Action4.boundAcceptingConsumer(parameter1, parameter2, parameter3,
+			parameter4));
 	}
 	
 	/**

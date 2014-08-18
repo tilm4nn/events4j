@@ -38,7 +38,7 @@ import net.objectzoo.delegates.impl.AsyncExecutor;
  * to use {@link Action4ToAction4Async} adapter instead to achieve a similar result.
  * 
  * All asynchronous calls are executed in another thread and forwarded to the
- * {@link Action4#invoke(Object, Object, Object, Object)} method.
+ * {@link Action4#accept(Object, Object, Object, Object)} method.
  * 
  * The {@link Executor} to use for the asynchronous invocations can be chosen during creation of
  * this adapter. If no explicit executor is given the a default executor is used. The default
@@ -88,8 +88,8 @@ public class Action4ToAsyncAction4<T1, T2, T3, T4> implements Action4<T1, T2, T3
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void invoke(T1 parameter1, T2 parameter2, T3 parameter3, T4 parameter4)
+	public void accept(T1 parameter1, T2 parameter2, T3 parameter3, T4 parameter4)
 	{
-		actionAsync.beginInvoke(null, null, parameter1, parameter2, parameter3, parameter4);
+		actionAsync.beginAccept(null, null, parameter1, parameter2, parameter3, parameter4);
 	}
 }

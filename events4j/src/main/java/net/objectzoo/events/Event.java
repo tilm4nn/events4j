@@ -24,15 +24,15 @@
  */
 package net.objectzoo.events;
 
-import net.objectzoo.delegates.Action;
+import java.util.function.Consumer;
 
 /**
  * An {@code Event} is a source of signals and/or information that can be observed by subscribing
- * {@link Action} instances to it.
+ * {@link Consumer} instances to it.
  * 
- * When an {@code Event} signals all subscribed {@code Action}s are invoked. The order of of the
- * invocation of the {@code Action}s and the behavior in case of an {@link RuntimeException} during
- * the invocation of an {@code Action} depends on the concrete {@code Event} implementation.
+ * When an {@code Event} signals all subscribed {@code Consumer}s are invoked. The order of of the
+ * invocation of the {@code Consumer}s and the behavior in case of an {@link RuntimeException}
+ * during the invocation of a {@code Consumer} depends on the concrete {@code Event} implementation.
  * 
  * @author tilmann
  * 
@@ -42,22 +42,18 @@ import net.objectzoo.delegates.Action;
 public interface Event<T>
 {
 	/**
-	 * Subscribe the given {@link Action} to this {@code Event}
+	 * Subscribe the given {@link Consumer} to this {@code Event}
 	 * 
-	 * @param action
-	 *        the {@link Action} to be invoked when this {@code Event} signals
-	 * @throws IllegalArgumentException
-	 *         if he given action to be subscribed is {@code null}
+	 * @param consumer
+	 *        the {@link Consumer} to be invoked when this {@code Event} signals
 	 */
-	public void subscribe(Action<? super T> action) throws IllegalArgumentException;
+	public void subscribe(Consumer<? super T> consumer) throws IllegalArgumentException;
 	
 	/**
-	 * Unsubscribe the given {@link Action} from this {@code Event}
+	 * Unsubscribe the given {@link Consumer} from this {@code Event}
 	 * 
-	 * @param action
-	 *        the {@link Action} to be unsubscribed
-	 * @throws IllegalArgumentException
-	 *         if he given action to be unsubscribed is {@code null}
+	 * @param consumer
+	 *        the {@link Consumer} to be unsubscribed
 	 */
-	public void unsubscribe(Action<? super T> action) throws IllegalArgumentException;
+	public void unsubscribe(Consumer<? super T> consumer) throws IllegalArgumentException;
 }

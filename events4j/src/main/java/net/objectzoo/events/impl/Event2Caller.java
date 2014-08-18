@@ -24,6 +24,8 @@
  */
 package net.objectzoo.events.impl;
 
+import java.util.function.BiConsumer;
+
 import net.objectzoo.delegates.Action2;
 import net.objectzoo.events.helpers.EventSubscriberHolder;
 
@@ -42,7 +44,7 @@ import net.objectzoo.events.helpers.EventSubscriberHolder;
  */
 public class Event2Caller<T1, T2> implements Event2Delegate<T1, T2>
 {
-	EventSubscriberHolder<Action2<? super T1, ? super T2>> subscriberHolder = new EventSubscriberHolder<Action2<? super T1, ? super T2>>();
+	EventSubscriberHolder<BiConsumer<? super T1, ? super T2>> subscriberHolder = new EventSubscriberHolder<>();
 	
 	/**
 	 * This {@code invoke} implementation invokes the sole subscriber if present.
@@ -53,13 +55,9 @@ public class Event2Caller<T1, T2> implements Event2Delegate<T1, T2>
 	 *        the second parameter to invoke the subscriber with
 	 */
 	@Override
-	public void invoke(T1 parameter1, T2 parameter2)
+	public void accept(T1 parameter1, T2 parameter2)
 	{
-		Action2<? super T1, ? super T2> subscriber = subscriberHolder.getSubscriber();
-		if (subscriber != null)
-		{
-			subscriber.invoke(parameter1, parameter2);
-		}
+		subscriberHolder.callWithSubscriber(Action2.boundAcceptingConsumer(parameter1, parameter2));
 	}
 	
 	/**
@@ -69,8 +67,8 @@ public class Event2Caller<T1, T2> implements Event2Delegate<T1, T2>
 	 *         if this {@code EventSubscriberHolder} already has a subscriber
 	 */
 	@Override
-	public void subscribe(Action2<? super T1, ? super T2> action) throws IllegalArgumentException,
-		IllegalStateException
+	public void subscribe(BiConsumer<? super T1, ? super T2> action)
+		throws IllegalArgumentException, IllegalStateException
 	{
 		subscriberHolder.subscribe(action);
 	}
@@ -83,8 +81,8 @@ public class Event2Caller<T1, T2> implements Event2Delegate<T1, T2>
 	 *         {@code EventSubscriberHolder}
 	 */
 	@Override
-	public void unsubscribe(Action2<? super T1, ? super T2> action) throws IllegalArgumentException,
-		IllegalStateException
+	public void unsubscribe(BiConsumer<? super T1, ? super T2> action)
+		throws IllegalArgumentException, IllegalStateException
 	{
 		subscriberHolder.unsubscribe(action);
 	}

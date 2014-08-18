@@ -24,76 +24,77 @@
  */
 package net.objectzoo.events.helpers;
 
+import java.util.Objects;
+import java.util.Optional;
+import java.util.function.Consumer;
+
 /**
- * This helper class is a holder that is used by the event callers to store the action that
+ * This helper class is a holder that is used by the event callers to store the subscribers that
  * subscribed for the event.
  * 
  * @author tilmann
  * 
- * @param <ActionType>
- *        the type of action this registry holds
+ * @param <SubscriberType>
+ *        the type of subscriber this registry holds
  */
-public class EventSubscriberHolder<ActionType>
+public class EventSubscriberHolder<SubscriberType>
 {
-	private ActionType subscriber;
+	Optional<SubscriberType> subscriber = Optional.empty();
 	
 	/**
-	 * Subscribe the given Action to this Event
+	 * Subscribe the given subscriber to this Event
 	 * 
-	 * @param action
-	 *        the Action to be invoked when this Event signals
+	 * @param subscriber
+	 *        the subscriber to be invoked when this Event signals
 	 * @throws IllegalStateException
 	 *         if this {@code EventSubscriberHolder} already has a subscriber
-	 * @throws IllegalArgumentException
-	 *         if he given action to be subscribed is {@code null}
 	 */
-	public void subscribe(ActionType action) throws IllegalArgumentException, IllegalStateException
+	public void subscribe(SubscriberType subscriber) throws IllegalArgumentException,
+		IllegalStateException
 	{
-		if (action == null)
-		{
-			throw new IllegalArgumentException("null is not a legal Action to be subscribed");
-		}
-		if (subscriber != null)
+		Objects.requireNonNull(subscriber);
+		
+		if (this.subscriber.isPresent())
 		{
 			throw new IllegalStateException(
 				"This event already has a subscriber action and allows only a single one.");
 		}
 		
-		subscriber = action;
+		this.subscriber = Optional.of(subscriber);
 	}
 	
 	/**
-	 * Unsubscribe the given Action from this Event
+	 * Unsubscribe the given subscriber from this Event
 	 * 
-	 * @param action
-	 *        the Action to be unsubscribed
+	 * @param subscriber
+	 *        the subscriber to be unsubscribed
 	 * @throws IllegalStateException
-	 *         if another action than the given one is subscribed to this
+	 *         if another subscriber than the given one is subscribed to this
 	 *         {@code EventSubscriberHolder}
-	 * @throws IllegalArgumentException
-	 *         if he given action to be unsubscribed is {@code null}
 	 */
-	public void unsubscribe(ActionType action) throws IllegalArgumentException, IllegalStateException
+	public void unsubscribe(SubscriberType subscriber) throws IllegalArgumentException,
+		IllegalStateException
 	{
-		if (action == null)
-		{
-			throw new IllegalArgumentException("null is not a legal Action to be unsubscribed");
-		}
-		if (subscriber != action)
+		Objects.requireNonNull(subscriber);
+		
+		if (this.subscriber.orElse(null) != subscriber)
 		{
 			throw new IllegalStateException("The given action is not subscribed to this event.");
 		}
 		
-		subscriber = null;
+		this.subscriber = Optional.empty();
 	}
 	
 	/**
-	 * Get the subscriber stored in this {@code EventSubscriberHolder}
+	 * Invokes the given {@link Consumer} with the subscriber if present.
 	 * 
-	 * @return the {@code Action} subscribed or {@code null} if no subscriber is present
+	 * @param subscriberConsumer
+	 *        the consumer to be invoked
 	 */
-	public ActionType getSubscriber()
+	public void callWithSubscriber(Consumer<SubscriberType> subscriberConsumer)
 	{
-		return subscriber;
+		Objects.requireNonNull(subscriberConsumer);
+		
+		this.subscriber.ifPresent(subscriberConsumer);
 	}
 }

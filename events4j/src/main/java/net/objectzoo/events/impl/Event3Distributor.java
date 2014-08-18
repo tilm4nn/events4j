@@ -44,7 +44,7 @@ import net.objectzoo.events.helpers.EventSubscriberRegistry;
  */
 public class Event3Distributor<T1, T2, T3> implements Event3Delegate<T1, T2, T3>
 {
-	EventSubscriberRegistry<Action3<? super T1, ? super T2, ? super T3>> registry = new EventSubscriberRegistry<Action3<? super T1, ? super T2, ? super T3>>();
+	EventSubscriberRegistry<Action3<? super T1, ? super T2, ? super T3>> registry = new EventSubscriberRegistry<>();
 	
 	/**
 	 * This {@code invoke} implementation invokes all event subscribers in the order they have been
@@ -58,19 +58,17 @@ public class Event3Distributor<T1, T2, T3> implements Event3Delegate<T1, T2, T3>
 	 *        the second parameter to invoke the subscribers with
 	 */
 	@Override
-	public void invoke(T1 parameter1, T2 parameter2, T3 parameter3)
+	public void accept(T1 parameter1, T2 parameter2, T3 parameter3)
 	{
-		for (Action3<? super T1, ? super T2, ? super T3> action : registry.getSubscribers())
-		{
-			action.invoke(parameter1, parameter2, parameter3);
-		}
+		registry.callWithEachSubscriber(Action3.boundAcceptingConsumer(parameter1, parameter2, parameter3));
 	}
 	
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void subscribe(Action3<? super T1, ? super T2, ? super T3> action) throws IllegalArgumentException
+	public void subscribe(Action3<? super T1, ? super T2, ? super T3> action)
+		throws IllegalArgumentException
 	{
 		registry.subscribe(action);
 	}
@@ -79,7 +77,8 @@ public class Event3Distributor<T1, T2, T3> implements Event3Delegate<T1, T2, T3>
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void unsubscribe(Action3<? super T1, ? super T2, ? super T3> action) throws IllegalArgumentException
+	public void unsubscribe(Action3<? super T1, ? super T2, ? super T3> action)
+		throws IllegalArgumentException
 	{
 		registry.unsubscribe(action);
 	}

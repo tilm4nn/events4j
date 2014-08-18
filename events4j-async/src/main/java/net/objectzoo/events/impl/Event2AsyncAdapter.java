@@ -25,10 +25,10 @@
 package net.objectzoo.events.impl;
 
 import java.util.concurrent.Executor;
+import java.util.function.BiConsumer;
+import java.util.function.Consumer;
 
-import net.objectzoo.delegates.Action2;
 import net.objectzoo.delegates.Action2Async;
-import net.objectzoo.delegates.ActionAsyncCallback;
 import net.objectzoo.delegates.ActionAsyncResult;
 import net.objectzoo.delegates.adapters.Action2ToAction2Async;
 import net.objectzoo.delegates.impl.AsyncExecutor;
@@ -106,26 +106,26 @@ public class Event2AsyncAdapter<T1, T2> implements Event2AsyncDelegate<T1, T2>
 	 * @return the {@link ActionAsyncResult} associated with this asynchronous invocation
 	 */
 	@Override
-	public ActionAsyncResult beginInvoke(ActionAsyncCallback callback, Object asyncState,
+	public ActionAsyncResult beginAccept(Consumer<ActionAsyncResult> callback, Object asyncState,
 										 T1 parameter1, T2 parameter2)
 	{
-		return asyncDelegate.beginInvoke(callback, asyncState, parameter1, parameter2);
+		return asyncDelegate.beginAccept(callback, asyncState, parameter1, parameter2);
 	}
 	
 	@Override
-	public void invoke(T1 parameter1, T2 parameter2)
+	public void accept(T1 parameter1, T2 parameter2)
 	{
-		delegate.invoke(parameter1, parameter2);
+		delegate.accept(parameter1, parameter2);
 	}
 	
 	@Override
-	public void subscribe(Action2<? super T1, ? super T2> action)
+	public void subscribe(BiConsumer<? super T1, ? super T2> action)
 	{
 		delegate.subscribe(action);
 	}
 	
 	@Override
-	public void unsubscribe(Action2<? super T1, ? super T2> action)
+	public void unsubscribe(BiConsumer<? super T1, ? super T2> action)
 	{
 		delegate.unsubscribe(action);
 	}

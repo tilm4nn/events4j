@@ -25,19 +25,21 @@
 package net.objectzoo.delegates.adapters;
 
 import java.util.concurrent.Executor;
+import java.util.function.Consumer;
 
 import net.objectzoo.delegates.Action;
 import net.objectzoo.delegates.ActionAsync;
 import net.objectzoo.delegates.impl.AsyncExecutor;
 
 /**
- * An adapter that converts an {@link Action} to a new {@link Action}, that makes an asynchronous
- * calls to the original Action0 upon invocation. This adapter provides no possibility to check for
- * the completion of the original action nor to retrieve thrown exceptions. Thus it is recommended
- * to use {@link ActionToActionAsync} adapter instead to achieve a similar result.
+ * An adapter that converts an {@link Action} or {@link Consumer} to a new {@link Action}, that
+ * makes an asynchronous calls to the original Action0 upon invocation. This adapter provides no
+ * possibility to check for the completion of the original action nor to retrieve thrown exceptions.
+ * Thus it is recommended to use {@link ActionToActionAsync} adapter instead to achieve a similar
+ * result.
  * 
  * All asynchronous calls are executed in another thread and forwarded to the
- * {@link Action#invoke(Object)} method.
+ * {@link Action#accept(Object)} method.
  * 
  * The {@link Executor} to use for the asynchronous invocations can be chosen during creation of
  * this adapter. If no explicit executor is given the a default executor is used. The default
@@ -59,7 +61,7 @@ public class ActionToAsyncAction<T> implements Action<T>
 	 * @param action
 	 *        the action to be called asynchronously
 	 */
-	public ActionToAsyncAction(Action<T> action)
+	public ActionToAsyncAction(Consumer<T> action)
 	{
 		this(action, null);
 	}
@@ -72,7 +74,7 @@ public class ActionToAsyncAction<T> implements Action<T>
 	 * @param executor
 	 *        the executor used for the asynchronous calls
 	 */
-	public ActionToAsyncAction(Action<T> action, Executor executor)
+	public ActionToAsyncAction(Consumer<T> action, Executor executor)
 	{
 		actionAsync = new ActionToActionAsync<T>(action, executor);
 	}
@@ -81,8 +83,8 @@ public class ActionToAsyncAction<T> implements Action<T>
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void invoke(T parameter)
+	public void accept(T parameter)
 	{
-		actionAsync.beginInvoke(null, null, parameter);
+		actionAsync.beginAccept(null, null, parameter);
 	}
 }

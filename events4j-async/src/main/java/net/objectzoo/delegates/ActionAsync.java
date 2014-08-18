@@ -24,6 +24,11 @@
  */
 package net.objectzoo.delegates;
 
+import java.util.concurrent.Executor;
+import java.util.function.Consumer;
+
+import net.objectzoo.delegates.adapters.ActionToActionAsync;
+
 /**
  * An {@code ActionAsync} is a reference to a procedure without return value that can be invoked
  * asynchronously in another thread. With {@code ActionAsync} it is possible to track the status and
@@ -56,6 +61,33 @@ public interface ActionAsync<T>
 	 *        the parameter value for the invocation
 	 * @return the {@link ActionAsyncResult} associated with this asynchronous invocation
 	 */
-	public ActionAsyncResult beginInvoke(ActionAsyncCallback callback, Object asyncState,
+	public ActionAsyncResult beginAccept(Consumer<ActionAsyncResult> callback, Object asyncState,
 										 T parameter);
+	
+	/**
+	 * Converts the given {@link Consumer} to the interface {@code ActionAsync} using the default
+	 * executor. Conversion is done using the adapter {@link ActionToActionAsync}.
+	 * 
+	 * @param action
+	 *        the action to be converted
+	 */
+	public static <T> ActionAsync<T> from(Consumer<T> action)
+	{
+		return new ActionToActionAsync<>(action);
+	}
+	
+	/**
+	 * Converts the given {@link Consumer} to the interface {@code ActionAsync} and executes
+	 * asynchronous call using the given {@link Executor}. Conversion is done using the adapter
+	 * {@link ActionToActionAsync}.
+	 * 
+	 * @param action
+	 *        the action to be converted
+	 * @param executor
+	 *        the executor used for the asynchronous calls
+	 */
+	public static <T> ActionAsync<T> from(Consumer<T> action, Executor executor)
+	{
+		return new ActionToActionAsync<>(action, executor);
+	}
 }

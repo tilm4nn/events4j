@@ -24,20 +24,21 @@
  */
 package net.objectzoo.delegates.adapters;
 
-import java.util.concurrent.Callable;
 import java.util.concurrent.Executor;
+import java.util.function.Consumer;
 
 import net.objectzoo.delegates.Action;
+import net.objectzoo.delegates.Action0;
 import net.objectzoo.delegates.ActionAsync;
-import net.objectzoo.delegates.ActionAsyncCallback;
 import net.objectzoo.delegates.ActionAsyncResult;
 import net.objectzoo.delegates.impl.AsyncExecutor;
 
 /**
- * An adapter that converts a conventional {@link Action} to an {@link ActionAsync}.
+ * An adapter that converts a conventional {@link Action} or {@link Consumer} to an
+ * {@link ActionAsync}.
  * 
  * All asynchronous calls are executed in another thread and forwarded to the
- * {@link Action#invoke(Object)} method.
+ * {@link Action#accept(Object)} method.
  * 
  * The {@link Executor} to use for the asynchronous invocations can be chosen during creation of
  * this adapter. If no explicit executor is given the a default executor is used. The default
@@ -51,7 +52,7 @@ import net.objectzoo.delegates.impl.AsyncExecutor;
  */
 public class ActionToActionAsync<T> implements ActionAsync<T>
 {
-	private final Action<T> action;
+	private final Consumer<T> action;
 	private final AsyncExecutor asyncExecutor;
 	
 	/**
@@ -61,7 +62,7 @@ public class ActionToActionAsync<T> implements ActionAsync<T>
 	 * @param action
 	 *        the action to be converted
 	 */
-	public ActionToActionAsync(Action<T> action)
+	public ActionToActionAsync(Consumer<T> action)
 	{
 		this(action, null);
 	}
@@ -75,7 +76,7 @@ public class ActionToActionAsync<T> implements ActionAsync<T>
 	 * @param executor
 	 *        the executor used for the asynchronous calls
 	 */
-	public ActionToActionAsync(Action<T> action, Executor executor)
+	public ActionToActionAsync(Consumer<T> action, Executor executor)
 	{
 		this.action = action;
 		this.asyncExecutor = new AsyncExecutor(executor);
@@ -85,20 +86,10 @@ public class ActionToActionAsync<T> implements ActionAsync<T>
 	 * {@inheritDoc}
 	 */
 	@Override
-	public ActionAsyncResult beginInvoke(ActionAsyncCallback callback, Object asyncState,
+	public ActionAsyncResult beginAccept(Consumer<ActionAsyncResult> callback, Object asyncState,
 										 final T parameter)
 	{
-		Callable<Object> callable = new Callable<Object>()
-		{
-			@Override
-			public Object call() throws Exception
-			{
-				action.invoke(parameter);
-				return null;
-			}
-		};
-		
-		return asyncExecutor.execute(callable, new ActionCallbackToFuncCallback(callback),
-			asyncState);
+		Action0 callable = Action.bindParameter(action, parameter);
+		return asyncExecutor.execute(callable, callback, asyncState);
 	}
 }

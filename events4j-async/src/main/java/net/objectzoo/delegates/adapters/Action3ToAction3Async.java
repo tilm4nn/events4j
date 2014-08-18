@@ -24,12 +24,12 @@
  */
 package net.objectzoo.delegates.adapters;
 
-import java.util.concurrent.Callable;
 import java.util.concurrent.Executor;
+import java.util.function.Consumer;
 
+import net.objectzoo.delegates.Action0;
 import net.objectzoo.delegates.Action3;
 import net.objectzoo.delegates.Action3Async;
-import net.objectzoo.delegates.ActionAsyncCallback;
 import net.objectzoo.delegates.ActionAsyncResult;
 import net.objectzoo.delegates.impl.AsyncExecutor;
 
@@ -37,7 +37,7 @@ import net.objectzoo.delegates.impl.AsyncExecutor;
  * An adapter that converts a conventional {@link Action3} to an {@link Action3Async}.
  * 
  * All asynchronous calls are executed in another thread and forwarded to the
- * {@link Action3#invoke(Object, Object, Object)} method.
+ * {@link Action3#accept(Object, Object, Object)} method.
  * 
  * The {@link Executor} to use for the asynchronous invocations can be chosen during creation of
  * this adapter. If no explicit executor is given the a default executor is used. The default
@@ -89,21 +89,11 @@ public class Action3ToAction3Async<T1, T2, T3> implements Action3Async<T1, T2, T
 	 * {@inheritDoc}
 	 */
 	@Override
-	public ActionAsyncResult beginInvoke(ActionAsyncCallback callback, Object asyncState,
+	public ActionAsyncResult beginAccept(Consumer<ActionAsyncResult> callback, Object asyncState,
 										 final T1 parameter1, final T2 parameter2,
 										 final T3 parameter3)
 	{
-		Callable<Object> callable = new Callable<Object>()
-		{
-			@Override
-			public Object call() throws Exception
-			{
-				action.invoke(parameter1, parameter2, parameter3);
-				return null;
-			}
-		};
-		
-		return asyncExecutor.execute(callable, new ActionCallbackToFuncCallback(callback),
-			asyncState);
+		Action0 callable = Action3.bindParameters(action, parameter1, parameter2, parameter3);
+		return asyncExecutor.execute(callable, callback, asyncState);
 	}
 }

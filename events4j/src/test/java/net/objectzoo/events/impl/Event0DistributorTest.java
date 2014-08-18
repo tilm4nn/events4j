@@ -1,12 +1,13 @@
 package net.objectzoo.events.impl;
 
-import static java.util.Arrays.asList;
-import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
+import java.util.function.Consumer;
+
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.ArgumentCaptor;
 
 import net.objectzoo.delegates.Action0;
 import net.objectzoo.events.helpers.EventSubscriberRegistry;
@@ -44,24 +45,17 @@ public class Event0DistributorTest
 	}
 	
 	@Test
-	public void invoke_retrieves_subscribers()
+	public void accept_calls_subscribers()
 	{
-		subject.invoke();
+		subject.start();
 		
-		verify(registryMock).getSubscribers();
-	}
-	
-	@Test
-	public void invoke_calls_subscribers()
-	{
-		Action0 subscriberMock1 = mock(Action0.class);
-		Action0 subscriberMock2 = mock(Action0.class);
-		doReturn(asList(subscriberMock1, subscriberMock2)).when(registryMock).getSubscribers();
+		ArgumentCaptor<Consumer<Action0>> consumerArgument = (ArgumentCaptor) ArgumentCaptor.forClass(Consumer.class);
+		verify(registryMock).callWithEachSubscriber(consumerArgument.capture());
 		
-		subject.invoke();
+		Action0 subscriberMock = mock(Action0.class);
 		
-		verify(subscriberMock1).invoke();
-		verify(subscriberMock2).invoke();
+		consumerArgument.getValue().accept(subscriberMock);
+		verify(subscriberMock).start();
 	}
 	
 	private static Action0 someAction0()
@@ -69,7 +63,7 @@ public class Event0DistributorTest
 		return new Action0()
 		{
 			@Override
-			public void invoke()
+			public void start()
 			{
 			}
 		};

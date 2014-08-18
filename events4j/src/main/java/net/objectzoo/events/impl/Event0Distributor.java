@@ -37,19 +37,16 @@ import net.objectzoo.events.helpers.EventSubscriberRegistry;
  */
 public class Event0Distributor implements Event0Delegate
 {
-	EventSubscriberRegistry<Action0> registry = new EventSubscriberRegistry<Action0>();
+	EventSubscriberRegistry<Action0> registry = new EventSubscriberRegistry<>();
 	
 	/**
 	 * This {@code invoke} implementation invokes all event subscribers in the order they have been
 	 * subscribed.
 	 */
 	@Override
-	public void invoke()
+	public void start()
 	{
-		for (Action0 action : registry.getSubscribers())
-		{
-			action.invoke();
-		}
+		registry.callWithEachSubscriber(Action0.startingConsumer());
 	}
 	
 	/**

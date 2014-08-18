@@ -25,10 +25,9 @@
 package net.objectzoo.events.impl;
 
 import java.util.concurrent.Executor;
+import java.util.function.Consumer;
 
-import net.objectzoo.delegates.Action;
 import net.objectzoo.delegates.ActionAsync;
-import net.objectzoo.delegates.ActionAsyncCallback;
 import net.objectzoo.delegates.ActionAsyncResult;
 import net.objectzoo.delegates.adapters.ActionToActionAsync;
 import net.objectzoo.delegates.impl.AsyncExecutor;
@@ -102,26 +101,26 @@ public class EventAsyncAdapter<T> implements EventAsyncDelegate<T>
 	 * @return the {@link ActionAsyncResult} associated with this asynchronous invocation
 	 */
 	@Override
-	public ActionAsyncResult beginInvoke(ActionAsyncCallback callback, Object asyncState,
+	public ActionAsyncResult beginAccept(Consumer<ActionAsyncResult> callback, Object asyncState,
 										 T parameter)
 	{
-		return asyncDelegate.beginInvoke(callback, asyncState, parameter);
+		return asyncDelegate.beginAccept(callback, asyncState, parameter);
 	}
 	
 	@Override
-	public void invoke(T parameter)
+	public void accept(T parameter)
 	{
-		delegate.invoke(parameter);
+		delegate.accept(parameter);
 	}
 	
 	@Override
-	public void subscribe(Action<? super T> action)
+	public void subscribe(Consumer<? super T> action)
 	{
 		delegate.subscribe(action);
 	}
 	
 	@Override
-	public void unsubscribe(Action<? super T> action)
+	public void unsubscribe(Consumer<? super T> action)
 	{
 		delegate.unsubscribe(action);
 	}

@@ -24,15 +24,16 @@
  */
 package net.objectzoo.events;
 
-import net.objectzoo.delegates.Action2;
+import java.util.function.BiConsumer;
 
 /**
  * An {@code Event2} is a source of signals and/or information that can be observed by subscribing
- * {@link Action2} instances to it.
+ * {@link BiConsumer} instances to it.
  * 
- * When an {@code Event2} signals all subscribed {@code Action2}s are invoked. The order of of the
- * invocation of the {@code Action2}s and the behavior in case of an {@link RuntimeException} during
- * the invocation of an {@code Action2} depends on the concrete {@code Event2} implementation.
+ * When an {@code Event2} signals all subscribed {@code BiConsumer}s are invoked. The order of of
+ * the invocation of the {@code BiConsumer}s and the behavior in case of an {@link RuntimeException}
+ * during the invocation of a {@code BiConsumer} depends on the concrete {@code Event2}
+ * implementation.
  * 
  * @author tilmann
  * 
@@ -44,22 +45,20 @@ import net.objectzoo.delegates.Action2;
 public interface Event2<T1, T2>
 {
 	/**
-	 * Subscribe the given {@link Action2} to this {@code Event2}
+	 * Subscribe the given {@link BiConsumer} to this {@code Event2}
 	 * 
-	 * @param action
-	 *        the {@link Action2} to be invoked when this {@code Event2} signals
-	 * @throws IllegalArgumentException
-	 *         if he given action to be subscribed is {@code null}
+	 * @param biConsumer
+	 *        the {@link BiConsumer} to be invoked when this {@code Event2} signals
 	 */
-	public void subscribe(Action2<? super T1, ? super T2> action) throws IllegalArgumentException;
+	public void subscribe(BiConsumer<? super T1, ? super T2> biConsumer)
+		throws IllegalArgumentException;
 	
 	/**
-	 * Unsubscribe the given {@link Action2} from this {@code Event2}
+	 * Unsubscribe the given {@link BiConsumer} from this {@code Event2}
 	 * 
-	 * @param action
-	 *        the {@link Action2} to be unsubscribed
-	 * @throws IllegalArgumentException
-	 *         if he given action to be unsubscribed is {@code null}
+	 * @param biConsumer
+	 *        the {@link BiConsumer} to be unsubscribed
 	 */
-	public void unsubscribe(Action2<? super T1, ? super T2> action) throws IllegalArgumentException;
+	public void unsubscribe(BiConsumer<? super T1, ? super T2> biConsumer)
+		throws IllegalArgumentException;
 }

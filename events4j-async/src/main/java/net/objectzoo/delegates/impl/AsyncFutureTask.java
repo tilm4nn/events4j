@@ -29,14 +29,14 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.FutureTask;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
+import java.util.function.Consumer;
 
 import net.objectzoo.delegates.ActionAsyncResult;
-import net.objectzoo.delegates.FuncAsyncCallback;
-import net.objectzoo.delegates.FuncAsyncResult;
+import net.objectzoo.delegates.FunctionAsyncResult;
 
 /**
  * This {@link FutureTask} subclass is used internally for the asynchronous invocation of actions
- * and funcs and implements the interfaces {@link FuncAsyncResult} and {@link ActionAsyncResult} so
+ * and funcs and implements the interfaces {@link FunctionAsyncResult} and {@link ActionAsyncResult} so
  * that it directly serves as return value for the asynchronous invocations and as parameter given
  * to the callback methods.
  * 
@@ -45,11 +45,11 @@ import net.objectzoo.delegates.FuncAsyncResult;
  * @param <R>
  *        the type of the return value of the invocation
  */
-public class AsyncFutureTask<R> extends FutureTask<R> implements FuncAsyncResult<R>,
+public class AsyncFutureTask<R> extends FutureTask<R> implements FunctionAsyncResult<R>,
 	ActionAsyncResult
 {
 	private final Object asyncState;
-	private final FuncAsyncCallback<R> callback;
+	private final Consumer<? super FunctionAsyncResult<R>> callback;
 	
 	/**
 	 * Creates a new {@code AsyncFutureTask} that invokes the given callable and holds the given
@@ -62,7 +62,8 @@ public class AsyncFutureTask<R> extends FutureTask<R> implements FuncAsyncResult
 	 * @param asyncState
 	 *        the asynchronous state object to be returned by this asynchronous result
 	 */
-	public AsyncFutureTask(Callable<R> callable, FuncAsyncCallback<R> callback, Object asyncState)
+	public AsyncFutureTask(Callable<R> callable, Consumer<? super FunctionAsyncResult<R>> callback,
+						   Object asyncState)
 	{
 		super(callable);
 		this.asyncState = asyncState;
@@ -87,7 +88,7 @@ public class AsyncFutureTask<R> extends FutureTask<R> implements FuncAsyncResult
 	{
 		if (callback != null)
 		{
-			callback.invocationFinished(this);
+			callback.accept(this);
 		}
 	}
 	
@@ -95,7 +96,7 @@ public class AsyncFutureTask<R> extends FutureTask<R> implements FuncAsyncResult
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void endInvoke() throws InterruptedException, ExecutionException
+	public void end() throws InterruptedException, ExecutionException
 	{
 		get();
 	}
@@ -104,7 +105,7 @@ public class AsyncFutureTask<R> extends FutureTask<R> implements FuncAsyncResult
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void endInvoke(long timeout, TimeUnit unit) throws InterruptedException,
+	public void end(long timeout, TimeUnit unit) throws InterruptedException,
 		ExecutionException, TimeoutException
 	{
 		get(timeout, unit);
@@ -114,7 +115,7 @@ public class AsyncFutureTask<R> extends FutureTask<R> implements FuncAsyncResult
 	 * {@inheritDoc}
 	 */
 	@Override
-	public R endInvokeReturn() throws InterruptedException, ExecutionException
+	public R endReturn() throws InterruptedException, ExecutionException
 	{
 		return get();
 	}
@@ -123,7 +124,7 @@ public class AsyncFutureTask<R> extends FutureTask<R> implements FuncAsyncResult
 	 * {@inheritDoc}
 	 */
 	@Override
-	public R endInvokeReturn(long timeout, TimeUnit unit) throws InterruptedException,
+	public R endReturn(long timeout, TimeUnit unit) throws InterruptedException,
 		ExecutionException, TimeoutException
 	{
 		return get(timeout, unit);

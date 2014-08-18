@@ -52,8 +52,6 @@ public interface Event4<T1, T2, T3, T4>
 	 * 
 	 * @param action
 	 *        the {@link Action4} to be invoked when this {@code Event4} signals
-	 * @throws IllegalArgumentException
-	 *         if he given action to be subscribed is {@code null}
 	 */
 	public void subscribe(Action4<? super T1, ? super T2, ? super T3, ? super T4> action)
 		throws IllegalArgumentException;
@@ -63,8 +61,6 @@ public interface Event4<T1, T2, T3, T4>
 	 * 
 	 * @param action
 	 *        the {@link Action4} to be unsubscribed
-	 * @throws IllegalArgumentException
-	 *         if he given action to be unsubscribed is {@code null}
 	 */
 	public void unsubscribe(Action4<? super T1, ? super T2, ? super T3, ? super T4> action)
 		throws IllegalArgumentException;

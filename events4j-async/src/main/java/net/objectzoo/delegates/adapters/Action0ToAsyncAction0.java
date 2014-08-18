@@ -37,7 +37,7 @@ import net.objectzoo.delegates.impl.AsyncExecutor;
  * to use {@link Action0ToAction0Async} adapter instead to achieve a similar result.
  * 
  * All asynchronous calls are executed in another thread and forwarded to the
- * {@link Action0#invoke()} method.
+ * {@link Action0#start()} method.
  * 
  * The {@link Executor} to use for the asynchronous invocations can be chosen during creation of
  * this adapter. If no explicit executor is given the a default executor is used. The default
@@ -78,8 +78,8 @@ public class Action0ToAsyncAction0 implements Action0
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void invoke()
+	public void start()
 	{
-		actionAsync.beginInvoke(null, null);
+		actionAsync.beginStart(null, null);
 	}
 }

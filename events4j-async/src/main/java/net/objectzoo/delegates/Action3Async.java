@@ -24,6 +24,11 @@
  */
 package net.objectzoo.delegates;
 
+import java.util.concurrent.Executor;
+import java.util.function.Consumer;
+
+import net.objectzoo.delegates.adapters.Action3ToAction3Async;
+
 /**
  * An {@code Action3Async} is a reference to a procedure without return value that can be invoked
  * asynchronously in another thread. With {@code Action3Async} it is possible to track the status
@@ -64,6 +69,34 @@ public interface Action3Async<T1, T2, T3>
 	 *        the third parameter's value for the invocation
 	 * @return the {@link ActionAsyncResult} associated with this asynchronous invocation
 	 */
-	public ActionAsyncResult beginInvoke(ActionAsyncCallback callback, Object asyncState,
+	public ActionAsyncResult beginAccept(Consumer<ActionAsyncResult> callback, Object asyncState,
 										 T1 parameter1, T2 parameter2, T3 parameter3);
+	
+	/**
+	 * Converts the given {@link Action3} to the interface {@code Action3Async} using the default
+	 * executor. Conversion is done using the adapter {@link Action3ToAction3Async}.
+	 * 
+	 * @param action
+	 *        the action to be converted
+	 */
+	public static <T1, T2, T3> Action3Async<T1, T2, T3> from(Action3<T1, T2, T3> action)
+	{
+		return new Action3ToAction3Async<>(action);
+	}
+	
+	/**
+	 * Converts the given {@link Action3} to the interface {@code Action3Async} and executes
+	 * asynchronous call using the given {@link Executor}. Conversion is done using the adapter
+	 * {@link Action3ToAction3Async}.
+	 * 
+	 * @param action
+	 *        the action to be converted
+	 * @param executor
+	 *        the executor used for the asynchronous calls
+	 */
+	public static <T1, T2, T3> Action3Async<T1, T2, T3> from(Action3<T1, T2, T3> action,
+															 Executor executor)
+	{
+		return new Action3ToAction3Async<>(action, executor);
+	}
 }

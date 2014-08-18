@@ -32,7 +32,7 @@ import java.util.concurrent.TimeoutException;
 /**
  * A {@code ActionAsyncResult} represents the result of an {@link ActionAsync} invocation. Methods
  * are provided to check if the invocation is complete, to wait for its completion and check the
- * outcome. The outcome can be checked using the method {@link #endInvoke()} when the
+ * outcome. The outcome can be checked using the method {@link #end()} when the
  * {@code ActionAsync} has completed, blocking if necessary until it is ready. Cancellation is
  * performed by the {@link #cancel(boolean)} method. Additional methods are provided to determine if
  * the {@code ActionAsync} completed normally or was cancelled. Once an {@code ActionAsync} has
@@ -47,7 +47,7 @@ public interface ActionAsyncResult
 	 * Retrieves the async state object associated with this {@code ActionAsync} invocation.
 	 * 
 	 * @return the async state object given in the call to
-	 *         {@link FuncAsync#beginInvoke(FuncAsyncCallback, Object, Object)}
+	 *         {@link FunctionAsync#beginApply(FuncAsyncCallback, Object, Object)}
 	 */
 	public Object getAsyncState();
 	
@@ -61,7 +61,7 @@ public interface ActionAsyncResult
 	 * @throws InterruptedException
 	 *         if the current thread was interrupted while waiting
 	 */
-	public void endInvoke() throws InterruptedException, ExecutionException;
+	public void end() throws InterruptedException, ExecutionException;
 	
 	/**
 	 * Waits if necessary for at most the given time for the {@code ActionAsync} to complete.
@@ -79,7 +79,7 @@ public interface ActionAsyncResult
 	 * @throws TimeoutException
 	 *         if the wait timed out
 	 */
-	public void endInvoke(long timeout, TimeUnit unit) throws InterruptedException,
+	public void end(long timeout, TimeUnit unit) throws InterruptedException,
 		ExecutionException, TimeoutException;
 	
 	/**

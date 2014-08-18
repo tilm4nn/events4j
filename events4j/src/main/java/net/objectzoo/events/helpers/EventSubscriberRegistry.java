@@ -27,40 +27,36 @@ package net.objectzoo.events.helpers;
 import static java.util.Collections.emptyList;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.function.Consumer;
 
 /**
- * This helper class is a registry that is used by the event distributors to store the actions that
- * subscribed for the event.
+ * This helper class is a registry that is used by the event distributors to store the subscribers
+ * that subscribed for the event.
  * 
  * @author tilmann
  * 
- * @param <ActionType>
- *        the type of action this registry holds
+ * @param <SubscriberType>
+ *        the type of subscriber this registry holds
  */
-public class EventSubscriberRegistry<ActionType>
+public class EventSubscriberRegistry<SubscriberType>
 {
-	private List<ActionType> subscribers = emptyList();
+	List<SubscriberType> subscribers = emptyList();
 	
 	/**
-	 * Adds the given action to this registry if it is not already subscribed. This is checked using
-	 * the {@link Object#equals(Object)} of the action.
+	 * Adds the given subscriber to this registry if it is not already subscribed. This is checked
+	 * using the {@link Object#equals(Object)} of the subscriber.
 	 * 
-	 * @param action
-	 *        the action to be added
-	 * @throws IllegalArgumentException
-	 *         if he given action to be subscribed is {@code null}
+	 * @param subscriber
+	 *        the subscriber to be added
 	 */
-	public void subscribe(ActionType action) throws IllegalArgumentException
+	public void subscribe(SubscriberType subscriber) throws IllegalArgumentException
 	{
-		if (action == null)
-		{
-			throw new IllegalArgumentException("null is not a legal Action to be subscribed");
-		}
+		Objects.requireNonNull(subscriber);
 		
-		addSubscriber(action);
+		addSubscriber(subscriber);
 	}
 	
 	/**
@@ -69,35 +65,29 @@ public class EventSubscriberRegistry<ActionType>
 	 * instead. But then it would not compile for GWT.
 	 * 
 	 * @param subscriber
-	 *        the action to be added
+	 *        the subscriber to be added
 	 */
-	private synchronized void addSubscriber(ActionType subscriber)
+	private synchronized void addSubscriber(SubscriberType subscriber)
 	{
 		if (!subscribers.contains(subscriber))
 		{
-			ArrayList<ActionType> newSubscribers = new ArrayList<ActionType>(subscribers.size() + 1);
-			newSubscribers.addAll(subscribers);
+			ArrayList<SubscriberType> newSubscribers = new ArrayList<SubscriberType>(subscribers);
 			newSubscribers.add(subscriber);
 			subscribers = newSubscribers;
 		}
 	}
 	
 	/**
-	 * Removes the given action from this registry.
+	 * Removes the given subscriber from this registry.
 	 * 
-	 * @param action
-	 *        the action to be removed
-	 * @throws IllegalArgumentException
-	 *         if he given action to be unsubscribed is {@code null}
+	 * @param subscriber
+	 *        the subscriber to be removed
 	 */
-	public synchronized void unsubscribe(ActionType action) throws IllegalArgumentException
+	public void unsubscribe(SubscriberType subscriber) throws IllegalArgumentException
 	{
-		if (action == null)
-		{
-			throw new IllegalArgumentException("null is not a legal Action to be unsubscribed");
-		}
+		Objects.requireNonNull(subscriber);
 		
-		removeSubscriber(action);
+		removeSubscriber(subscriber);
 	}
 	
 	/**
@@ -106,31 +96,26 @@ public class EventSubscriberRegistry<ActionType>
 	 * been used instead. But then it would not compile for GWT.
 	 * 
 	 * @param subscriber
-	 *        the action to be removed
+	 *        the subscriber to be removed
 	 */
-	private synchronized void removeSubscriber(ActionType subscriber)
+	private synchronized void removeSubscriber(SubscriberType subscriber)
 	{
 		if (subscribers.contains(subscriber))
 		{
-			ArrayList<ActionType> newSubscribers = new ArrayList<ActionType>(subscribers.size() - 1);
-			for (ActionType oldSubscriber : subscribers)
-			{
-				if (!oldSubscriber.equals(subscriber))
-				{
-					newSubscribers.add(oldSubscriber);
-				}
-			}
+			ArrayList<SubscriberType> newSubscribers = new ArrayList<>(subscribers);
+			newSubscribers.remove(subscriber);
 			subscribers = newSubscribers;
 		}
 	}
 	
 	/**
-	 * Returns all subscribed actions in this registry
+	 * Invokes the given {@link Consumer} for all subscribers in this registry
 	 * 
-	 * @return all subscribed actions
+	 * @param subscriberConsumer
+	 *        the consumer to be invoked
 	 */
-	public Collection<ActionType> getSubscribers()
+	public void callWithEachSubscriber(Consumer<SubscriberType> subscriberConsumer)
 	{
-		return subscribers;
+		subscribers.forEach(subscriberConsumer);
 	}
 }

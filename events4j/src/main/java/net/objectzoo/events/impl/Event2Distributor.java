@@ -24,6 +24,8 @@
  */
 package net.objectzoo.events.impl;
 
+import java.util.function.BiConsumer;
+
 import net.objectzoo.delegates.Action2;
 import net.objectzoo.events.helpers.EventSubscriberRegistry;
 
@@ -42,7 +44,7 @@ import net.objectzoo.events.helpers.EventSubscriberRegistry;
  */
 public class Event2Distributor<T1, T2> implements Event2Delegate<T1, T2>
 {
-	EventSubscriberRegistry<Action2<? super T1, ? super T2>> registry = new EventSubscriberRegistry<Action2<? super T1, ? super T2>>();
+	EventSubscriberRegistry<BiConsumer<? super T1, ? super T2>> registry = new EventSubscriberRegistry<>();
 	
 	/**
 	 * This {@code invoke} implementation invokes all event subscribers in the order they have been
@@ -54,19 +56,17 @@ public class Event2Distributor<T1, T2> implements Event2Delegate<T1, T2>
 	 *        the second parameter to invoke the subscribers with
 	 */
 	@Override
-	public void invoke(T1 parameter1, T2 parameter2)
+	public void accept(T1 parameter1, T2 parameter2)
 	{
-		for (Action2<? super T1, ? super T2> action : registry.getSubscribers())
-		{
-			action.invoke(parameter1, parameter2);
-		}
+		registry.callWithEachSubscriber(Action2.boundAcceptingConsumer(parameter1, parameter2));
 	}
 	
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void subscribe(Action2<? super T1, ? super T2> action) throws IllegalArgumentException
+	public void subscribe(BiConsumer<? super T1, ? super T2> action)
+		throws IllegalArgumentException
 	{
 		registry.subscribe(action);
 	}
@@ -75,7 +75,8 @@ public class Event2Distributor<T1, T2> implements Event2Delegate<T1, T2>
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void unsubscribe(Action2<? super T1, ? super T2> action) throws IllegalArgumentException
+	public void unsubscribe(BiConsumer<? super T1, ? super T2> action)
+		throws IllegalArgumentException
 	{
 		registry.unsubscribe(action);
 	}

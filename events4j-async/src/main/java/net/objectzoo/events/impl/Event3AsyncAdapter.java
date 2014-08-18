@@ -25,10 +25,10 @@
 package net.objectzoo.events.impl;
 
 import java.util.concurrent.Executor;
+import java.util.function.Consumer;
 
 import net.objectzoo.delegates.Action3;
 import net.objectzoo.delegates.Action3Async;
-import net.objectzoo.delegates.ActionAsyncCallback;
 import net.objectzoo.delegates.ActionAsyncResult;
 import net.objectzoo.delegates.adapters.Action3ToAction3Async;
 import net.objectzoo.delegates.impl.AsyncExecutor;
@@ -110,16 +110,16 @@ public class Event3AsyncAdapter<T1, T2, T3> implements Event3AsyncDelegate<T1, T
 	 * @return the {@link ActionAsyncResult} associated with this asynchronous invocation
 	 */
 	@Override
-	public ActionAsyncResult beginInvoke(ActionAsyncCallback callback, Object asyncState,
+	public ActionAsyncResult beginAccept(Consumer<ActionAsyncResult> callback, Object asyncState,
 										 T1 parameter1, T2 parameter2, T3 parameter3)
 	{
-		return asyncDelegate.beginInvoke(callback, asyncState, parameter1, parameter2, parameter3);
+		return asyncDelegate.beginAccept(callback, asyncState, parameter1, parameter2, parameter3);
 	}
 	
 	@Override
-	public void invoke(T1 parameter1, T2 parameter2, T3 parameter3)
+	public void accept(T1 parameter1, T2 parameter2, T3 parameter3)
 	{
-		delegate.invoke(parameter1, parameter2, parameter3);
+		delegate.accept(parameter1, parameter2, parameter3);
 	}
 	
 	@Override

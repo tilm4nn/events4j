@@ -25,18 +25,18 @@
 package net.objectzoo.delegates.impl;
 
 import java.util.concurrent.Executor;
+import java.util.function.Consumer;
 
-import net.objectzoo.delegates.Func;
-import net.objectzoo.delegates.FuncAsync;
-import net.objectzoo.delegates.FuncAsyncCallback;
-import net.objectzoo.delegates.FuncAsyncResult;
-import net.objectzoo.delegates.adapters.FuncToFuncAsync;
+import net.objectzoo.delegates.FunctionAsync;
+import net.objectzoo.delegates.FunctionAsyncResult;
+import net.objectzoo.delegates.Function;
+import net.objectzoo.delegates.adapters.FunctionToFunctionAsync;
 
 /**
  * This is an abstract support class that can be used to quickly implement asynchronous funcs.
  * 
  * All asynchronous calls are executed in another thread and forwarded to the
- * {@link Func#invoke(Object)} method.
+ * {@link Function#invoke(Object)} method.
  * 
  * The {@link Executor} to use for the asynchronous invocations can be chosen during creation of
  * {@code ActionAsyncSupport} instances. If no explicit executor is given the a default executor is
@@ -51,9 +51,9 @@ import net.objectzoo.delegates.adapters.FuncToFuncAsync;
  * @param <R>
  *        The type of the funcs result
  */
-public abstract class FuncAsyncSupport<T, R> implements Func<T, R>, FuncAsync<T, R>
+public abstract class FuncAsyncSupport<T, R> implements Function<T, R>, FunctionAsync<T, R>
 {
-	private final FuncAsync<T, R> asyncDelegate;
+	private final FunctionAsync<T, R> asyncDelegate;
 	
 	/**
 	 * Creates a new {@code FuncAsyncSupport} that uses the default executor
@@ -71,22 +71,22 @@ public abstract class FuncAsyncSupport<T, R> implements Func<T, R>, FuncAsync<T,
 	 */
 	public FuncAsyncSupport(Executor executor)
 	{
-		asyncDelegate = new FuncToFuncAsync<T, R>(this, executor);
+		asyncDelegate = new FunctionToFunctionAsync<T, R>(this, executor);
 	}
 	
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public abstract R invoke(T parameter);
+	public abstract R apply(T parameter);
 	
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public FuncAsyncResult<R> beginInvoke(FuncAsyncCallback<? super R> callback, Object asyncState,
-										  T parameter)
+	public FunctionAsyncResult<R> beginApply(Consumer<? super FunctionAsyncResult<R>> callback,
+										  Object asyncState, T parameter)
 	{
-		return asyncDelegate.beginInvoke(callback, asyncState, parameter);
+		return asyncDelegate.beginApply(callback, asyncState, parameter);
 	}
 }

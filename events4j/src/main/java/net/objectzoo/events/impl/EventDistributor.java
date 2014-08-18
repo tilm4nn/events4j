@@ -24,6 +24,8 @@
  */
 package net.objectzoo.events.impl;
 
+import java.util.function.Consumer;
+
 import net.objectzoo.delegates.Action;
 import net.objectzoo.events.helpers.EventSubscriberRegistry;
 
@@ -40,7 +42,7 @@ import net.objectzoo.events.helpers.EventSubscriberRegistry;
  */
 public class EventDistributor<T> implements EventDelegate<T>
 {
-	EventSubscriberRegistry<Action<? super T>> registry = new EventSubscriberRegistry<Action<? super T>>();
+	EventSubscriberRegistry<Consumer<? super T>> registry = new EventSubscriberRegistry<>();
 	
 	/**
 	 * This {@code invoke} implementation invokes all event subscribers in the order they have been
@@ -50,19 +52,16 @@ public class EventDistributor<T> implements EventDelegate<T>
 	 *        the parameter to invoke the subscribers with
 	 */
 	@Override
-	public void invoke(T parameter)
+	public void accept(T parameter)
 	{
-		for (Action<? super T> action : registry.getSubscribers())
-		{
-			action.invoke(parameter);
-		}
+		registry.callWithEachSubscriber(Action.boundAcceptingConsumer(parameter));
 	}
 	
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void subscribe(Action<? super T> action) throws IllegalArgumentException
+	public void subscribe(Consumer<? super T> action) throws IllegalArgumentException
 	{
 		registry.subscribe(action);
 	}
@@ -71,7 +70,7 @@ public class EventDistributor<T> implements EventDelegate<T>
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void unsubscribe(Action<? super T> action) throws IllegalArgumentException
+	public void unsubscribe(Consumer<? super T> action) throws IllegalArgumentException
 	{
 		registry.unsubscribe(action);
 	}

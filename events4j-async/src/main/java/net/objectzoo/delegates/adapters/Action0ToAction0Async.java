@@ -24,12 +24,11 @@
  */
 package net.objectzoo.delegates.adapters;
 
-import java.util.concurrent.Callable;
 import java.util.concurrent.Executor;
+import java.util.function.Consumer;
 
 import net.objectzoo.delegates.Action0;
 import net.objectzoo.delegates.Action0Async;
-import net.objectzoo.delegates.ActionAsyncCallback;
 import net.objectzoo.delegates.ActionAsyncResult;
 import net.objectzoo.delegates.impl.AsyncExecutor;
 
@@ -37,7 +36,7 @@ import net.objectzoo.delegates.impl.AsyncExecutor;
  * An adapter that converts a conventional {@link Action0} to an {@link Action0Async}.
  * 
  * All asynchronous calls are executed in another thread and forwarded to the
- * {@link Action0#invoke()} method.
+ * {@link Action0#start()} method.
  * 
  * The {@link Executor} to use for the asynchronous invocations can be chosen during creation of
  * this adapter. If no explicit executor is given the a default executor is used. The default
@@ -82,19 +81,8 @@ public class Action0ToAction0Async implements Action0Async
 	 * {@inheritDoc}
 	 */
 	@Override
-	public ActionAsyncResult beginInvoke(ActionAsyncCallback callback, Object asyncState)
+	public ActionAsyncResult beginStart(Consumer<ActionAsyncResult> callback, Object asyncState)
 	{
-		Callable<Object> callable = new Callable<Object>()
-		{
-			@Override
-			public Object call() throws Exception
-			{
-				action.invoke();
-				return null;
-			}
-		};
-		
-		return asyncExecutor.execute(callable, new ActionCallbackToFuncCallback(callback),
-			asyncState);
+		return asyncExecutor.execute(action, callback, asyncState);
 	}
 }

@@ -1,9 +1,15 @@
 package net.objectzoo.events.helpers;
 
 import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+
+import java.util.function.Consumer;
 
 import org.junit.Test;
+import org.mockito.Mockito;
 
 import net.objectzoo.delegates.Action0;
 
@@ -11,7 +17,7 @@ public class EventSubscriberHolderTest
 {
 	private EventSubscriberHolder<Action0> sut = new EventSubscriberHolder<Action0>();
 	
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = NullPointerException.class)
 	public void subscribe_throws_exception_for_null_subscriber()
 	{
 		sut.subscribe(null);
@@ -32,10 +38,10 @@ public class EventSubscriberHolderTest
 		
 		sut.subscribe(subscriber);
 		
-		assertThat(sut.getSubscriber(), is(subscriber));
+		assertThat(sut.subscriber.get(), is(subscriber));
 	}
 	
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = NullPointerException.class)
 	public void unsubscribe_throws_exception_for_null_subscriber()
 	{
 		sut.unsubscribe(null);
@@ -57,17 +63,45 @@ public class EventSubscriberHolderTest
 		
 		sut.unsubscribe(subscriber);
 		
-		assertThat(sut.getSubscriber(), is((Action0) null));
+		assertFalse(sut.subscriber.isPresent());
+	}
+	
+	@Test
+	@SuppressWarnings("unchecked")
+	public void callWithSubscriber_calls_given_consumer_when_subscribed()
+	{
+		Action0 subscriber = someAction0();
+		sut.subscribe(subscriber);
+		Consumer<Action0> actionConsumer = mock(Consumer.class);
+		
+		sut.callWithSubscriber(actionConsumer);
+		
+		verify(actionConsumer).accept(subscriber);
+	}
+	
+	@Test
+	@SuppressWarnings("unchecked")
+	public void callWithSubscriber_does_not_call_given_consumer_when_not_subscribed()
+	{
+		Consumer<Action0> actionConsumer = mock(Consumer.class);
+		
+		sut.callWithSubscriber(actionConsumer);
+		
+		Mockito.verifyZeroInteractions(actionConsumer);
 	}
 	
 	private static Action0 someAction0()
 	{
+		// This does not work because the returned values are equal!
+		// return () -> {};
+		
 		return new Action0()
 		{
 			@Override
-			public void invoke()
+			public void start()
 			{
 			}
 		};
 	}
+	
 }

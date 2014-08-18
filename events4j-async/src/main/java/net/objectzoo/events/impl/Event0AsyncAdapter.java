@@ -25,10 +25,10 @@
 package net.objectzoo.events.impl;
 
 import java.util.concurrent.Executor;
+import java.util.function.Consumer;
 
 import net.objectzoo.delegates.Action0;
 import net.objectzoo.delegates.Action0Async;
-import net.objectzoo.delegates.ActionAsyncCallback;
 import net.objectzoo.delegates.ActionAsyncResult;
 import net.objectzoo.delegates.adapters.Action0ToAction0Async;
 import net.objectzoo.delegates.impl.AsyncExecutor;
@@ -97,9 +97,9 @@ public class Event0AsyncAdapter implements Event0AsyncDelegate
 	 * @return the {@link ActionAsyncResult} associated with this asynchronous invocation
 	 */
 	@Override
-	public ActionAsyncResult beginInvoke(ActionAsyncCallback callback, Object asyncState)
+	public ActionAsyncResult beginStart(Consumer<ActionAsyncResult> callback, Object asyncState)
 	{
-		return asyncDelegate.beginInvoke(callback, asyncState);
+		return asyncDelegate.beginStart(callback, asyncState);
 	}
 	
 	@Override
@@ -115,8 +115,8 @@ public class Event0AsyncAdapter implements Event0AsyncDelegate
 	}
 	
 	@Override
-	public void invoke()
+	public void start()
 	{
-		delegate.invoke();
+		delegate.start();
 	}
 }
