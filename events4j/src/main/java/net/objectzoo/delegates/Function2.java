@@ -31,97 +31,86 @@ import java.util.function.BiFunction;
  * synchronously similar to a regular Java method call. To enable interoperability with Java 8
  * libraries {@code Function2} is replaceable with its super interface {@link BiFunction} in many
  * situations.
- * 
+ *
+ * @param <T1> The type of the {@code Function2}'s first parameter
+ * @param <T2> The type of the {@code Function2}'s second parameter
+ * @param <R>  The type of the {@code Function2}'s return value
  * @author tilmann
- * 
- * @param <T1>
- *        The type of the {@code Function2}'s first parameter
- * @param <T2>
- *        The type of the {@code Function2}'s second parameter
- * @param <R>
- *        The type of the {@code Function2}'s return value
  */
 @FunctionalInterface
 public interface Function2<T1, T2, R> extends BiFunction<T1, T2, R>
 {
-	/**
-	 * Invoke this {@code Function2} with the given parameter values
-	 * 
-	 * @param parameter1
-	 *        the first parameter's value for the invocation
-	 * @param parameter2
-	 *        the second parameter's value for the invocation
-	 * @return the return value of the invocation
-	 */
-	R apply(T1 parameter1, T2 parameter2);
-	
-	/**
-	 * Binds the given parameters to this {@code Function2} returning a new {@link Function0} that
-	 * acts as an invocation of this {@code Function2} with the given parameters.
-	 * 
-	 * @param parameter1
-	 *        the first parameter to be bound
-	 * @param parameter2
-	 *        the second parameter to be bound
-	 * @return the bound {@code Function2} as {@link Function0}
-	 */
-	default Function0<R> bindParameters(T1 parameter1, T2 parameter2)
-	{
-		return bindParameters(this, parameter1, parameter2);
-	}
-	
-	/**
-	 * Converts this {@code Function2} into an {@link Action2} ignoring the function's return value.
-	 * 
-	 * @return an {@link Action2} calling this function
-	 */
-	default Action2<T1, T2> toAction()
-	{
-		return Action2.from(this);
-	}
-	
-	/**
-	 * Binds the given parameters to the given {@link BiFunction} returning a new {@link Function0}
-	 * that acts as an invocation of the {@link BiFunction} with the given parameters.
-	 * 
-	 * @param parameter1
-	 *        the first parameter to be bound
-	 * @param parameter2
-	 *        the second parameter to be bound
-	 * @return the bound {@link BiFunction} as {@link Function0}
-	 */
-	public static <T1, T2, R> Function0<R> bindParameters(BiFunction<? super T1, ? super T2, R> function,
-														  T1 parameter1, T2 parameter2)
-	{
-		return () -> function.apply(parameter1, parameter2);
-	}
-	
-	//	/**
-	//	 * Creates a {@link Function} that calls {@link #apply(Object, Object)} with the given
-	//	 * parameters on the consumed {@link BiFunction}s.
-	//	 * 
-	//	 * @param parameter1
-	//	 *        the first parameter to be bound
-	//	 * @param parameter2
-	//	 *        the second parameter to be bound
-	//	 * @return the applying {@link Function} with bound parameters
-	//	 */
-	//	public static <T1, T2, R> Function<BiFunction<? super T1, ? super T2, ? extends R>, R> boundApplyingFunction(T1 parameter1,
-	//																												 T2 parameter2)
-	//	{
-	//		return function -> function.apply(parameter1, parameter2);
-	//	}
-	
-	/**
-	 * Converts the given {@link BiFunction} into a {@code Function2} that invokes the given
-	 * function.
-	 * 
-	 * @param function
-	 *        the function to be converted
-	 * @return the function invoking the given function
-	 */
-	public static <T1, T2, R> Function2<T1, T2, R> from(BiFunction<T1, T2, R> function)
-	{
-		return (t1, t2) -> function.apply(t1, t2);
-	}
+    /**
+     * Binds the given parameters to the given {@link BiFunction} returning a new {@link Function0}
+     * that acts as an invocation of the {@link BiFunction} with the given parameters.
+     *
+     * @param parameter1 the first parameter to be bound
+     * @param parameter2 the second parameter to be bound
+     * @return the bound {@link BiFunction} as {@link Function0}
+     */
+    public static <T1, T2, R> Function0<R> bindParameters(BiFunction<? super T1, ? super T2, R> function,
+                                                          T1 parameter1, T2 parameter2)
+    {
+        return () -> function.apply(parameter1, parameter2);
+    }
+
+    /**
+     * Converts the given {@link BiFunction} into a {@code Function2} that invokes the given
+     * function.
+     *
+     * @param function the function to be converted
+     * @return the function invoking the given function
+     */
+    public static <T1, T2, R> Function2<T1, T2, R> from(BiFunction<T1, T2, R> function)
+    {
+        return function::apply;
+    }
+
+    /**
+     * Invoke this {@code Function2} with the given parameter values
+     *
+     * @param parameter1 the first parameter's value for the invocation
+     * @param parameter2 the second parameter's value for the invocation
+     * @return the return value of the invocation
+     */
+    R apply(T1 parameter1, T2 parameter2);
+
+    /**
+     * Binds the given parameters to this {@code Function2} returning a new {@link Function0} that
+     * acts as an invocation of this {@code Function2} with the given parameters.
+     *
+     * @param parameter1 the first parameter to be bound
+     * @param parameter2 the second parameter to be bound
+     * @return the bound {@code Function2} as {@link Function0}
+     */
+    default Function0<R> bindParameters(T1 parameter1, T2 parameter2)
+    {
+        return bindParameters(this, parameter1, parameter2);
+    }
+
+    //	/**
+    //	 * Creates a {@link Function} that calls {@link #apply(Object, Object)} with the given
+    //	 * parameters on the consumed {@link BiFunction}s.
+    //	 *
+    //	 * @param parameter1
+    //	 *        the first parameter to be bound
+    //	 * @param parameter2
+    //	 *        the second parameter to be bound
+    //	 * @return the applying {@link Function} with bound parameters
+    //	 */
+    //	public static <T1, T2, R> Function<BiFunction<? super T1, ? super T2, ? extends R>, R> boundApplyingFunction(T1 parameter1,
+    //																												 T2 parameter2)
+    //	{
+    //		return function -> function.apply(parameter1, parameter2);
+    //	}
+
+    /**
+     * Converts this {@code Function2} into an {@link Action2} ignoring the function's return value.
+     *
+     * @return an {@link Action2} calling this function
+     */
+    default Action2<T1, T2> toAction()
+    {
+        return Action2.from(this);
+    }
 }

@@ -29,87 +29,80 @@ package net.objectzoo.delegates;
  * synchronously similar to a regular Java method call. To enable interoperability with Java 8
  * libraries {@code Function} is replaceable with its super interface
  * {@link java.util.function.Function} in many situations.
- * 
+ *
+ * @param <T> The type of the {@code Function}'s parameter
+ * @param <R> The type of the {@code Function}'s return value
  * @author tilmann
- * 
- * @param <T>
- *        The type of the {@code Function}'s parameter
- * @param <R>
- *        The type of the {@code Function}'s return value
  */
 @FunctionalInterface
 public interface Function<T, R> extends java.util.function.Function<T, R>
 {
-	/**
-	 * Invoke this {@code Function} with the given parameter value
-	 * 
-	 * @param parameter
-	 *        the parameter value for the invocation
-	 * @return the return value of the invocation
-	 */
-	R apply(T parameter);
-	
-	/**
-	 * Binds the given parameter to this {@code Function} returning a new {@link Function0} that
-	 * acts as an invocation of this {@code Function} with the given parameter.
-	 * 
-	 * @param parameter
-	 *        the parameter to be bound
-	 * @return the bound {@code Function} as {@link Function0}
-	 */
-	default Function0<R> bindParameter(T parameter)
-	{
-		return bindParameter(this, parameter);
-	}
-	
-	/**
-	 * Converts this {@code Function} into an {@link Action} ignoring the function's return value.
-	 * 
-	 * @return an {@link Action} calling this function
-	 */
-	default Action<T> toAction()
-	{
-		return Action.from(this);
-	}
-	
-	/**
-	 * Binds the given parameter to the given {@link java.util.function.Function} returning a new
-	 * {@link Function0} that acts as an invocation of the {@link java.util.function.Function} with
-	 * the given parameter.
-	 * 
-	 * @param parameter
-	 *        the parameter to be bound
-	 * @return the bound {@link java.util.function.Function} as {@link Function0}
-	 */
-	public static <T, R> Function0<R> bindParameter(java.util.function.Function<? super T, R> function,
-													T parameter)
-	{
-		return () -> function.apply(parameter);
-	}
-	
-	//	/**
-	//	 * Creates a {@link Function} that calls {@link #apply(Object)} with the given parameter on the
-	//	 * consumed {@link java.util.function.Function}s.
-	//	 * 
-	//	 * @param parameter
-	//	 *        the parameter to be bound
-	//	 * @return the applying {@link Function} with bound parameter
-	//	 */
-	//	public static <T, R> Function<java.util.function.Function<? super T, ? extends R>, R> boundApplyingFunction(T parameter)
-	//	{
-	//		return function -> function.apply(parameter);
-	//	}
-	
-	/**
-	 * Converts the given {@link java.util.function.Function} into a {@code Function} that invokes
-	 * the given function.
-	 * 
-	 * @param function
-	 *        the function to be converted
-	 * @return the function invoking the given function
-	 */
-	public static <T, R> Function<T, R> from(java.util.function.Function<T, R> function)
-	{
-		return t -> function.apply(t);
-	}
+    /**
+     * Binds the given parameter to the given {@link java.util.function.Function} returning a new
+     * {@link Function0} that acts as an invocation of the {@link java.util.function.Function} with
+     * the given parameter.
+     *
+     * @param parameter the parameter to be bound
+     * @return the bound {@link java.util.function.Function} as {@link Function0}
+     */
+    public static <T, R> Function0<R> bindParameter(java.util.function.Function<? super T, R> function,
+                                                    T parameter)
+    {
+        return () -> function.apply(parameter);
+    }
+
+    /**
+     * Converts the given {@link java.util.function.Function} into a {@code Function} that invokes
+     * the given function.
+     *
+     * @param function the function to be converted
+     * @return the function invoking the given function
+     */
+    public static <T, R> Function<T, R> from(java.util.function.Function<T, R> function)
+    {
+        return function::apply;
+    }
+
+    /**
+     * Invoke this {@code Function} with the given parameter value
+     *
+     * @param parameter the parameter value for the invocation
+     * @return the return value of the invocation
+     */
+    R apply(T parameter);
+
+    /**
+     * Binds the given parameter to this {@code Function} returning a new {@link Function0} that
+     * acts as an invocation of this {@code Function} with the given parameter.
+     *
+     * @param parameter the parameter to be bound
+     * @return the bound {@code Function} as {@link Function0}
+     */
+    default Function0<R> bindParameter(T parameter)
+    {
+        return bindParameter(this, parameter);
+    }
+
+    //	/**
+    //	 * Creates a {@link Function} that calls {@link #apply(Object)} with the given parameter on the
+    //	 * consumed {@link java.util.function.Function}s.
+    //	 *
+    //	 * @param parameter
+    //	 *        the parameter to be bound
+    //	 * @return the applying {@link Function} with bound parameter
+    //	 */
+    //	public static <T, R> Function<java.util.function.Function<? super T, ? extends R>, R> boundApplyingFunction(T parameter)
+    //	{
+    //		return function -> function.apply(parameter);
+    //	}
+
+    /**
+     * Converts this {@code Function} into an {@link Action} ignoring the function's return value.
+     *
+     * @return an {@link Action} calling this function
+     */
+    default Action<T> toAction()
+    {
+        return Action.from(this);
+    }
 }

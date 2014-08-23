@@ -75,7 +75,7 @@ public interface Function0<R> extends Supplier<R>
 	 */
 	public static <R> Callable<R> toCallable(Supplier<R> supplier)
 	{
-		return () -> supplier.get();
+		return supplier::get;
 	}
 	
 	//	/**
@@ -97,6 +97,6 @@ public interface Function0<R> extends Supplier<R>
 	 */
 	public static <R> Function0<R> from(Supplier<R> supplier)
 	{
-		return () -> supplier.get();
+		return supplier::get;
 	}
 }

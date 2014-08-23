@@ -30,60 +30,57 @@ import java.util.function.Supplier;
 /**
  * An {@code Action0} is a reference to a procedure without return value that can be invoked
  * synchronously similar to a regular Java method call.
- * 
+ *
  * @author tilmann
- * 
  */
 @FunctionalInterface
 public interface Action0
 {
-	/**
-	 * Invoke this {@code Action0}
-	 */
-	void start();
-	
-	/**
-	 * Wraps this {@code Action0} in a {@link Runnable}
-	 * 
-	 * @return the {@link Runnable} that executes this {@code Action0}
-	 */
-	default Runnable toRunnable()
-	{
-		return toRunnable(this);
-	}
-	
-	/**
-	 * Wraps the given {@code Action0} in a {@link Runnable}
-	 * 
-	 * @param action0
-	 *        the {@code Action0} to wrap
-	 * @return the {@link Runnable} that executes the {@code Action0}
-	 */
-	public static Runnable toRunnable(Action0 action0)
-	{
-		return () -> action0.start();
-	}
-	
-	/**
-	 * Creates a {@link Consumer} that calls {@link #start()} on the consumed {@code Action0}s.
-	 * 
-	 * @return the starting {@link Consumer}
-	 */
-	public static Consumer<Action0> startingConsumer()
-	{
-		return action0 -> action0.start();
-	}
-	
-	/**
-	 * Converts the given {@link Supplier} into an {@code Action0} that invokes the supplier and
-	 * then ignores its return value.
-	 * 
-	 * @param supplier
-	 *        the supplier to be converted
-	 * @return the action invoking the supplier
-	 */
-	public static Action0 from(Supplier<?> supplier)
-	{
-		return () -> supplier.get();
-	}
+    /**
+     * Wraps the given {@code Action0} in a {@link Runnable}
+     *
+     * @param action0 the {@code Action0} to wrap
+     * @return the {@link Runnable} that executes the {@code Action0}
+     */
+    public static Runnable toRunnable(Action0 action0)
+    {
+        return action0::start;
+    }
+
+    /**
+     * Creates a {@link Consumer} that calls {@link #start()} on the consumed {@code Action0}s.
+     *
+     * @return the starting {@link Consumer}
+     */
+    public static Consumer<Action0> startingConsumer()
+    {
+        return Action0::start;
+    }
+
+    /**
+     * Converts the given {@link Supplier} into an {@code Action0} that invokes the supplier and
+     * then ignores its return value.
+     *
+     * @param supplier the supplier to be converted
+     * @return the action invoking the supplier
+     */
+    public static Action0 from(Supplier<?> supplier)
+    {
+        return supplier::get;
+    }
+
+    /**
+     * Invoke this {@code Action0}
+     */
+    void start();
+
+    /**
+     * Wraps this {@code Action0} in a {@link Runnable}
+     *
+     * @return the {@link Runnable} that executes this {@code Action0}
+     */
+    default Runnable toRunnable()
+    {
+        return toRunnable(this);
+    }
 }

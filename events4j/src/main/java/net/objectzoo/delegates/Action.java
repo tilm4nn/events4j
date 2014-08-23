@@ -31,84 +31,76 @@ import java.util.function.Consumer;
  * synchronously similar to a regular Java method call. To enable interoperability with Java 8
  * libraries {@code Action} is replaceable with its super interface {@link Consumer} in many
  * situations.
- * 
+ *
+ * @param <T> The type of the {@code Action}'s parameter
  * @author tilmann
- * 
- * @param <T>
- *        The type of the {@code Action}'s parameter
  */
 @FunctionalInterface
 public interface Action<T> extends Consumer<T>
 {
-	/**
-	 * Invoke this {@code Action} with the given parameter value
-	 * 
-	 * @param parameter
-	 *        the parameter value for the invocation
-	 */
-	void accept(T parameter);
-	
-	/**
-	 * Binds the given parameter to this {@code Action} returning a new {@link Action0} that acts as
-	 * an invocation of this {@code Action} with the given parameter.
-	 * 
-	 * @param parameter
-	 *        the parameter to be bound
-	 * @return the bound {@code Action} as {@link Action0}
-	 */
-	default Action0 bindParameter(T parameter)
-	{
-		return bindParameter(this, parameter);
-	}
-	
-	/**
-	 * Binds the given parameter to the given {@link Consumer} returning a new {@link Action0} that
-	 * acts as an invocation of the {@link Consumer} with the given parameter.
-	 * 
-	 * @param parameter
-	 *        the parameter to be bound
-	 * @return the bound {@link Consumer} as {@link Action0}
-	 */
-	public static <T> Action0 bindParameter(Consumer<? super T> action, T parameter)
-	{
-		return () -> action.accept(parameter);
-	}
-	
-	/**
-	 * Creates a {@link Consumer} that calls {@link #accept(Object)} with the given parameter on the
-	 * consumed {@link Consumer}s.
-	 * 
-	 * @param parameter
-	 *        the parameter to be bound
-	 * @return the accepting {@link Consumer} with bound parameter
-	 */
-	public static <T> Consumer<Consumer<? super T>> boundAcceptingConsumer(T parameter)
-	{
-		return action -> action.accept(parameter);
-	}
-	
-	/**
-	 * Converts the given {@link Consumer} into an {@code Action} that invokes the consumer.
-	 * 
-	 * @param consumer
-	 *        the consumer to be converted
-	 * @return the action invoking the consumer
-	 */
-	public static <T> Action<T> from(Consumer<T> consumer)
-	{
-		return t -> consumer.accept(t);
-	}
-	
-	/**
-	 * Converts the given {@link java.util.function.Function} into an {@code Action} that invokes
-	 * the function and then ignores its return value.
-	 * 
-	 * @param function
-	 *        the function to be converted
-	 * @return the action invoking the function
-	 */
-	public static <T> Action<T> from(java.util.function.Function<T, ?> function)
-	{
-		return t -> function.apply(t);
-	}
+    /**
+     * Binds the given parameter to the given {@link Consumer} returning a new {@link Action0} that
+     * acts as an invocation of the {@link Consumer} with the given parameter.
+     *
+     * @param parameter the parameter to be bound
+     * @return the bound {@link Consumer} as {@link Action0}
+     */
+    public static <T> Action0 bindParameter(Consumer<? super T> action, T parameter)
+    {
+        return () -> action.accept(parameter);
+    }
+
+    /**
+     * Creates a {@link Consumer} that calls {@link #accept(Object)} with the given parameter on the
+     * consumed {@link Consumer}s.
+     *
+     * @param parameter the parameter to be bound
+     * @return the accepting {@link Consumer} with bound parameter
+     */
+    public static <T> Consumer<Consumer<? super T>> boundAcceptingConsumer(T parameter)
+    {
+        return action -> action.accept(parameter);
+    }
+
+    /**
+     * Converts the given {@link Consumer} into an {@code Action} that invokes the consumer.
+     *
+     * @param consumer the consumer to be converted
+     * @return the action invoking the consumer
+     */
+    public static <T> Action<T> from(Consumer<T> consumer)
+    {
+        return consumer::accept;
+    }
+
+    /**
+     * Converts the given {@link java.util.function.Function} into an {@code Action} that invokes
+     * the function and then ignores its return value.
+     *
+     * @param function the function to be converted
+     * @return the action invoking the function
+     */
+    public static <T> Action<T> from(java.util.function.Function<T, ?> function)
+    {
+        return function::apply;
+    }
+
+    /**
+     * Invoke this {@code Action} with the given parameter value
+     *
+     * @param parameter the parameter value for the invocation
+     */
+    void accept(T parameter);
+
+    /**
+     * Binds the given parameter to this {@code Action} returning a new {@link Action0} that acts as
+     * an invocation of this {@code Action} with the given parameter.
+     *
+     * @param parameter the parameter to be bound
+     * @return the bound {@code Action} as {@link Action0}
+     */
+    default Action0 bindParameter(T parameter)
+    {
+        return bindParameter(this, parameter);
+    }
 }
