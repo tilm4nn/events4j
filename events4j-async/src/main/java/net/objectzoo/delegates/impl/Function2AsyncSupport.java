@@ -26,19 +26,19 @@
  */
 package net.objectzoo.delegates.impl;
 
-import net.objectzoo.delegates.Action;
-import net.objectzoo.delegates.ActionAsync;
-import net.objectzoo.delegates.ActionAsyncResult;
-import net.objectzoo.delegates.adapters.ActionToActionAsync;
+import net.objectzoo.delegates.Function2;
+import net.objectzoo.delegates.Function2Async;
+import net.objectzoo.delegates.FunctionAsyncResult;
+import net.objectzoo.delegates.adapters.Function2ToFunction2Async;
 
 import java.util.concurrent.Executor;
 import java.util.function.Consumer;
 
 /**
- * This is an abstract support class that can be used to quickly implement asynchronous actions.
+ * This is an abstract support class that can be used to quickly implement asynchronous functions.
  * <p>
  * All asynchronous calls are executed in another thread and forwarded to the
- * {@link Action#accept(Object)} method.
+ * {@link Function2#apply(Object, Object)} method.
  * <p>
  * The {@link Executor} to use for the asynchronous invocations can be chosen during creation of
  * {@code ActionAsyncSupport} instances. If no explicit executor is given the a default executor is
@@ -46,44 +46,47 @@ import java.util.function.Consumer;
  * {@link AsyncExecutor#setDefaultExecutor(Executor)} property or is created automatically by the
  * {@link AsyncExecutor}.
  *
- * @param <T> The type of the {@code ActionAsync}'s parameter
+ * @param <T1> The type of the {@code FuncAsync}'s first parameter
+ * @param <T2> The type of the {@code FuncAsync}'s second parameter
+ * @param <R>  The type of the functions result
  * @author tilmann
  */
-public abstract class ActionAsyncSupport<T> implements Action<T>, ActionAsync<T>
+public abstract class Function2AsyncSupport<T1, T2, R> implements Function2<T1, T2, R>,
+    Function2Async<T1, T2, R>
 {
-    private final ActionAsync<T> asyncDelegate;
+    private final Function2Async<T1, T2, R> asyncDelegate;
 
     /**
-     * Creates a new {@code ActionAsyncSupport} that uses the default executor
+     * Creates a new {@code Function2AsyncSupport} that uses the default executor
      */
-    public ActionAsyncSupport()
+    public Function2AsyncSupport()
     {
         this(null);
     }
 
     /**
-     * Create a new {@code ActionAsyncSupport} that uses the given executor
+     * Create a new {@code Function2AsyncSupport} that uses the given executor
      *
      * @param executor the {@link Executor} to use for asynchronous invocations
      */
-    public ActionAsyncSupport(Executor executor)
+    public Function2AsyncSupport(Executor executor)
     {
-        asyncDelegate = new ActionToActionAsync<>(this, executor);
+        asyncDelegate = new Function2ToFunction2Async<>(this, executor);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public abstract void accept(T parameter);
+    public abstract R apply(T1 parameter1, T2 parameter2);
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public ActionAsyncResult beginAccept(Consumer<ActionAsyncResult> callback, Object asyncState,
-                                         T parameter)
+    public FunctionAsyncResult<R> beginApply(Consumer<? super FunctionAsyncResult<R>> callback,
+                                             Object asyncState, T1 parameter1, T2 parameter2)
     {
-        return asyncDelegate.beginAccept(callback, asyncState, parameter);
+        return asyncDelegate.beginApply(callback, asyncState, parameter1, parameter2);
     }
 }

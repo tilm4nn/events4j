@@ -26,19 +26,19 @@
  */
 package net.objectzoo.delegates.impl;
 
-import net.objectzoo.delegates.Action;
-import net.objectzoo.delegates.ActionAsync;
-import net.objectzoo.delegates.ActionAsyncResult;
-import net.objectzoo.delegates.adapters.ActionToActionAsync;
+import net.objectzoo.delegates.Function0;
+import net.objectzoo.delegates.Function0Async;
+import net.objectzoo.delegates.FunctionAsyncResult;
+import net.objectzoo.delegates.adapters.Function0ToFunction0Async;
 
 import java.util.concurrent.Executor;
 import java.util.function.Consumer;
 
 /**
- * This is an abstract support class that can be used to quickly implement asynchronous actions.
+ * This is an abstract support class that can be used to quickly implement asynchronous functions.
  * <p>
  * All asynchronous calls are executed in another thread and forwarded to the
- * {@link Action#accept(Object)} method.
+ * {@link Function0#get()} method.
  * <p>
  * The {@link Executor} to use for the asynchronous invocations can be chosen during creation of
  * {@code ActionAsyncSupport} instances. If no explicit executor is given the a default executor is
@@ -46,44 +46,44 @@ import java.util.function.Consumer;
  * {@link AsyncExecutor#setDefaultExecutor(Executor)} property or is created automatically by the
  * {@link AsyncExecutor}.
  *
- * @param <T> The type of the {@code ActionAsync}'s parameter
+ * @param <R> The type of the functions result
  * @author tilmann
  */
-public abstract class ActionAsyncSupport<T> implements Action<T>, ActionAsync<T>
+public abstract class Function0AsyncSupport<R> implements Function0<R>, Function0Async<R>
 {
-    private final ActionAsync<T> asyncDelegate;
+    private final Function0Async<R> asyncDelegate;
 
     /**
-     * Creates a new {@code ActionAsyncSupport} that uses the default executor
+     * Creates a new {@code Function0AsyncSupport} that uses the default executor
      */
-    public ActionAsyncSupport()
+    public Function0AsyncSupport()
     {
         this(null);
     }
 
     /**
-     * Create a new {@code ActionAsyncSupport} that uses the given executor
+     * Create a new {@code Function0AsyncSupport} that uses the given executor
      *
      * @param executor the {@link Executor} to use for asynchronous invocations
      */
-    public ActionAsyncSupport(Executor executor)
+    public Function0AsyncSupport(Executor executor)
     {
-        asyncDelegate = new ActionToActionAsync<>(this, executor);
+        asyncDelegate = new Function0ToFunction0Async<>(this, executor);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public abstract void accept(T parameter);
+    public abstract R get();
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public ActionAsyncResult beginAccept(Consumer<ActionAsyncResult> callback, Object asyncState,
-                                         T parameter)
+    public FunctionAsyncResult<R> beginGet(Consumer<? super FunctionAsyncResult<R>> callback,
+                                           Object asyncState)
     {
-        return asyncDelegate.beginAccept(callback, asyncState, parameter);
+        return asyncDelegate.beginGet(callback, asyncState);
     }
 }
