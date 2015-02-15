@@ -24,14 +24,14 @@
  */
 package net.objectzoo.events.impl;
 
-import java.util.concurrent.Executor;
-import java.util.function.Consumer;
-
 import net.objectzoo.delegates.Action0;
 import net.objectzoo.delegates.Action0Async;
 import net.objectzoo.delegates.ActionAsyncResult;
 import net.objectzoo.delegates.adapters.Action0ToAction0Async;
 import net.objectzoo.delegates.impl.AsyncExecutor;
+
+import java.util.concurrent.Executor;
+import java.util.function.Consumer;
 
 /**
  * The {@code Event0AsyncAdapter} is class that adapts an {@link Event0Delegate} to
@@ -88,10 +88,10 @@ public class Event0AsyncAdapter implements Event0AsyncDelegate
 	 * the order they have been subscribed.
 	 * 
 	 * @param callback
-	 *        the {@link ActionAsyncCallback}, if given to {@code beginInvoke}, is invoked upon
-	 *        completion of invocation of all event subscribers and receives the same
-	 *        {@link ActionAsyncResult} that is returned by the call to {@code beginInvoke}.
-	 * @param asyncState
+     *        the {@link Consumer}, if given to {@code beginInvoke}, is invoked upon
+     *        completion of invocation of all event subscribers and receives the same
+     *        {@link ActionAsyncResult} that is returned by the call to {@code beginInvoke}.
+     * @param asyncState
 	 *        the asyncState is an arbitrary reference that, if given to {@code beginInvoke}, can be
 	 *        retrieved from this invocations {@link ActionAsyncResult#getAsyncState()}
 	 * @return the {@link ActionAsyncResult} associated with this asynchronous invocation

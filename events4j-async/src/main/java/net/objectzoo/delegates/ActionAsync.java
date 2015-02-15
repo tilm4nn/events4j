@@ -47,6 +47,8 @@ public interface ActionAsync<T>
      * executor. Conversion is done using the adapter {@link ActionToActionAsync}.
      *
      * @param action the action to be converted
+     * @param <T>    The type of the {@code Consumer}'s parameter
+     * @return the converted action
      */
     public static <T> ActionAsync<T> from(Consumer<T> action)
     {
@@ -59,7 +61,9 @@ public interface ActionAsync<T>
      * {@link ActionToActionAsync}.
      *
      * @param action   the action to be converted
+     * @param <T>      The type of the {@code Consumer}'s parameter
      * @param executor the executor used for the asynchronous calls
+     * @return the converted action
      */
     public static <T> ActionAsync<T> from(Consumer<T> action, Executor executor)
     {

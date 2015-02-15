@@ -51,6 +51,12 @@ public interface Function4Async<T1, T2, T3, T4, R>
      * default executor. Conversion is done using the adapter {@link Function4ToFunction4Async}.
      *
      * @param function the function to be converted
+     * @param <T1>     The type of the {@code Function4}'s first parameter
+     * @param <T2>     The type of the {@code Function4}'s second parameter
+     * @param <T3>     The type of the {@code Function4}'s third parameter
+     * @param <T4>     The type of the {@code Function4}'s fourth parameter
+     * @param <R>      The type of the {@code Function4}'s return value
+     * @return the converted function
      */
     public static <T1, T2, T3, T4, R> Function4Async<T1, T2, T3, T4, R> from(Function4<T1, T2, T3, T4, R> function)
     {
@@ -63,7 +69,13 @@ public interface Function4Async<T1, T2, T3, T4, R>
      * {@link Function4ToFunction4Async}.
      *
      * @param function the action to be converted
+     * @param <T1>     The type of the {@code Function4}'s first parameter
+     * @param <T2>     The type of the {@code Function4}'s second parameter
+     * @param <T3>     The type of the {@code Function4}'s third parameter
+     * @param <T4>     The type of the {@code Function4}'s fourth parameter
+     * @param <R>      The type of the {@code Function4}'s return value
      * @param executor the executor used for the asynchronous calls
+     * @return the converted function
      */
     public static <T1, T2, T3, T4, R> Function4Async<T1, T2, T3, T4, R> from(Function4<T1, T2, T3, T4, R> function,
                                                                              Executor executor)

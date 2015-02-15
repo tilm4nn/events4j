@@ -24,14 +24,14 @@
  */
 package net.objectzoo.events.impl;
 
-import java.util.concurrent.Executor;
-import java.util.function.BiConsumer;
-import java.util.function.Consumer;
-
 import net.objectzoo.delegates.Action2Async;
 import net.objectzoo.delegates.ActionAsyncResult;
 import net.objectzoo.delegates.adapters.Action2ToAction2Async;
 import net.objectzoo.delegates.impl.AsyncExecutor;
+
+import java.util.concurrent.Executor;
+import java.util.function.BiConsumer;
+import java.util.function.Consumer;
 
 /**
  * The {@code Event2AsyncAdapter} is class that adapts an {@link Event2Delegate} to
@@ -85,18 +85,18 @@ public class Event2AsyncAdapter<T1, T2> implements Event2AsyncDelegate<T1, T2>
 		throws IllegalArgumentException
 	{
 		this.delegate = delegate;
-		asyncDelegate = new Action2ToAction2Async<T1, T2>(delegate, executor);
-	}
-	
-	/**
-	 * This {@code beginInvoke} implementation invokes all event subscribers in another thread in
+        asyncDelegate = new Action2ToAction2Async<>(delegate, executor);
+    }
+
+    /**
+     * This {@code beginInvoke} implementation invokes all event subscribers in another thread in
 	 * the order they have been subscribed.
 	 * 
 	 * @param callback
-	 *        the {@link ActionAsyncCallback}, if given to {@code beginInvoke}, is invoked upon
-	 *        completion of invocation of all event subscribers and receives the same
-	 *        {@link ActionAsyncResult} that is returned by the call to {@code beginInvoke}.
-	 * @param asyncState
+     *        the {@link Consumer}, if given to {@code beginInvoke}, is invoked upon
+     *        completion of invocation of all event subscribers and receives the same
+     *        {@link ActionAsyncResult} that is returned by the call to {@code beginInvoke}.
+     * @param asyncState
 	 *        the asyncState is an arbitrary reference that, if given to {@code beginInvoke}, can be
 	 *        retrieved from this invocations {@link ActionAsyncResult#getAsyncState()}
 	 * @param parameter1

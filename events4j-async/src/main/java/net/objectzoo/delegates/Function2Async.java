@@ -50,6 +50,10 @@ public interface Function2Async<T1, T2, R>
      * default executor. Conversion is done using the adapter {@link Function2ToFunction2Async}.
      *
      * @param function the function to be converted
+     * @param <T1>     The type of the {@code BiFunction}'s first parameter
+     * @param <T2>     The type of the {@code BiFunction}'s second parameter
+     * @param <R>      The type of the {@code BiFunction}'s return value
+     * @return the converted function
      */
     public static <T1, T2, R> Function2Async<T1, T2, R> from(BiFunction<T1, T2, R> function)
     {
@@ -62,7 +66,11 @@ public interface Function2Async<T1, T2, R>
      * {@link Function2ToFunction2Async}.
      *
      * @param function the action to be converted
+     * @param <T1>     The type of the {@code BiFunction}'s first parameter
+     * @param <T2>     The type of the {@code BiFunction}'s second parameter
+     * @param <R>      The type of the {@code BiFunction}'s return value
      * @param executor the executor used for the asynchronous calls
+     * @return the converted function
      */
     public static <T1, T2, R> Function2Async<T1, T2, R> from(BiFunction<T1, T2, R> function,
                                                              Executor executor)

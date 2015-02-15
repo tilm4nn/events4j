@@ -42,12 +42,14 @@ public interface Action<T> extends Consumer<T>
      * Binds the given parameter to the given {@link Consumer} returning a new {@link Action0} that
      * acts as an invocation of the {@link Consumer} with the given parameter.
      *
+     * @param consumer  the {@code Consumer} to be bound
      * @param parameter the parameter to be bound
+     * @param <T>       The type of the {@code Consumer}'s parameter
      * @return the bound {@link Consumer} as {@link Action0}
      */
-    public static <T> Action0 bindParameter(Consumer<? super T> action, T parameter)
+    public static <T> Action0 bindParameter(Consumer<? super T> consumer, T parameter)
     {
-        return () -> action.accept(parameter);
+        return () -> consumer.accept(parameter);
     }
 
     /**
@@ -55,17 +57,19 @@ public interface Action<T> extends Consumer<T>
      * consumed {@link Consumer}s.
      *
      * @param parameter the parameter to be bound
+     * @param <T>       The type of the {@code Consumer}'s parameter
      * @return the accepting {@link Consumer} with bound parameter
      */
     public static <T> Consumer<Consumer<? super T>> boundAcceptingConsumer(T parameter)
     {
-        return action -> action.accept(parameter);
+        return consumer -> consumer.accept(parameter);
     }
 
     /**
      * Converts the given {@link Consumer} into an {@code Action} that invokes the consumer.
      *
      * @param consumer the consumer to be converted
+     * @param <T>      The type of the {@code Consumer}'s parameter
      * @return the action invoking the consumer
      */
     public static <T> Action<T> from(Consumer<T> consumer)
@@ -78,6 +82,7 @@ public interface Action<T> extends Consumer<T>
      * the function and then ignores its return value.
      *
      * @param function the function to be converted
+     * @param <T>      The type of the {@code Function}'s parameter
      * @return the action invoking the function
      */
     public static <T> Action<T> from(java.util.function.Function<T, ?> function)

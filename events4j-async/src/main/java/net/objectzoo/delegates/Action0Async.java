@@ -46,6 +46,7 @@ public interface Action0Async
      * executor. Conversion is done using the adapter {@link Action0ToAction0Async}.
      *
      * @param action the action to be converted
+     * @return the converted action
      */
     public static Action0Async from(Action0 action)
     {
@@ -59,6 +60,7 @@ public interface Action0Async
      *
      * @param action   the action to be converted
      * @param executor the executor used for the asynchronous calls
+     * @return the converted action
      */
     public static Action0Async from(Action0 action, Executor executor)
     {

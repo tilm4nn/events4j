@@ -49,6 +49,9 @@ public interface FunctionAsync<T, R>
      * executor. Conversion is done using the adapter {@link FunctionToFunctionAsync}.
      *
      * @param function the function to be converted
+     * @param <T>      The type of the {@code Function}'s parameter
+     * @param <R>      The type of the {@code Function}'s return value
+     * @return the converted function
      */
     public static <T, R> FunctionAsync<T, R> from(Function<T, R> function)
     {
@@ -61,7 +64,10 @@ public interface FunctionAsync<T, R>
      * {@link FunctionToFunctionAsync}.
      *
      * @param function the action to be converted
+     * @param <T>      The type of the {@code Function}'s parameter
+     * @param <R>      The type of the {@code Function}'s return value
      * @param executor the executor used for the asynchronous calls
+     * @return the converted function
      */
     public static <T, R> FunctionAsync<T, R> from(Function<T, R> function, Executor executor)
     {

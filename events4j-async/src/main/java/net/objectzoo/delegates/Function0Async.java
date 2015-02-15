@@ -48,6 +48,8 @@ public interface Function0Async<R>
      * executor. Conversion is done using the adapter {@link Function0ToFunction0Async}.
      *
      * @param function the function to be converted
+     * @param <R>      The type of the {@code Supplier}'s return value
+     * @return the converted function
      */
     public static <R> Function0Async<R> from(Supplier<R> function)
     {
@@ -60,7 +62,9 @@ public interface Function0Async<R>
      * {@link Function0ToFunction0Async}.
      *
      * @param function the action to be converted
+     * @param <R>      The type of the {@code Supplier}'s return value
      * @param executor the executor used for the asynchronous calls
+     * @return the converted function
      */
     public static <R> Function0Async<R> from(Supplier<R> function, Executor executor)
     {

@@ -49,6 +49,9 @@ public interface Action2Async<T1, T2>
      * executor. Conversion is done using the adapter {@link Action2ToAction2Async}.
      *
      * @param action the action to be converted
+     * @param <T1>   The type of the {@code BiConsumer}'s first parameter
+     * @param <T2>   The type of the {@code BiConsumer}'s second parameter
+     * @return the converted action
      */
     public static <T1, T2> Action2Async<T1, T2> from(BiConsumer<T1, T2> action)
     {
@@ -61,7 +64,10 @@ public interface Action2Async<T1, T2>
      * {@link Action2ToAction2Async}.
      *
      * @param action   the action to be converted
+     * @param <T1>     The type of the {@code BiConsumer}'s first parameter
+     * @param <T2>     The type of the {@code BiConsumer}'s second parameter
      * @param executor the executor used for the asynchronous calls
+     * @return the converted action
      */
     public static <T1, T2> Action2Async<T1, T2> from(BiConsumer<T1, T2> action, Executor executor)
     {

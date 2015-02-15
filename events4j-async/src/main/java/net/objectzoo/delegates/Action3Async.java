@@ -49,6 +49,10 @@ public interface Action3Async<T1, T2, T3>
      * executor. Conversion is done using the adapter {@link Action3ToAction3Async}.
      *
      * @param action the action to be converted
+     * @param <T1>   The type of the {@code Action3}'s first parameter
+     * @param <T2>   The type of the {@code Action3}'s second parameter
+     * @param <T3>   The type of the {@code Action3}'s third parameter
+     * @return the converted action
      */
     public static <T1, T2, T3> Action3Async<T1, T2, T3> from(Action3<T1, T2, T3> action)
     {
@@ -61,7 +65,11 @@ public interface Action3Async<T1, T2, T3>
      * {@link Action3ToAction3Async}.
      *
      * @param action   the action to be converted
+     * @param <T1>     The type of the {@code Action3}'s first parameter
+     * @param <T2>     The type of the {@code Action3}'s second parameter
+     * @param <T3>     The type of the {@code Action3}'s third parameter
      * @param executor the executor used for the asynchronous calls
+     * @return the converted action
      */
     public static <T1, T2, T3> Action3Async<T1, T2, T3> from(Action3<T1, T2, T3> action,
                                                              Executor executor)

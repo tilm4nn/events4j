@@ -84,7 +84,6 @@ public interface FunctionAsyncResult<R> extends ActionAsyncResult
      * determines whether the thread executing this {@code FunctionAsync} should be interrupted in an
      * attempt to stop the {@code FunctionAsync}.
      * <p>
-     * <p>
      * After this method returns, subsequent calls to {@link #isDone} will always return
      * {@code true}. Subsequent calls to {@link #isCancelled} will always return {@code true} if
      * this method returned {@code true}.

@@ -42,9 +42,13 @@ public interface Action3<T1, T2, T3>
      * Binds the given parameters to the given {@code Action3} returning a new {@link Action0} that
      * acts as an invocation of the {@code Action3} with the given parameters.
      *
+     * @param action the {@code Action3} to be bound
      * @param parameter1 the first parameter to be bound
      * @param parameter2 the second parameter to be bound
      * @param parameter3 the third parameter to be bound
+     * @param <T1>       The type of the {@code Action3}'s first parameter
+     * @param <T2>       The type of the {@code Action3}'s second parameter
+     * @param <T3>       The type of the {@code Action3}'s third parameter
      * @return the bound {@code Action3} as {@link Action0}
      */
     public static <T1, T2, T3> Action0 bindParameters(Action3<? super T1, ? super T2, ? super T3> action,
@@ -60,6 +64,9 @@ public interface Action3<T1, T2, T3>
      * @param parameter1 the first parameter to be bound
      * @param parameter2 the second parameter to be bound
      * @param parameter3 the third parameter to be bound
+     * @param <T1>       The type of the {@code Action3}'s first parameter
+     * @param <T2>       The type of the {@code Action3}'s second parameter
+     * @param <T3>       The type of the {@code Action3}'s third parameter
      * @return the accepting {@link Consumer} with bound parameters
      */
     public static <T1, T2, T3> Consumer<Action3<? super T1, ? super T2, ? super T3>> boundAcceptingConsumer(
@@ -75,6 +82,9 @@ public interface Action3<T1, T2, T3>
      * then ignores its return value.
      *
      * @param function the function to be converted
+     * @param <T1>     The type of the {@code Function3}'s first parameter
+     * @param <T2>     The type of the {@code Function3}'s second parameter
+     * @param <T3>     The type of the {@code Function3}'s third parameter
      * @return the action invoking the function
      */
     public static <T1, T2, T3> Action3<T1, T2, T3> from(Function3<T1, T2, T3, ?> function)

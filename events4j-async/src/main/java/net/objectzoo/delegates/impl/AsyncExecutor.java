@@ -60,6 +60,7 @@ import java.util.function.Supplier;
 public class AsyncExecutor
 {
     private static volatile Executor defaultExecutor;
+
     private final Executor executor;
 
     /**

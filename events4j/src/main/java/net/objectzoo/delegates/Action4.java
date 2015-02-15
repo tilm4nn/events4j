@@ -43,10 +43,15 @@ public interface Action4<T1, T2, T3, T4>
      * Binds the given parameters to the given {@code Action4} returning a new {@link Action0} that
      * acts as an invocation of the {@code Action4} with the given parameters.
      *
+     * @param action     the {@code Action4} to be bound
      * @param parameter1 the first parameter to be bound
      * @param parameter2 the second parameter to be bound
      * @param parameter3 the third parameter to be bound
      * @param parameter4 the fourth parameter to be bound
+     * @param <T1>       The type of the {@code Action4}'s first parameter
+     * @param <T2>       The type of the {@code Action4}'s second parameter
+     * @param <T3>       The type of the {@code Action4}'s third parameter
+     * @param <T4>       The type of the {@code Action4}'s fourth parameter
      * @return the bound {@code Action4} as {@link Action0}
      */
     public static <T1, T2, T3, T4> Action0 bindParameters(
@@ -65,6 +70,10 @@ public interface Action4<T1, T2, T3, T4>
      * @param parameter2 the second parameter to be bound
      * @param parameter3 the third parameter to be bound
      * @param parameter4 the fourth parameter to be bound
+     * @param <T1>       The type of the {@code Action4}'s first parameter
+     * @param <T2>       The type of the {@code Action4}'s second parameter
+     * @param <T3>       The type of the {@code Action4}'s third parameter
+     * @param <T4>       The type of the {@code Action4}'s fourth parameter
      * @return the accepting {@link Consumer} with bound parameters
      */
     public static <T1, T2, T3, T4> Consumer<Action4<? super T1, ? super T2, ? super T3, ? super T4>> boundAcceptingConsumer(
@@ -81,6 +90,10 @@ public interface Action4<T1, T2, T3, T4>
      * then ignores its return value.
      *
      * @param function the function to be converted
+     * @param <T1>     The type of the {@code Function4}'s first parameter
+     * @param <T2>     The type of the {@code Function4}'s second parameter
+     * @param <T3>     The type of the {@code Function4}'s third parameter
+     * @param <T4>     The type of the {@code Function4}'s fourth parameter
      * @return the action invoking the function
      */
     public static <T1, T2, T3, T4> Action4<T1, T2, T3, T4> from(Function4<T1, T2, T3, T4, ?> function)

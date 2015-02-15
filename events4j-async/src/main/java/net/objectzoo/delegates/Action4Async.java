@@ -50,6 +50,11 @@ public interface Action4Async<T1, T2, T3, T4>
      * executor. Conversion is done using the adapter {@link Action4ToAction4Async}.
      *
      * @param action the action to be converted
+     * @param <T1> The type of the {@code Action4}'s first parameter
+     * @param <T2> The type of the {@code Action4}'s second parameter
+     * @param <T3> The type of the {@code Action4}'s third parameter
+     * @param <T4> The type of the {@code Action4}'s fourth parameter
+     * @return the converted action
      */
     public static <T1, T2, T3, T4> Action4Async<T1, T2, T3, T4> from(Action4<T1, T2, T3, T4> action)
     {
@@ -62,7 +67,12 @@ public interface Action4Async<T1, T2, T3, T4>
      * {@link Action4ToAction4Async}.
      *
      * @param action   the action to be converted
+     * @param <T1> The type of the {@code Action4}'s first parameter
+     * @param <T2> The type of the {@code Action4}'s second parameter
+     * @param <T3> The type of the {@code Action4}'s third parameter
+     * @param <T4> The type of the {@code Action4}'s fourth parameter
      * @param executor the executor used for the asynchronous calls
+     * @return the converted action
      */
     public static <T1, T2, T3, T4> Action4Async<T1, T2, T3, T4> from(Action4<T1, T2, T3, T4> action,
                                                                      Executor executor)

@@ -50,6 +50,11 @@ public interface Function3Async<T1, T2, T3, R>
      * default executor. Conversion is done using the adapter {@link Function3ToFunction3Async}.
      *
      * @param function the function to be converted
+     * @param <T1> The type of the {@code Function3}'s first parameter
+     * @param <T2> The type of the {@code Function3}'s second parameter
+     * @param <T3> The type of the {@code Function3}'s third parameter
+     * @param <R>  The type of the {@code Function3}'s return value
+     * @return the converted function
      */
     public static <T1, T2, T3, R> Function3Async<T1, T2, T3, R> from(Function3<T1, T2, T3, R> function)
     {
@@ -62,7 +67,12 @@ public interface Function3Async<T1, T2, T3, R>
      * {@link Function3ToFunction3Async}.
      *
      * @param function the action to be converted
+     * @param <T1> The type of the {@code Function3}'s first parameter
+     * @param <T2> The type of the {@code Function3}'s second parameter
+     * @param <T3> The type of the {@code Function3}'s third parameter
+     * @param <R>  The type of the {@code Function3}'s return value
      * @param executor the executor used for the asynchronous calls
+     * @return the converted function
      */
     public static <T1, T2, T3, R> Function3Async<T1, T2, T3, R> from(Function3<T1, T2, T3, R> function,
                                                                      Executor executor)
