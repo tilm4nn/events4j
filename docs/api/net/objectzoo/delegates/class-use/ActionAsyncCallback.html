@@ -1,0 +1,635 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--NewPage-->
+<HTML>
+<HEAD>
+<TITLE>
+Uses of Interface net.objectzoo.delegates.ActionAsyncCallback (Events4J API 1.2.1)
+</TITLE>
+
+
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../../../../stylesheet.css" TITLE="Style">
+
+<SCRIPT type="text/javascript">
+function windowTitle()
+{
+    if (location.href.indexOf('is-external=true') == -1) {
+        parent.document.title="Uses of Interface net.objectzoo.delegates.ActionAsyncCallback (Events4J API 1.2.1)";
+    }
+}
+</SCRIPT>
+<NOSCRIPT>
+</NOSCRIPT>
+
+</HEAD>
+
+<BODY BGCOLOR="white" onload="windowTitle();">
+<HR>
+
+
+<!-- ========= START OF TOP NAVBAR ======= -->
+<A NAME="navbar_top"><!-- --></A>
+<A HREF="#skip-navbar_top" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_top_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../net/objectzoo/delegates/ActionAsyncCallback.html" title="interface in net.objectzoo.delegates"><FONT CLASS="NavBarFont1"><B>Class</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Use</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../overview-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;PREV&nbsp;
+&nbsp;NEXT</FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../index.html?net/objectzoo/delegates/\class-useActionAsyncCallback.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="ActionAsyncCallback.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_top"></A>
+<!-- ========= END OF TOP NAVBAR ========= -->
+
+<HR>
+<CENTER>
+<H2>
+<B>Uses of Interface<br>net.objectzoo.delegates.ActionAsyncCallback</B></H2>
+</CENTER>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Packages that use <A HREF="../../../../net/objectzoo/delegates/ActionAsyncCallback.html" title="interface in net.objectzoo.delegates">ActionAsyncCallback</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#net.objectzoo.delegates"><B>net.objectzoo.delegates</B></A></TD>
+<TD>This package contains the delegates of the Events4J API.&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#net.objectzoo.delegates.adapters"><B>net.objectzoo.delegates.adapters</B></A></TD>
+<TD>This package contains a lots of adapters that can be used to convert between different delegate
+ types.&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#net.objectzoo.delegates.helpers"><B>net.objectzoo.delegates.helpers</B></A></TD>
+<TD>This package contains helper classes used to implement addapters and supporters.&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#net.objectzoo.delegates.impl"><B>net.objectzoo.delegates.impl</B></A></TD>
+<TD>This package contains support classes that can be used to implement asynchronous delegates.&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#net.objectzoo.events.impl"><B>net.objectzoo.events.impl</B></A></TD>
+<TD>This package contains support classes that implement <code>EventDelegate</code>s ready to be used.&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="net.objectzoo.delegates"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Uses of <A HREF="../../../../net/objectzoo/delegates/ActionAsyncCallback.html" title="interface in net.objectzoo.delegates">ActionAsyncCallback</A> in <A HREF="../../../../net/objectzoo/delegates/package-summary.html">net.objectzoo.delegates</A></FONT></TH>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Methods in <A HREF="../../../../net/objectzoo/delegates/package-summary.html">net.objectzoo.delegates</A> with parameters of type <A HREF="../../../../net/objectzoo/delegates/ActionAsyncCallback.html" title="interface in net.objectzoo.delegates">ActionAsyncCallback</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../net/objectzoo/delegates/ActionAsyncResult.html" title="interface in net.objectzoo.delegates">ActionAsyncResult</A></CODE></FONT></TD>
+<TD><CODE><B>DynamicActionAsync.</B><B><A HREF="../../../../net/objectzoo/delegates/DynamicActionAsync.html#beginDynamicInvoke(net.objectzoo.delegates.ActionAsyncCallback, java.lang.Object, java.lang.Object...)">beginDynamicInvoke</A></B>(<A HREF="../../../../net/objectzoo/delegates/ActionAsyncCallback.html" title="interface in net.objectzoo.delegates">ActionAsyncCallback</A>&nbsp;callback,
+                   <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>&nbsp;asyncState,
+                   <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>...&nbsp;params)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Asynchronously invoke this <code>DynamicActionAsync</code> with the given parameter values,
+ callback and asyncState.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../net/objectzoo/delegates/ActionAsyncResult.html" title="interface in net.objectzoo.delegates">ActionAsyncResult</A></CODE></FONT></TD>
+<TD><CODE><B>Action0Async.</B><B><A HREF="../../../../net/objectzoo/delegates/Action0Async.html#beginInvoke(net.objectzoo.delegates.ActionAsyncCallback, java.lang.Object)">beginInvoke</A></B>(<A HREF="../../../../net/objectzoo/delegates/ActionAsyncCallback.html" title="interface in net.objectzoo.delegates">ActionAsyncCallback</A>&nbsp;callback,
+            <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>&nbsp;asyncState)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Asynchronously invoke this <code>Action0Async</code> with the given parameter value, callback and
+ asyncState.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../net/objectzoo/delegates/ActionAsyncResult.html" title="interface in net.objectzoo.delegates">ActionAsyncResult</A></CODE></FONT></TD>
+<TD><CODE><B>ActionAsync.</B><B><A HREF="../../../../net/objectzoo/delegates/ActionAsync.html#beginInvoke(net.objectzoo.delegates.ActionAsyncCallback, java.lang.Object, T)">beginInvoke</A></B>(<A HREF="../../../../net/objectzoo/delegates/ActionAsyncCallback.html" title="interface in net.objectzoo.delegates">ActionAsyncCallback</A>&nbsp;callback,
+            <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>&nbsp;asyncState,
+            <A HREF="../../../../net/objectzoo/delegates/ActionAsync.html" title="type parameter in ActionAsync">T</A>&nbsp;parameter)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Asynchronously invoke this <code>ActionAsync</code> with the given parameter value, callback and
+ asyncState.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../net/objectzoo/delegates/ActionAsyncResult.html" title="interface in net.objectzoo.delegates">ActionAsyncResult</A></CODE></FONT></TD>
+<TD><CODE><B>Action2Async.</B><B><A HREF="../../../../net/objectzoo/delegates/Action2Async.html#beginInvoke(net.objectzoo.delegates.ActionAsyncCallback, java.lang.Object, T1, T2)">beginInvoke</A></B>(<A HREF="../../../../net/objectzoo/delegates/ActionAsyncCallback.html" title="interface in net.objectzoo.delegates">ActionAsyncCallback</A>&nbsp;callback,
+            <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>&nbsp;asyncState,
+            <A HREF="../../../../net/objectzoo/delegates/Action2Async.html" title="type parameter in Action2Async">T1</A>&nbsp;parameter1,
+            <A HREF="../../../../net/objectzoo/delegates/Action2Async.html" title="type parameter in Action2Async">T2</A>&nbsp;parameter2)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Asynchronously invoke this <code>Action2Async</code> with the given parameter value, callback and
+ asyncState.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../net/objectzoo/delegates/ActionAsyncResult.html" title="interface in net.objectzoo.delegates">ActionAsyncResult</A></CODE></FONT></TD>
+<TD><CODE><B>Action3Async.</B><B><A HREF="../../../../net/objectzoo/delegates/Action3Async.html#beginInvoke(net.objectzoo.delegates.ActionAsyncCallback, java.lang.Object, T1, T2, T3)">beginInvoke</A></B>(<A HREF="../../../../net/objectzoo/delegates/ActionAsyncCallback.html" title="interface in net.objectzoo.delegates">ActionAsyncCallback</A>&nbsp;callback,
+            <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>&nbsp;asyncState,
+            <A HREF="../../../../net/objectzoo/delegates/Action3Async.html" title="type parameter in Action3Async">T1</A>&nbsp;parameter1,
+            <A HREF="../../../../net/objectzoo/delegates/Action3Async.html" title="type parameter in Action3Async">T2</A>&nbsp;parameter2,
+            <A HREF="../../../../net/objectzoo/delegates/Action3Async.html" title="type parameter in Action3Async">T3</A>&nbsp;parameter3)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Asynchronously invoke this <code>Action3Async</code> with the given parameter value, callback and
+ asyncState.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../net/objectzoo/delegates/ActionAsyncResult.html" title="interface in net.objectzoo.delegates">ActionAsyncResult</A></CODE></FONT></TD>
+<TD><CODE><B>Action4Async.</B><B><A HREF="../../../../net/objectzoo/delegates/Action4Async.html#beginInvoke(net.objectzoo.delegates.ActionAsyncCallback, java.lang.Object, T1, T2, T3, T4)">beginInvoke</A></B>(<A HREF="../../../../net/objectzoo/delegates/ActionAsyncCallback.html" title="interface in net.objectzoo.delegates">ActionAsyncCallback</A>&nbsp;callback,
+            <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>&nbsp;asyncState,
+            <A HREF="../../../../net/objectzoo/delegates/Action4Async.html" title="type parameter in Action4Async">T1</A>&nbsp;parameter1,
+            <A HREF="../../../../net/objectzoo/delegates/Action4Async.html" title="type parameter in Action4Async">T2</A>&nbsp;parameter2,
+            <A HREF="../../../../net/objectzoo/delegates/Action4Async.html" title="type parameter in Action4Async">T3</A>&nbsp;parameter3,
+            <A HREF="../../../../net/objectzoo/delegates/Action4Async.html" title="type parameter in Action4Async">T4</A>&nbsp;parameter4)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Asynchronously invoke this <code>Action4Async</code> with the given parameter value, callback and
+ asyncState.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="net.objectzoo.delegates.adapters"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Uses of <A HREF="../../../../net/objectzoo/delegates/ActionAsyncCallback.html" title="interface in net.objectzoo.delegates">ActionAsyncCallback</A> in <A HREF="../../../../net/objectzoo/delegates/adapters/package-summary.html">net.objectzoo.delegates.adapters</A></FONT></TH>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Methods in <A HREF="../../../../net/objectzoo/delegates/adapters/package-summary.html">net.objectzoo.delegates.adapters</A> with parameters of type <A HREF="../../../../net/objectzoo/delegates/ActionAsyncCallback.html" title="interface in net.objectzoo.delegates">ActionAsyncCallback</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../net/objectzoo/delegates/ActionAsyncResult.html" title="interface in net.objectzoo.delegates">ActionAsyncResult</A></CODE></FONT></TD>
+<TD><CODE><B>ActionXAsyncToDynamicActionAsync.</B><B><A HREF="../../../../net/objectzoo/delegates/adapters/ActionXAsyncToDynamicActionAsync.html#beginDynamicInvoke(net.objectzoo.delegates.ActionAsyncCallback, java.lang.Object, java.lang.Object...)">beginDynamicInvoke</A></B>(<A HREF="../../../../net/objectzoo/delegates/ActionAsyncCallback.html" title="interface in net.objectzoo.delegates">ActionAsyncCallback</A>&nbsp;callback,
+                   <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>&nbsp;asyncState,
+                   <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>...&nbsp;params)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Asynchronously invoke this <code>DynamicActionAsync</code> with the given parameter values,
+ callback and asyncState.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../net/objectzoo/delegates/ActionAsyncResult.html" title="interface in net.objectzoo.delegates">ActionAsyncResult</A></CODE></FONT></TD>
+<TD><CODE><B>DynamicActionToDynamicActionAsync.</B><B><A HREF="../../../../net/objectzoo/delegates/adapters/DynamicActionToDynamicActionAsync.html#beginDynamicInvoke(net.objectzoo.delegates.ActionAsyncCallback, java.lang.Object, java.lang.Object...)">beginDynamicInvoke</A></B>(<A HREF="../../../../net/objectzoo/delegates/ActionAsyncCallback.html" title="interface in net.objectzoo.delegates">ActionAsyncCallback</A>&nbsp;callback,
+                   <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>&nbsp;asyncState,
+                   <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>...&nbsp;params)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Asynchronously invoke this <code>DynamicActionAsync</code> with the given parameter values,
+ callback and asyncState.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../net/objectzoo/delegates/ActionAsyncResult.html" title="interface in net.objectzoo.delegates">ActionAsyncResult</A></CODE></FONT></TD>
+<TD><CODE><B>DynamicFuncAsyncToDynamicActionAsync.</B><B><A HREF="../../../../net/objectzoo/delegates/adapters/DynamicFuncAsyncToDynamicActionAsync.html#beginDynamicInvoke(net.objectzoo.delegates.ActionAsyncCallback, java.lang.Object, java.lang.Object...)">beginDynamicInvoke</A></B>(<A HREF="../../../../net/objectzoo/delegates/ActionAsyncCallback.html" title="interface in net.objectzoo.delegates">ActionAsyncCallback</A>&nbsp;callback,
+                   <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>&nbsp;asyncState,
+                   <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>...&nbsp;params)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Asynchronously invoke this <code>DynamicActionAsync</code> with the given parameter values,
+ callback and asyncState.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../net/objectzoo/delegates/ActionAsyncResult.html" title="interface in net.objectzoo.delegates">ActionAsyncResult</A></CODE></FONT></TD>
+<TD><CODE><B>Action0ToAction0Async.</B><B><A HREF="../../../../net/objectzoo/delegates/adapters/Action0ToAction0Async.html#beginInvoke(net.objectzoo.delegates.ActionAsyncCallback, java.lang.Object)">beginInvoke</A></B>(<A HREF="../../../../net/objectzoo/delegates/ActionAsyncCallback.html" title="interface in net.objectzoo.delegates">ActionAsyncCallback</A>&nbsp;callback,
+            <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>&nbsp;asyncState)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Asynchronously invoke this <code>Action0Async</code> with the given parameter value, callback and
+ asyncState.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../net/objectzoo/delegates/ActionAsyncResult.html" title="interface in net.objectzoo.delegates">ActionAsyncResult</A></CODE></FONT></TD>
+<TD><CODE><B>Func0AsyncToAction0Async.</B><B><A HREF="../../../../net/objectzoo/delegates/adapters/Func0AsyncToAction0Async.html#beginInvoke(net.objectzoo.delegates.ActionAsyncCallback, java.lang.Object)">beginInvoke</A></B>(<A HREF="../../../../net/objectzoo/delegates/ActionAsyncCallback.html" title="interface in net.objectzoo.delegates">ActionAsyncCallback</A>&nbsp;callback,
+            <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>&nbsp;asyncState)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Asynchronously invoke this <code>Action0Async</code> with the given parameter value, callback and
+ asyncState.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../net/objectzoo/delegates/ActionAsyncResult.html" title="interface in net.objectzoo.delegates">ActionAsyncResult</A></CODE></FONT></TD>
+<TD><CODE><B>ActionToActionAsync.</B><B><A HREF="../../../../net/objectzoo/delegates/adapters/ActionToActionAsync.html#beginInvoke(net.objectzoo.delegates.ActionAsyncCallback, java.lang.Object, T)">beginInvoke</A></B>(<A HREF="../../../../net/objectzoo/delegates/ActionAsyncCallback.html" title="interface in net.objectzoo.delegates">ActionAsyncCallback</A>&nbsp;callback,
+            <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>&nbsp;asyncState,
+            <A HREF="../../../../net/objectzoo/delegates/adapters/ActionToActionAsync.html" title="type parameter in ActionToActionAsync">T</A>&nbsp;parameter)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Asynchronously invoke this <code>ActionAsync</code> with the given parameter value, callback and
+ asyncState.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../net/objectzoo/delegates/ActionAsyncResult.html" title="interface in net.objectzoo.delegates">ActionAsyncResult</A></CODE></FONT></TD>
+<TD><CODE><B>FuncAsyncToActionAsync.</B><B><A HREF="../../../../net/objectzoo/delegates/adapters/FuncAsyncToActionAsync.html#beginInvoke(net.objectzoo.delegates.ActionAsyncCallback, java.lang.Object, T)">beginInvoke</A></B>(<A HREF="../../../../net/objectzoo/delegates/ActionAsyncCallback.html" title="interface in net.objectzoo.delegates">ActionAsyncCallback</A>&nbsp;callback,
+            <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>&nbsp;asyncState,
+            <A HREF="../../../../net/objectzoo/delegates/adapters/FuncAsyncToActionAsync.html" title="type parameter in FuncAsyncToActionAsync">T</A>&nbsp;parameter)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Asynchronously invoke this <code>ActionAsync</code> with the given parameter value, callback and
+ asyncState.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../net/objectzoo/delegates/ActionAsyncResult.html" title="interface in net.objectzoo.delegates">ActionAsyncResult</A></CODE></FONT></TD>
+<TD><CODE><B>Action2ToAction2Async.</B><B><A HREF="../../../../net/objectzoo/delegates/adapters/Action2ToAction2Async.html#beginInvoke(net.objectzoo.delegates.ActionAsyncCallback, java.lang.Object, T1, T2)">beginInvoke</A></B>(<A HREF="../../../../net/objectzoo/delegates/ActionAsyncCallback.html" title="interface in net.objectzoo.delegates">ActionAsyncCallback</A>&nbsp;callback,
+            <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>&nbsp;asyncState,
+            <A HREF="../../../../net/objectzoo/delegates/adapters/Action2ToAction2Async.html" title="type parameter in Action2ToAction2Async">T1</A>&nbsp;parameter1,
+            <A HREF="../../../../net/objectzoo/delegates/adapters/Action2ToAction2Async.html" title="type parameter in Action2ToAction2Async">T2</A>&nbsp;parameter2)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Asynchronously invoke this <code>Action2Async</code> with the given parameter value, callback and
+ asyncState.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../net/objectzoo/delegates/ActionAsyncResult.html" title="interface in net.objectzoo.delegates">ActionAsyncResult</A></CODE></FONT></TD>
+<TD><CODE><B>Func2AsyncToAction2Async.</B><B><A HREF="../../../../net/objectzoo/delegates/adapters/Func2AsyncToAction2Async.html#beginInvoke(net.objectzoo.delegates.ActionAsyncCallback, java.lang.Object, T1, T2)">beginInvoke</A></B>(<A HREF="../../../../net/objectzoo/delegates/ActionAsyncCallback.html" title="interface in net.objectzoo.delegates">ActionAsyncCallback</A>&nbsp;callback,
+            <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>&nbsp;asyncState,
+            <A HREF="../../../../net/objectzoo/delegates/adapters/Func2AsyncToAction2Async.html" title="type parameter in Func2AsyncToAction2Async">T1</A>&nbsp;parameter1,
+            <A HREF="../../../../net/objectzoo/delegates/adapters/Func2AsyncToAction2Async.html" title="type parameter in Func2AsyncToAction2Async">T2</A>&nbsp;parameter2)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Asynchronously invoke this <code>Action2Async</code> with the given parameter value, callback and
+ asyncState.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../net/objectzoo/delegates/ActionAsyncResult.html" title="interface in net.objectzoo.delegates">ActionAsyncResult</A></CODE></FONT></TD>
+<TD><CODE><B>Action3ToAction3Async.</B><B><A HREF="../../../../net/objectzoo/delegates/adapters/Action3ToAction3Async.html#beginInvoke(net.objectzoo.delegates.ActionAsyncCallback, java.lang.Object, T1, T2, T3)">beginInvoke</A></B>(<A HREF="../../../../net/objectzoo/delegates/ActionAsyncCallback.html" title="interface in net.objectzoo.delegates">ActionAsyncCallback</A>&nbsp;callback,
+            <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>&nbsp;asyncState,
+            <A HREF="../../../../net/objectzoo/delegates/adapters/Action3ToAction3Async.html" title="type parameter in Action3ToAction3Async">T1</A>&nbsp;parameter1,
+            <A HREF="../../../../net/objectzoo/delegates/adapters/Action3ToAction3Async.html" title="type parameter in Action3ToAction3Async">T2</A>&nbsp;parameter2,
+            <A HREF="../../../../net/objectzoo/delegates/adapters/Action3ToAction3Async.html" title="type parameter in Action3ToAction3Async">T3</A>&nbsp;parameter3)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Asynchronously invoke this <code>Action3Async</code> with the given parameter value, callback and
+ asyncState.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../net/objectzoo/delegates/ActionAsyncResult.html" title="interface in net.objectzoo.delegates">ActionAsyncResult</A></CODE></FONT></TD>
+<TD><CODE><B>Func3AsyncToAction3Async.</B><B><A HREF="../../../../net/objectzoo/delegates/adapters/Func3AsyncToAction3Async.html#beginInvoke(net.objectzoo.delegates.ActionAsyncCallback, java.lang.Object, T1, T2, T3)">beginInvoke</A></B>(<A HREF="../../../../net/objectzoo/delegates/ActionAsyncCallback.html" title="interface in net.objectzoo.delegates">ActionAsyncCallback</A>&nbsp;callback,
+            <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>&nbsp;asyncState,
+            <A HREF="../../../../net/objectzoo/delegates/adapters/Func3AsyncToAction3Async.html" title="type parameter in Func3AsyncToAction3Async">T1</A>&nbsp;parameter1,
+            <A HREF="../../../../net/objectzoo/delegates/adapters/Func3AsyncToAction3Async.html" title="type parameter in Func3AsyncToAction3Async">T2</A>&nbsp;parameter2,
+            <A HREF="../../../../net/objectzoo/delegates/adapters/Func3AsyncToAction3Async.html" title="type parameter in Func3AsyncToAction3Async">T3</A>&nbsp;parameter3)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Asynchronously invoke this <code>Action3Async</code> with the given parameter value, callback and
+ asyncState.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../net/objectzoo/delegates/ActionAsyncResult.html" title="interface in net.objectzoo.delegates">ActionAsyncResult</A></CODE></FONT></TD>
+<TD><CODE><B>Action4ToAction4Async.</B><B><A HREF="../../../../net/objectzoo/delegates/adapters/Action4ToAction4Async.html#beginInvoke(net.objectzoo.delegates.ActionAsyncCallback, java.lang.Object, T1, T2, T3, T4)">beginInvoke</A></B>(<A HREF="../../../../net/objectzoo/delegates/ActionAsyncCallback.html" title="interface in net.objectzoo.delegates">ActionAsyncCallback</A>&nbsp;callback,
+            <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>&nbsp;asyncState,
+            <A HREF="../../../../net/objectzoo/delegates/adapters/Action4ToAction4Async.html" title="type parameter in Action4ToAction4Async">T1</A>&nbsp;parameter1,
+            <A HREF="../../../../net/objectzoo/delegates/adapters/Action4ToAction4Async.html" title="type parameter in Action4ToAction4Async">T2</A>&nbsp;parameter2,
+            <A HREF="../../../../net/objectzoo/delegates/adapters/Action4ToAction4Async.html" title="type parameter in Action4ToAction4Async">T3</A>&nbsp;parameter3,
+            <A HREF="../../../../net/objectzoo/delegates/adapters/Action4ToAction4Async.html" title="type parameter in Action4ToAction4Async">T4</A>&nbsp;parameter4)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Asynchronously invoke this <code>Action4Async</code> with the given parameter value, callback and
+ asyncState.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../net/objectzoo/delegates/ActionAsyncResult.html" title="interface in net.objectzoo.delegates">ActionAsyncResult</A></CODE></FONT></TD>
+<TD><CODE><B>Func4AsyncToAction4Async.</B><B><A HREF="../../../../net/objectzoo/delegates/adapters/Func4AsyncToAction4Async.html#beginInvoke(net.objectzoo.delegates.ActionAsyncCallback, java.lang.Object, T1, T2, T3, T4)">beginInvoke</A></B>(<A HREF="../../../../net/objectzoo/delegates/ActionAsyncCallback.html" title="interface in net.objectzoo.delegates">ActionAsyncCallback</A>&nbsp;callback,
+            <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>&nbsp;asyncState,
+            <A HREF="../../../../net/objectzoo/delegates/adapters/Func4AsyncToAction4Async.html" title="type parameter in Func4AsyncToAction4Async">T1</A>&nbsp;parameter1,
+            <A HREF="../../../../net/objectzoo/delegates/adapters/Func4AsyncToAction4Async.html" title="type parameter in Func4AsyncToAction4Async">T2</A>&nbsp;parameter2,
+            <A HREF="../../../../net/objectzoo/delegates/adapters/Func4AsyncToAction4Async.html" title="type parameter in Func4AsyncToAction4Async">T3</A>&nbsp;parameter3,
+            <A HREF="../../../../net/objectzoo/delegates/adapters/Func4AsyncToAction4Async.html" title="type parameter in Func4AsyncToAction4Async">T4</A>&nbsp;parameter4)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Asynchronously invoke this <code>Action4Async</code> with the given parameter value, callback and
+ asyncState.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Constructors in <A HREF="../../../../net/objectzoo/delegates/adapters/package-summary.html">net.objectzoo.delegates.adapters</A> with parameters of type <A HREF="../../../../net/objectzoo/delegates/ActionAsyncCallback.html" title="interface in net.objectzoo.delegates">ActionAsyncCallback</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../net/objectzoo/delegates/adapters/ActionCallbackToFuncCallback.html#ActionCallbackToFuncCallback(net.objectzoo.delegates.ActionAsyncCallback)">ActionCallbackToFuncCallback</A></B>(<A HREF="../../../../net/objectzoo/delegates/ActionAsyncCallback.html" title="interface in net.objectzoo.delegates">ActionAsyncCallback</A>&nbsp;actionCallback)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Converts the given <A HREF="../../../../net/objectzoo/delegates/ActionAsyncCallback.html" title="interface in net.objectzoo.delegates"><CODE>ActionAsyncCallback</CODE></A> to <A HREF="../../../../net/objectzoo/delegates/FuncAsyncCallback.html" title="interface in net.objectzoo.delegates"><CODE>FuncAsyncCallback</CODE></A></TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="net.objectzoo.delegates.helpers"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Uses of <A HREF="../../../../net/objectzoo/delegates/ActionAsyncCallback.html" title="interface in net.objectzoo.delegates">ActionAsyncCallback</A> in <A HREF="../../../../net/objectzoo/delegates/helpers/package-summary.html">net.objectzoo.delegates.helpers</A></FONT></TH>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Methods in <A HREF="../../../../net/objectzoo/delegates/helpers/package-summary.html">net.objectzoo.delegates.helpers</A> with parameters of type <A HREF="../../../../net/objectzoo/delegates/ActionAsyncCallback.html" title="interface in net.objectzoo.delegates">ActionAsyncCallback</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../net/objectzoo/delegates/ActionAsyncResult.html" title="interface in net.objectzoo.delegates">ActionAsyncResult</A></CODE></FONT></TD>
+<TD><CODE><B>DynamicActionAsyncSupport.</B><B><A HREF="../../../../net/objectzoo/delegates/helpers/DynamicActionAsyncSupport.html#beginDynamicInvoke(net.objectzoo.delegates.ActionAsyncCallback, java.lang.Object, java.lang.Object...)">beginDynamicInvoke</A></B>(<A HREF="../../../../net/objectzoo/delegates/ActionAsyncCallback.html" title="interface in net.objectzoo.delegates">ActionAsyncCallback</A>&nbsp;callback,
+                   <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>&nbsp;asyncState,
+                   <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>...&nbsp;params)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Asynchronously invoke this <code>DynamicActionAsync</code> with the given parameter values,
+ callback and asyncState.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="net.objectzoo.delegates.impl"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Uses of <A HREF="../../../../net/objectzoo/delegates/ActionAsyncCallback.html" title="interface in net.objectzoo.delegates">ActionAsyncCallback</A> in <A HREF="../../../../net/objectzoo/delegates/impl/package-summary.html">net.objectzoo.delegates.impl</A></FONT></TH>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Methods in <A HREF="../../../../net/objectzoo/delegates/impl/package-summary.html">net.objectzoo.delegates.impl</A> with parameters of type <A HREF="../../../../net/objectzoo/delegates/ActionAsyncCallback.html" title="interface in net.objectzoo.delegates">ActionAsyncCallback</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../net/objectzoo/delegates/ActionAsyncResult.html" title="interface in net.objectzoo.delegates">ActionAsyncResult</A></CODE></FONT></TD>
+<TD><CODE><B>Action0AsyncSupport.</B><B><A HREF="../../../../net/objectzoo/delegates/impl/Action0AsyncSupport.html#beginInvoke(net.objectzoo.delegates.ActionAsyncCallback, java.lang.Object)">beginInvoke</A></B>(<A HREF="../../../../net/objectzoo/delegates/ActionAsyncCallback.html" title="interface in net.objectzoo.delegates">ActionAsyncCallback</A>&nbsp;callback,
+            <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>&nbsp;asyncState)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Asynchronously invoke this <code>Action0Async</code> with the given parameter value, callback and
+ asyncState.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../net/objectzoo/delegates/ActionAsyncResult.html" title="interface in net.objectzoo.delegates">ActionAsyncResult</A></CODE></FONT></TD>
+<TD><CODE><B>ActionAsyncSupport.</B><B><A HREF="../../../../net/objectzoo/delegates/impl/ActionAsyncSupport.html#beginInvoke(net.objectzoo.delegates.ActionAsyncCallback, java.lang.Object, T)">beginInvoke</A></B>(<A HREF="../../../../net/objectzoo/delegates/ActionAsyncCallback.html" title="interface in net.objectzoo.delegates">ActionAsyncCallback</A>&nbsp;callback,
+            <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>&nbsp;asyncState,
+            <A HREF="../../../../net/objectzoo/delegates/impl/ActionAsyncSupport.html" title="type parameter in ActionAsyncSupport">T</A>&nbsp;parameter)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Asynchronously invoke this <code>ActionAsync</code> with the given parameter value, callback and
+ asyncState.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../net/objectzoo/delegates/ActionAsyncResult.html" title="interface in net.objectzoo.delegates">ActionAsyncResult</A></CODE></FONT></TD>
+<TD><CODE><B>Action2AsyncSupport.</B><B><A HREF="../../../../net/objectzoo/delegates/impl/Action2AsyncSupport.html#beginInvoke(net.objectzoo.delegates.ActionAsyncCallback, java.lang.Object, T1, T2)">beginInvoke</A></B>(<A HREF="../../../../net/objectzoo/delegates/ActionAsyncCallback.html" title="interface in net.objectzoo.delegates">ActionAsyncCallback</A>&nbsp;callback,
+            <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>&nbsp;asyncState,
+            <A HREF="../../../../net/objectzoo/delegates/impl/Action2AsyncSupport.html" title="type parameter in Action2AsyncSupport">T1</A>&nbsp;parameter1,
+            <A HREF="../../../../net/objectzoo/delegates/impl/Action2AsyncSupport.html" title="type parameter in Action2AsyncSupport">T2</A>&nbsp;parameter2)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Asynchronously invoke this <code>Action2Async</code> with the given parameter value, callback and
+ asyncState.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../net/objectzoo/delegates/ActionAsyncResult.html" title="interface in net.objectzoo.delegates">ActionAsyncResult</A></CODE></FONT></TD>
+<TD><CODE><B>Action3AsyncSupport.</B><B><A HREF="../../../../net/objectzoo/delegates/impl/Action3AsyncSupport.html#beginInvoke(net.objectzoo.delegates.ActionAsyncCallback, java.lang.Object, T1, T2, T3)">beginInvoke</A></B>(<A HREF="../../../../net/objectzoo/delegates/ActionAsyncCallback.html" title="interface in net.objectzoo.delegates">ActionAsyncCallback</A>&nbsp;callback,
+            <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>&nbsp;asyncState,
+            <A HREF="../../../../net/objectzoo/delegates/impl/Action3AsyncSupport.html" title="type parameter in Action3AsyncSupport">T1</A>&nbsp;parameter1,
+            <A HREF="../../../../net/objectzoo/delegates/impl/Action3AsyncSupport.html" title="type parameter in Action3AsyncSupport">T2</A>&nbsp;parameter2,
+            <A HREF="../../../../net/objectzoo/delegates/impl/Action3AsyncSupport.html" title="type parameter in Action3AsyncSupport">T3</A>&nbsp;parameter3)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Asynchronously invoke this <code>Action3Async</code> with the given parameter value, callback and
+ asyncState.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../net/objectzoo/delegates/ActionAsyncResult.html" title="interface in net.objectzoo.delegates">ActionAsyncResult</A></CODE></FONT></TD>
+<TD><CODE><B>Action4AsyncSupport.</B><B><A HREF="../../../../net/objectzoo/delegates/impl/Action4AsyncSupport.html#beginInvoke(net.objectzoo.delegates.ActionAsyncCallback, java.lang.Object, T1, T2, T3, T4)">beginInvoke</A></B>(<A HREF="../../../../net/objectzoo/delegates/ActionAsyncCallback.html" title="interface in net.objectzoo.delegates">ActionAsyncCallback</A>&nbsp;callback,
+            <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>&nbsp;asyncState,
+            <A HREF="../../../../net/objectzoo/delegates/impl/Action4AsyncSupport.html" title="type parameter in Action4AsyncSupport">T1</A>&nbsp;parameter1,
+            <A HREF="../../../../net/objectzoo/delegates/impl/Action4AsyncSupport.html" title="type parameter in Action4AsyncSupport">T2</A>&nbsp;parameter2,
+            <A HREF="../../../../net/objectzoo/delegates/impl/Action4AsyncSupport.html" title="type parameter in Action4AsyncSupport">T3</A>&nbsp;parameter3,
+            <A HREF="../../../../net/objectzoo/delegates/impl/Action4AsyncSupport.html" title="type parameter in Action4AsyncSupport">T4</A>&nbsp;parameter4)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Asynchronously invoke this <code>Action4Async</code> with the given parameter value, callback and
+ asyncState.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="net.objectzoo.events.impl"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Uses of <A HREF="../../../../net/objectzoo/delegates/ActionAsyncCallback.html" title="interface in net.objectzoo.delegates">ActionAsyncCallback</A> in <A HREF="../../../../net/objectzoo/events/impl/package-summary.html">net.objectzoo.events.impl</A></FONT></TH>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Methods in <A HREF="../../../../net/objectzoo/events/impl/package-summary.html">net.objectzoo.events.impl</A> with parameters of type <A HREF="../../../../net/objectzoo/delegates/ActionAsyncCallback.html" title="interface in net.objectzoo.delegates">ActionAsyncCallback</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../net/objectzoo/delegates/ActionAsyncResult.html" title="interface in net.objectzoo.delegates">ActionAsyncResult</A></CODE></FONT></TD>
+<TD><CODE><B>DynamicEventAsyncAdapter.</B><B><A HREF="../../../../net/objectzoo/events/impl/DynamicEventAsyncAdapter.html#beginDynamicInvoke(net.objectzoo.delegates.ActionAsyncCallback, java.lang.Object, java.lang.Object...)">beginDynamicInvoke</A></B>(<A HREF="../../../../net/objectzoo/delegates/ActionAsyncCallback.html" title="interface in net.objectzoo.delegates">ActionAsyncCallback</A>&nbsp;callback,
+                   <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>&nbsp;asyncState,
+                   <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>...&nbsp;params)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This <code>beginDynamicInvoke</code> implementation invokes all event subscribers in another
+ thread in the order they have been subscribed.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../net/objectzoo/delegates/ActionAsyncResult.html" title="interface in net.objectzoo.delegates">ActionAsyncResult</A></CODE></FONT></TD>
+<TD><CODE><B>Event0AsyncAdapter.</B><B><A HREF="../../../../net/objectzoo/events/impl/Event0AsyncAdapter.html#beginInvoke(net.objectzoo.delegates.ActionAsyncCallback, java.lang.Object)">beginInvoke</A></B>(<A HREF="../../../../net/objectzoo/delegates/ActionAsyncCallback.html" title="interface in net.objectzoo.delegates">ActionAsyncCallback</A>&nbsp;callback,
+            <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>&nbsp;asyncState)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This <code>beginInvoke</code> implementation invokes all event subscribers in another thread in
+ the order they have been subscribed.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../net/objectzoo/delegates/ActionAsyncResult.html" title="interface in net.objectzoo.delegates">ActionAsyncResult</A></CODE></FONT></TD>
+<TD><CODE><B>EventAsyncAdapter.</B><B><A HREF="../../../../net/objectzoo/events/impl/EventAsyncAdapter.html#beginInvoke(net.objectzoo.delegates.ActionAsyncCallback, java.lang.Object, T)">beginInvoke</A></B>(<A HREF="../../../../net/objectzoo/delegates/ActionAsyncCallback.html" title="interface in net.objectzoo.delegates">ActionAsyncCallback</A>&nbsp;callback,
+            <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>&nbsp;asyncState,
+            <A HREF="../../../../net/objectzoo/events/impl/EventAsyncAdapter.html" title="type parameter in EventAsyncAdapter">T</A>&nbsp;parameter)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This <code>beginInvoke</code> implementation invokes all event subscribers in another thread in
+ the order they have been subscribed.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../net/objectzoo/delegates/ActionAsyncResult.html" title="interface in net.objectzoo.delegates">ActionAsyncResult</A></CODE></FONT></TD>
+<TD><CODE><B>Event2AsyncAdapter.</B><B><A HREF="../../../../net/objectzoo/events/impl/Event2AsyncAdapter.html#beginInvoke(net.objectzoo.delegates.ActionAsyncCallback, java.lang.Object, T1, T2)">beginInvoke</A></B>(<A HREF="../../../../net/objectzoo/delegates/ActionAsyncCallback.html" title="interface in net.objectzoo.delegates">ActionAsyncCallback</A>&nbsp;callback,
+            <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>&nbsp;asyncState,
+            <A HREF="../../../../net/objectzoo/events/impl/Event2AsyncAdapter.html" title="type parameter in Event2AsyncAdapter">T1</A>&nbsp;parameter1,
+            <A HREF="../../../../net/objectzoo/events/impl/Event2AsyncAdapter.html" title="type parameter in Event2AsyncAdapter">T2</A>&nbsp;parameter2)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This <code>beginInvoke</code> implementation invokes all event subscribers in another thread in
+ the order they have been subscribed.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../net/objectzoo/delegates/ActionAsyncResult.html" title="interface in net.objectzoo.delegates">ActionAsyncResult</A></CODE></FONT></TD>
+<TD><CODE><B>Event3AsyncAdapter.</B><B><A HREF="../../../../net/objectzoo/events/impl/Event3AsyncAdapter.html#beginInvoke(net.objectzoo.delegates.ActionAsyncCallback, java.lang.Object, T1, T2, T3)">beginInvoke</A></B>(<A HREF="../../../../net/objectzoo/delegates/ActionAsyncCallback.html" title="interface in net.objectzoo.delegates">ActionAsyncCallback</A>&nbsp;callback,
+            <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>&nbsp;asyncState,
+            <A HREF="../../../../net/objectzoo/events/impl/Event3AsyncAdapter.html" title="type parameter in Event3AsyncAdapter">T1</A>&nbsp;parameter1,
+            <A HREF="../../../../net/objectzoo/events/impl/Event3AsyncAdapter.html" title="type parameter in Event3AsyncAdapter">T2</A>&nbsp;parameter2,
+            <A HREF="../../../../net/objectzoo/events/impl/Event3AsyncAdapter.html" title="type parameter in Event3AsyncAdapter">T3</A>&nbsp;parameter3)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This <code>beginInvoke</code> implementation invokes all event subscribers in another thread in
+ the order they have been subscribed.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../net/objectzoo/delegates/ActionAsyncResult.html" title="interface in net.objectzoo.delegates">ActionAsyncResult</A></CODE></FONT></TD>
+<TD><CODE><B>Event4AsyncAdapter.</B><B><A HREF="../../../../net/objectzoo/events/impl/Event4AsyncAdapter.html#beginInvoke(net.objectzoo.delegates.ActionAsyncCallback, java.lang.Object, T1, T2, T3, T4)">beginInvoke</A></B>(<A HREF="../../../../net/objectzoo/delegates/ActionAsyncCallback.html" title="interface in net.objectzoo.delegates">ActionAsyncCallback</A>&nbsp;callback,
+            <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>&nbsp;asyncState,
+            <A HREF="../../../../net/objectzoo/events/impl/Event4AsyncAdapter.html" title="type parameter in Event4AsyncAdapter">T1</A>&nbsp;parameter1,
+            <A HREF="../../../../net/objectzoo/events/impl/Event4AsyncAdapter.html" title="type parameter in Event4AsyncAdapter">T2</A>&nbsp;parameter2,
+            <A HREF="../../../../net/objectzoo/events/impl/Event4AsyncAdapter.html" title="type parameter in Event4AsyncAdapter">T3</A>&nbsp;parameter3,
+            <A HREF="../../../../net/objectzoo/events/impl/Event4AsyncAdapter.html" title="type parameter in Event4AsyncAdapter">T4</A>&nbsp;parameter4)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This <code>beginInvoke</code> implementation invokes all event subscribers in another thread in
+ the order they have been subscribed.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<HR>
+
+
+<!-- ======= START OF BOTTOM NAVBAR ====== -->
+<A NAME="navbar_bottom"><!-- --></A>
+<A HREF="#skip-navbar_bottom" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_bottom_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../net/objectzoo/delegates/ActionAsyncCallback.html" title="interface in net.objectzoo.delegates"><FONT CLASS="NavBarFont1"><B>Class</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Use</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../overview-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;PREV&nbsp;
+&nbsp;NEXT</FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../index.html?net/objectzoo/delegates/\class-useActionAsyncCallback.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="ActionAsyncCallback.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_bottom"></A>
+<!-- ======== END OF BOTTOM NAVBAR ======= -->
+
+<HR>
+Copyright &copy; 2010 - 2012 - object-zoo - Tilmann Kuhn
+</BODY>
+</HTML>
