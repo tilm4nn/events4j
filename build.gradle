@@ -1,9 +1,5 @@
 apply plugin: 'base'
 
-task wrapper(type: Wrapper) {
-    gradleVersion = '2.2.1'
-}
-
 allprojects {
 	version = '1.3.0'
 	ext.title = 'Events4J API'
@@ -63,7 +59,7 @@ project(':events4j-async') {
 }
 
 task javadoc(type: Javadoc) {
-    destinationDir = new File("${rootDir}/doc/api")
+	destinationDir = new File("${rootDir}/doc/api")
     source = files(subprojects.collect { project -> project.sourceSets.main.allJava })
     classpath = files(subprojects.collect { project -> project.sourceSets.main.compileClasspath })
 }
