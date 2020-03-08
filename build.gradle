@@ -97,10 +97,8 @@ allprojects {
 			setNoTimestamp(true)
 			encoding project.encoding
 			links project.javadoc
-			overview "${rootDir}/docs/index.html"
 			docTitle "<h1>${project.title} ${project.version}</h1>"
 			windowTitle "${project.title} ${project.version}"
-			bottom "Copyright &copy; ${project.copy} - ${project.vendor}"
 		}
 	}
 }
