@@ -11,7 +11,7 @@ It is open source software released under the terms of the MIT License found in
 the file "LICENSE.txt"
 
 ## Download
-Events4J can be obtained form the [Git Repository](http://object-zoo.net/events4j/releases).
+Events4J can be downloaded form the [Releases Page](http://object-zoo.net/events4j/releases).
 
 ## Motivation
 #### Problems solved:
