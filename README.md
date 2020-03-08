@@ -43,6 +43,14 @@ Events4J can be downloaded form the [Releases Page](http://object-zoo.net/events
 * [Ant](http://ant.apache.org/) (Automated build)
 
 ## Release History
+* __1.3__ Renewed
+    - Added Java 8 functions and lambdas support
+    - Added parameter bindings
+    - Fixes and cleanups
+    - Switched from Maven to Gradle
+    - Switched from Jnario to JUnit
+    - Switched from Eclipse to IntelliJ IDEA
+    - Switched from Assembla to Github
 * __1.2.1__  Fixes
     - Fixed GWT support
 * __1.2__  Extensions
