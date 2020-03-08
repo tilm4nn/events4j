@@ -1,6 +1,6 @@
 # Events4J
 
-http://www.object-zoo.net/events4j  
+[http://www.object-zoo.net/events4j](http://www.object-zoo.net/events4j)  
 [events4j@object-zoo.net](mailto:events4j@object-zoo.net)
 
 Events4J is a simple and generic Java API that mimics the delegates (Action, Func)
