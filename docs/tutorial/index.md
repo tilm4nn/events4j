@@ -1,10 +1,11 @@
-# Delegates
+# Tutorial
+## Delegates
 
 Delegates are placeholders for regular Java methods that can be stored in fields or used as parameters in method calls. There are different categories of delegates: standard delegates and asynchronous delegates. And there are two different types of delegates: functions that have a return value and actions that don't.
 
-## Standard Delegates
+### Standard Delegates
 
-### Actions
+#### Actions
 
 The most simple form of a standard delegate is an action. The action represents a Java method without return value that takes one argument parameter and is defined by the following interface:
 
@@ -30,7 +31,7 @@ And then the action can be called of course.
 
 In addition to the `Action<T>` there are also an `Action0`, `Action2<T1, T2>`, `Action3<T1, T2, T3>` and `Action4<T1, T2, T3, T4>` that take zero, two, three or four parameters as well as the `DynamicAction` that takes an arbitrary number of parameters.
 
-### Funcs
+#### Funcs
 
 Functions, or short funcs, are similar to actions with the addition that they have a return value. Here is the definition of the `Func<T, R>` interface.
 
@@ -52,7 +53,7 @@ And an exemplary implementation
 
 Of course the func delegate can easily be called and there are plenty of additional implementations like `Func0<R>`, `Func2<T1, T2, R>` ... `DynamicFunc` but there is no magic about that. The interesting part starts with asynchronous delegates and events.
 
-## Asynchronous Delegates
+### Asynchronous Delegates
 
 Let's say you want to call a function asynchronously in another thread. (Actions will work in a similar manner.) The only thing you have to do is to convert it to an asynchronous function and call that instead.
 
@@ -120,7 +121,7 @@ Putting it all together and using the `FuncAsyncSupport<T, R>` gives us a really
 	
 	toUpperCaseAsyncFunc.beginInvoke(printlnAsyncCallback, null, "Upper case this!");
 
-# Events
+## Events
 
 An event is a source of signals and/or information that can be observed by subscribing action instances to it:
 
