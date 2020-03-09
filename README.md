@@ -36,11 +36,9 @@ Events4J can be downloaded form the [Releases Page](http://object-zoo.net/events
 
 ## Development Tools
 
-* [Eclipse](http://www.eclipse.org/)
-* [FindBugs](http://findbugs.sourceforge.net/) (Static code analysis)
-* [EclEmma](http://www.eclemma.org/) (Code Coverage)
+* [IntelliJ IDEA](https://www.jetbrains.com/idea/) (IDE)
 * [Infinitest](http://infinitest.github.com/) (Continuous Testing)
-* [Ant](http://ant.apache.org/) (Automated build)
+* [Gradle](https://gradle.org/) (Automated build)
 
 ## Release History
 * __1.3__ Renewed
