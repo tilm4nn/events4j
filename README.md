@@ -1,5 +1,8 @@
 # Events4J
 
+[![](https://jitci.com/gh/tilm4nn/events4j/svg)](https://jitci.com/gh/tilm4nn/events4j)
+[![](https://jitpack.io/v/net.object-zoo/events4j.svg)](https://jitpack.io/#net.object-zoo/events4j)
+
 http://www.object-zoo.net/events4j  
 [events4j@object-zoo.net](mailto:events4j@object-zoo.net)
 
@@ -30,8 +33,7 @@ the file "LICENSE.txt"
 ## How To Use It
 * Learn by example in the [Tutorial](http://doc.object-zoo.net/events4j/tutorial)
 * Browse the [JavaDoc](http://doc.object-zoo.net/events4j/api/) 
-* Include Maven artifact from  
-[![](https://jitpack.io/v/net.object-zoo/events4j.svg)](https://jitpack.io/#net.object-zoo/events4j)
+* Include Maven artifact from [JitPack](https://jitpack.io/#net.object-zoo/events4j)
 * Or download form the [Releases Page](http://object-zoo.net/events4j/releases)
 
 ## Development Tools
@@ -39,6 +41,7 @@ the file "LICENSE.txt"
 * [IntelliJ IDEA](https://www.jetbrains.com/idea/) (IDE)
 * [Infinitest](http://infinitest.github.com/) (Continuous Testing)
 * [Gradle](https://gradle.org/) (Automated build)
+* [JitCI](https://jitci.com/gh/tilm4nn/events4j) (Continuous Integration)
 
 ## Release History
 * __1.3__ Renewed
