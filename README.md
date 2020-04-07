@@ -10,9 +10,6 @@ coupled functional units.
 It is open source software released under the terms of the MIT License found in
 the file "LICENSE.txt"
 
-## Download
-Events4J can be downloaded form the [Releases Page](http://object-zoo.net/events4j/releases).
-
 ## Motivation
 #### Problems solved:
 * Introduce delegates and events as Java types, that are not available in the SDK
@@ -32,7 +29,10 @@ Events4J can be downloaded form the [Releases Page](http://object-zoo.net/events
 
 ## How To Use It
 * Learn by example in the [Tutorial](http://doc.object-zoo.net/events4j/tutorial)
-* Browse the [JavaDoc](http://doc.object-zoo.net/events4j/api/)
+* Browse the [JavaDoc](http://doc.object-zoo.net/events4j/api/) 
+* Include Maven artifact from  
+[![](https://jitpack.io/v/net.object-zoo/events4j.svg)](https://jitpack.io/#net.object-zoo/events4j)
+* Or download form the [Releases Page](http://object-zoo.net/events4j/releases)
 
 ## Development Tools
 
